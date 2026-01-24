@@ -24,7 +24,7 @@
     --secondary-foreground: 0 0% 100%;
 
     --muted: 210 20% 96%;
-    --muted-foreground: 220 10% 50%;
+    --muted-foreground: 220 10% 45%;
 
     --accent: 179 72% 95%;
     --accent-foreground: 179 72% 25%;
@@ -32,7 +32,7 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 90%;
+    --border: 220 15% 88%;
     --input: 220 15% 90%;
     --ring: 179 72% 35%;
 
@@ -49,9 +49,12 @@
     --gradient-blue: linear-gradient(135deg, hsl(200, 70%, 55%), hsl(180, 60%, 50%));
     --gradient-green: linear-gradient(135deg, hsl(160, 65%, 45%), hsl(145, 65%, 42%));
 
-    /* Shadows */
-    --shadow-soft: 0 4px 20px -4px hsl(220 20% 15% / 0.08);
-    --shadow-card: 0 2px 12px -2px hsl(220 20% 15% / 0.06);
+    /* Enhanced Shadows */
+    --shadow-soft: 0 8px 30px -6px hsl(220 20% 15% / 0.12);
+    --shadow-card: 0 4px 16px -4px hsl(220 20% 15% / 0.08);
+    --shadow-elevated: 0 12px 40px -8px hsl(220 20% 15% / 0.15);
+    --shadow-button: 0 4px 14px -3px hsl(179 72% 35% / 0.35);
+    --shadow-button-secondary: 0 4px 14px -3px hsl(145 65% 42% / 0.35);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -101,6 +104,7 @@
 
   html {
     direction: rtl;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -138,5 +142,50 @@
 
   .shadow-card {
     box-shadow: var(--shadow-card);
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .shadow-button {
+    box-shadow: var(--shadow-button);
+  }
+
+  .shadow-button-secondary {
+    box-shadow: var(--shadow-button-secondary);
+  }
+
+  /* Hover animations */
+  .hover-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  /* Link underline animation */
+  .link-underline {
+    position: relative;
+  }
+
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background: hsl(var(--primary));
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease-out;
+  }
+
+  .link-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
   }
 }
