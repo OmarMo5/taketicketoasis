@@ -1,4 +1,5 @@
 import { Facebook, Twitter, Instagram, Youtube, MapPin, Phone, Mail } from "lucide-react";
+import { motion, type Variants } from "framer-motion";
 
 const FooterSection = () => {
   const quickLinks = [
@@ -24,15 +25,41 @@ const FooterSection = () => {
     { icon: Youtube, href: "#", label: "Youtube" },
   ];
 
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] },
+    },
+  };
+
   return (
     <footer className="bg-foreground text-primary-foreground">
       {/* Main Footer */}
-      <div className="max-w-6xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        className="max-w-6xl mx-auto px-4 py-14"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Logo & Description */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
+          <motion.div variants={itemVariants} className="lg:col-span-1">
+            <div className="flex items-center gap-3 mb-5 group cursor-pointer">
+              <div className="w-11 h-11 bg-gradient-primary rounded-xl flex items-center justify-center shadow-soft transition-transform duration-300 group-hover:scale-105">
                 <span className="text-primary-foreground font-bold text-xl">م</span>
               </div>
               <span className="font-bold text-xl">متحف السيرة النبوية</span>
@@ -43,78 +70,82 @@ const FooterSection = () => {
             {/* Social Icons */}
             <div className="flex gap-3">
               {socialLinks.map((social) => (
-                <a
+                <motion.a
                   key={social.label}
                   href={social.href}
-                  className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary transition-colors flex items-center justify-center"
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary transition-all duration-300 flex items-center justify-center"
                   aria-label={social.label}
                 >
                   <social.icon className="w-5 h-5" />
-                </a>
+                </motion.a>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="font-bold text-lg mb-4">روابط سريعة</h3>
+          <motion.div variants={itemVariants}>
+            <h3 className="font-bold text-lg mb-5 text-primary-foreground">روابط سريعة</h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  <a
+                  <motion.a
                     href={link.href}
-                    className="text-primary-foreground/70 hover:text-primary transition-colors text-sm"
+                    whileHover={{ x: -4 }}
+                    className="text-primary-foreground/70 hover:text-primary transition-colors duration-300 text-sm inline-block"
                   >
                     {link.label}
-                  </a>
+                  </motion.a>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Branches */}
-          <div>
-            <h3 className="font-bold text-lg mb-4">فروعنا</h3>
+          <motion.div variants={itemVariants}>
+            <h3 className="font-bold text-lg mb-5 text-primary-foreground">فروعنا</h3>
             <ul className="space-y-3">
               {branches.map((branch) => (
                 <li key={branch.label}>
-                  <a
+                  <motion.a
                     href={branch.href}
-                    className="text-primary-foreground/70 hover:text-primary transition-colors text-sm"
+                    whileHover={{ x: -4 }}
+                    className="text-primary-foreground/70 hover:text-primary transition-colors duration-300 text-sm inline-block"
                   >
                     {branch.label}
-                  </a>
+                  </motion.a>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Contact Info */}
-          <div>
-            <h3 className="font-bold text-lg mb-4">تواصل معنا</h3>
+          <motion.div variants={itemVariants}>
+            <h3 className="font-bold text-lg mb-5 text-primary-foreground">تواصل معنا</h3>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                <span className="text-primary-foreground/70 text-sm">
+              <li className="flex items-start gap-3 group">
+                <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110" />
+                <span className="text-primary-foreground/70 text-sm group-hover:text-primary-foreground transition-colors duration-300">
                   مكة المكرمة، المملكة العربية السعودية
                 </span>
               </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-primary shrink-0" />
-                <span className="text-primary-foreground/70 text-sm" dir="ltr">
+              <li className="flex items-center gap-3 group">
+                <Phone className="w-5 h-5 text-primary shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                <span className="text-primary-foreground/70 text-sm group-hover:text-primary-foreground transition-colors duration-300" dir="ltr">
                   +966 12 345 6789
                 </span>
               </li>
-              <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-primary shrink-0" />
-                <span className="text-primary-foreground/70 text-sm">
+              <li className="flex items-center gap-3 group">
+                <Mail className="w-5 h-5 text-primary shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                <span className="text-primary-foreground/70 text-sm group-hover:text-primary-foreground transition-colors duration-300">
                   info@seerah-museum.com
                 </span>
               </li>
             </ul>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Bottom Bar */}
       <div className="border-t border-primary-foreground/10">
@@ -124,12 +155,20 @@ const FooterSection = () => {
               © 2024 متحف السيرة النبوية. جميع الحقوق محفوظة.
             </p>
             <div className="flex gap-6">
-              <a href="#" className="text-primary-foreground/60 hover:text-primary text-sm transition-colors">
+              <motion.a
+                href="#"
+                whileHover={{ y: -1 }}
+                className="text-primary-foreground/60 hover:text-primary text-sm transition-colors duration-300"
+              >
                 سياسة الخصوصية
-              </a>
-              <a href="#" className="text-primary-foreground/60 hover:text-primary text-sm transition-colors">
+              </motion.a>
+              <motion.a
+                href="#"
+                whileHover={{ y: -1 }}
+                className="text-primary-foreground/60 hover:text-primary text-sm transition-colors duration-300"
+              >
                 الشروط والأحكام
-              </a>
+              </motion.a>
             </div>
           </div>
         </div>

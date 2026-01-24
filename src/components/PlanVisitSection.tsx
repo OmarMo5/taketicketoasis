@@ -1,4 +1,5 @@
 import { Star, Calendar, Users } from "lucide-react";
+import { motion, type Variants } from "framer-motion";
 
 const PlanVisitSection = () => {
   const features = [
@@ -22,36 +23,73 @@ const PlanVisitSection = () => {
       id: 3,
       icon: Users,
       title: "للجميع",
-      description: "مثال للعائلات والطلاب والباحثين والزوار من جميع أنحاء العالم الذين يسعون لاستكشاف التراث الإسلامي",
+      description: "مثالي للعائلات والطلاب والباحثين والزوار من جميع أنحاء العالم الذين يسعون لاستكشاف التراث الإسلامي",
       bgColor: "bg-card-green",
       iconBg: "bg-gradient-green",
     },
   ];
 
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
+    },
+  };
+
   return (
-    <section className="py-16 md:py-24 bg-background">
+    <section className="py-20 md:py-28 bg-background">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-14"
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             خطط زيارتك
           </h2>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-lg">
             كل ما تحتاج معرفته لتجربة متحف غنية
           </p>
-        </div>
+        </motion.div>
 
         {/* Feature Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        >
           {features.map((feature) => (
-            <div
+            <motion.div
               key={feature.id}
-              className={`${feature.bgColor} rounded-3xl p-8 text-center transition-transform hover:-translate-y-1 duration-300`}
+              variants={itemVariants}
+              whileHover={{ y: -6, scale: 1.02 }}
+              className={`${feature.bgColor} rounded-3xl p-8 text-center transition-all duration-400 border border-border/30 shadow-card hover:shadow-elevated`}
             >
               {/* Icon */}
-              <div className={`w-14 h-14 ${feature.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-soft`}>
-                <feature.icon className="w-6 h-6 text-white" />
-              </div>
+              <motion.div
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                className={`w-16 h-16 ${feature.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-soft`}
+              >
+                <feature.icon className="w-7 h-7 text-primary-foreground" />
+              </motion.div>
 
               {/* Title */}
               <h3 className="text-xl font-bold text-foreground mb-4">
@@ -62,9 +100,9 @@ const PlanVisitSection = () => {
               <p className="text-muted-foreground leading-relaxed text-sm">
                 {feature.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
