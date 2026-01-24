@@ -1,5 +1,6 @@
 import { Facebook, Twitter, Instagram, Youtube, MapPin, Phone, Mail } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
+import museumLogo from "@/assets/museum-logo.png";
 
 const FooterSection = () => {
   const quickLinks = [
@@ -58,12 +59,13 @@ const FooterSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Logo & Description */}
           <motion.div variants={itemVariants} className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-5 group cursor-pointer">
-              <div className="w-11 h-11 bg-gradient-primary rounded-xl flex items-center justify-center shadow-soft transition-transform duration-300 group-hover:scale-105">
-                <span className="text-primary-foreground font-bold text-xl">م</span>
-              </div>
-              <span className="font-bold text-xl">متحف السيرة النبوية</span>
-            </div>
+            <a href="#" className="inline-block mb-5 group cursor-pointer transition-transform duration-300 hover:scale-105">
+              <img 
+                src={museumLogo} 
+                alt="المعرض والمتحف الدولي للسيرة النبوية" 
+                className="h-14 w-auto object-contain brightness-0 invert"
+              />
+            </a>
             <p className="text-primary-foreground/70 text-sm leading-relaxed mb-6">
               متحف عالمي يحتفي بالتراث الإسلامي ويروي قصة الرسول ﷺ من خلال أحدث التقنيات والمعروضات التفاعلية.
             </p>

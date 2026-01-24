@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import museumLogo from "@/assets/museum-logo.png";
 
 const Navbar = () => {
   const navLinks = [
@@ -18,15 +19,13 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-3 group cursor-pointer">
-          <div className="w-10 h-10 rounded-xl bg-gradient-primary flex items-center justify-center shadow-button transition-transform duration-300 group-hover:scale-105">
-            <span className="text-primary-foreground font-bold text-lg">م</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="font-bold text-foreground text-sm transition-colors group-hover:text-primary">المتحف الدولي</span>
-            <span className="text-xs text-muted-foreground">للسيرة النبوية</span>
-          </div>
-        </div>
+        <a href="#" className="flex items-center gap-2 group cursor-pointer transition-transform duration-300 hover:scale-105">
+          <img 
+            src={museumLogo} 
+            alt="المعرض والمتحف الدولي للسيرة النبوية" 
+            className="h-12 w-auto object-contain"
+          />
+        </a>
 
         {/* Nav Links */}
         <div className="hidden md:flex items-center gap-8">
