@@ -6,24 +6,29 @@ import museumLogo from "@/assets/museum-logo.png";
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState("hero");
   
+  // Links for display in navbar (visual order)
   const navLinks = [
     { label: "الرئيسية", href: "#hero", id: "hero" },
     { label: "المواقع", href: "#global-locations", id: "global-locations" },
     { label: "التجربة", href: "#tour-highlights", id: "tour-highlights" },
     { label: "خطط زيارتك", href: "#plan-visit", id: "plan-visit" },
   ];
+  
+  // Sections ordered by DOM position for scroll detection
+  const sectionOrder = ["hero", "tour-highlights", "plan-visit", "global-locations"];
 
   // Scroll detection for active section
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navLinks.map(link => ({
-        id: link.id,
-        element: document.getElementById(link.id)
+      const sections = sectionOrder.map(id => ({
+        id,
+        element: document.getElementById(id)
       }));
       
       const navbarHeight = 64;
       const scrollPosition = window.scrollY + navbarHeight + 100;
       
+      // Iterate from last to first in DOM order
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
         if (section.element) {
