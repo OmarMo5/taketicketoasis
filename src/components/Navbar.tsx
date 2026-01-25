@@ -1,21 +1,53 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import museumLogo from "@/assets/museum-logo.png";
 
 const Navbar = () => {
+  const [activeSection, setActiveSection] = useState("hero");
+  
   const navLinks = [
-    { label: "الرئيسية", href: "#hero" },
-    { label: "المواقع", href: "#global-locations" },
-    { label: "التجربة", href: "#tour-highlights" },
-    { label: "خطط زيارتك", href: "#plan-visit" },
+    { label: "الرئيسية", href: "#hero", id: "hero" },
+    { label: "المواقع", href: "#global-locations", id: "global-locations" },
+    { label: "التجربة", href: "#tour-highlights", id: "tour-highlights" },
+    { label: "خطط زيارتك", href: "#plan-visit", id: "plan-visit" },
   ];
 
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  // Scroll detection for active section
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navLinks.map(link => ({
+        id: link.id,
+        element: document.getElementById(link.id)
+      }));
+      
+      const navbarHeight = 64;
+      const scrollPosition = window.scrollY + navbarHeight + 100;
+      
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        if (section.element) {
+          const sectionTop = section.element.offsetTop;
+          if (scrollPosition >= sectionTop) {
+            setActiveSection(section.id);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial check
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string, id: string) => {
     e.preventDefault();
-    const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
+    setActiveSection(id);
+    const element = document.getElementById(id);
     if (element) {
-      const navbarHeight = 64; // h-16 = 64px
+      const navbarHeight = 64;
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
       const offsetPosition = elementPosition - navbarHeight;
       
@@ -35,7 +67,11 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2 group cursor-pointer transition-transform duration-300 hover:scale-105">
+        <a 
+          href="#hero" 
+          onClick={(e) => handleSmoothScroll(e, "#hero", "hero")}
+          className="flex items-center gap-2 group cursor-pointer transition-transform duration-300 hover:scale-105"
+        >
           <img 
             src={museumLogo} 
             alt="المعرض والمتحف الدولي للسيرة النبوية" 
@@ -45,19 +81,36 @@ const Navbar = () => {
 
         {/* Nav Links */}
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link, index) => (
-            <motion.a
-              key={link.label}
-              href={link.href}
-              onClick={(e) => handleSmoothScroll(e, link.href)}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 * index, duration: 0.3 }}
-              className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm font-medium link-underline cursor-pointer"
-            >
-              {link.label}
-            </motion.a>
-          ))}
+          {navLinks.map((link, index) => {
+            const isActive = activeSection === link.id;
+            return (
+              <motion.a
+                key={link.label}
+                href={link.href}
+                onClick={(e) => handleSmoothScroll(e, link.href, link.id)}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * index, duration: 0.3 }}
+                className={`relative text-sm font-semibold cursor-pointer transition-all duration-300 ${
+                  isActive 
+                    ? "text-primary" 
+                    : "text-muted-foreground hover:text-primary"
+                }`}
+              >
+                {link.label}
+                {/* Active indicator */}
+                <motion.span
+                  initial={false}
+                  animate={{
+                    scaleX: isActive ? 1 : 0,
+                    opacity: isActive ? 1 : 0
+                  }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full origin-center"
+                />
+              </motion.a>
+            );
+          })}
         </div>
 
         {/* CTA Button */}
