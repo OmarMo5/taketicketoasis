@@ -50,7 +50,7 @@ const PlanVisitSection = () => {
   };
 
   return (
-    <section className="py-20 md:py-28 bg-background">
+    <section id="plan-visit" className="py-20 md:py-28 bg-background">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div

@@ -4,11 +4,27 @@ import museumLogo from "@/assets/museum-logo.png";
 
 const Navbar = () => {
   const navLinks = [
-    { label: "الرئيسية", href: "#" },
-    { label: "المواقع", href: "#" },
-    { label: "التجربة", href: "#" },
-    { label: "خطط زيارتك", href: "#" },
+    { label: "الرئيسية", href: "#hero" },
+    { label: "المواقع", href: "#global-locations" },
+    { label: "التجربة", href: "#tour-highlights" },
+    { label: "خطط زيارتك", href: "#plan-visit" },
   ];
+
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      const navbarHeight = 64; // h-16 = 64px
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - navbarHeight;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <motion.nav
@@ -33,10 +49,11 @@ const Navbar = () => {
             <motion.a
               key={link.label}
               href={link.href}
+              onClick={(e) => handleSmoothScroll(e, link.href)}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * index, duration: 0.3 }}
-              className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm font-medium link-underline"
+              className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm font-medium link-underline cursor-pointer"
             >
               {link.label}
             </motion.a>
