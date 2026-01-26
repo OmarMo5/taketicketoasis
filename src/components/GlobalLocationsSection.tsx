@@ -170,20 +170,24 @@ const GlobalLocationsSection = () => {
   };
 
   return (
-    <section id="global-locations" className="py-20 md:py-28 bg-background" dir="rtl">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <section id="global-locations" className="py-24 md:py-32 bg-background relative" dir="rtl">
+      {/* Decorative background */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/3 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-secondary/3 rounded-full blur-3xl pointer-events-none" />
+      
+      <div className="container mx-auto px-4 max-w-6xl relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5">
             مواقعنا العالمية
           </h2>
-          <p className="text-primary font-medium mb-2">
+          <p className="text-primary font-semibold mb-3">
             قم بزيارة متاحفنا ذات المستوى العالمي في ثلاث قارات
           </p>
           <p className="text-muted-foreground">
@@ -197,7 +201,7 @@ const GlobalLocationsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-3 mb-14"
+          className="flex flex-wrap justify-center gap-3 mb-16"
         >
           {locationsData.map((location, index) => (
             <motion.button
@@ -206,12 +210,12 @@ const GlobalLocationsSection = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.05 }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+              className={`px-7 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
                 activeLocation === location.id
                   ? "bg-primary text-primary-foreground shadow-button"
-                  : "bg-card text-foreground border border-border hover:border-primary/50 hover:bg-accent/50"
+                  : "bg-card text-foreground border border-border hover:border-primary/50 hover:bg-accent/60 shadow-card"
               }`}
             >
               {location.name}
@@ -262,23 +266,23 @@ const GlobalLocationsSection = () => {
 
               {/* Price Card */}
               <motion.div
-                whileHover={{ y: -3 }}
-                className="mt-6 p-5 border border-border rounded-xl bg-card shadow-card hover:shadow-soft transition-all duration-300"
+                whileHover={{ y: -4 }}
+                className="mt-6 p-6 border border-border/50 rounded-2xl bg-card shadow-card hover:shadow-elevated transition-all duration-400"
               >
-                <div className="text-center mb-5">
-                  <p className="text-sm text-muted-foreground mb-1">تبدأ التذاكر من</p>
+                <div className="text-center mb-6">
+                  <p className="text-sm text-muted-foreground mb-2">تبدأ التذاكر من</p>
                   <div className="flex items-baseline justify-center gap-2">
-                    <span className="text-4xl font-bold text-foreground">{currentLocation.price}</span>
-                    <span className="text-lg text-muted-foreground">{currentLocation.currency}</span>
+                    <span className="text-5xl font-bold text-foreground">{currentLocation.price}</span>
+                    <span className="text-lg text-muted-foreground font-medium">{currentLocation.currency}</span>
                   </div>
                 </div>
                 <motion.button
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3.5 px-6 rounded-xl font-medium flex items-center justify-center gap-2 transition-all duration-300 shadow-button hover:shadow-elevated"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 px-6 rounded-xl font-semibold flex items-center justify-center gap-3 transition-all duration-300 shadow-button hover:shadow-glow-primary"
                 >
                   <span>احجز زيارة {currentLocation.name}</span>
-                  <ArrowLeft className="w-4 h-4" />
+                  <ArrowLeft className="w-5 h-5" />
                 </motion.button>
               </motion.div>
             </div>

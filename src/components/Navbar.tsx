@@ -68,14 +68,14 @@ const Navbar = () => {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-md border-b border-border/50"
+      className="sticky top-0 z-50 w-full bg-background/90 backdrop-blur-lg border-b border-border/40 shadow-sm"
     >
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
         <a 
           href="#hero" 
           onClick={(e) => handleSmoothScroll(e, "#hero", "hero")}
-          className="flex items-center gap-2 group cursor-pointer transition-transform duration-300 hover:scale-105"
+          className="flex items-center gap-2 group cursor-pointer transition-all duration-300 hover:scale-105"
         >
           <img 
             src={museumLogo} 
@@ -85,7 +85,7 @@ const Navbar = () => {
         </a>
 
         {/* Nav Links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link, index) => {
             const isActive = activeSection === link.id;
             return (
@@ -96,7 +96,7 @@ const Navbar = () => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index, duration: 0.3 }}
-                className={`relative text-sm font-semibold cursor-pointer transition-all duration-300 ${
+                className={`relative text-sm font-semibold cursor-pointer transition-all duration-300 py-1 ${
                   isActive 
                     ? "text-primary" 
                     : "text-muted-foreground hover:text-primary"
@@ -111,7 +111,7 @@ const Navbar = () => {
                     opacity: isActive ? 1 : 0
                   }}
                   transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full origin-center"
+                  className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-primary rounded-full origin-center"
                 />
               </motion.a>
             );
@@ -124,7 +124,7 @@ const Navbar = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 0.3 }}
         >
-          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-6 shadow-button hover:shadow-elevated transition-all duration-300 hover:-translate-y-0.5">
+          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-7 py-2.5 font-semibold shadow-button hover:shadow-glow-primary transition-all duration-300 hover:-translate-y-0.5">
             احجز تذكرتك
           </Button>
         </motion.div>
