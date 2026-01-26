@@ -65,7 +65,10 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section className="py-20 md:py-28 px-4 bg-muted/30">
+    <section className="py-24 md:py-32 px-4 bg-muted/40 relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+      
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <motion.div
@@ -73,12 +76,12 @@ const TestimonialsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-14"
+          className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5">
             ماذا يقول زوارنا
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground text-lg max-w-md mx-auto">
             اكتشف تجارب الزوار من جميع أنحاء العالم
           </p>
         </motion.div>
@@ -127,7 +130,7 @@ const TestimonialCard = ({ testimonial, fullWidth }: TestimonialCardProps) => {
     const parts = testimonial.text.split(testimonial.highlightedText);
     return (
       <>
-        <span className="text-primary font-semibold">{testimonial.highlightedText}</span>
+        <span className="text-primary font-bold">{testimonial.highlightedText}</span>
         {parts[1]}
       </>
     );
@@ -135,13 +138,13 @@ const TestimonialCard = ({ testimonial, fullWidth }: TestimonialCardProps) => {
 
   return (
     <motion.div
-      whileHover={{ y: -4 }}
-      className={`bg-card rounded-2xl p-7 shadow-card hover:shadow-soft transition-all duration-300 ${
-        testimonial.featured ? "border-2 border-primary shadow-soft" : "border border-border/60"
+      whileHover={{ y: -6 }}
+      className={`bg-card rounded-2xl p-8 shadow-card hover:shadow-elevated transition-all duration-400 ${
+        testimonial.featured ? "border-2 border-primary/60 shadow-soft ring-4 ring-primary/5" : "border border-border/50"
       } ${fullWidth ? "w-full" : ""}`}
     >
       {/* Stars */}
-      <div className="flex justify-center gap-1 mb-5">
+      <div className="flex justify-center gap-1.5 mb-6">
         {Array.from({ length: testimonial.rating }).map((_, i) => (
           <motion.div
             key={i}
@@ -155,7 +158,7 @@ const TestimonialCard = ({ testimonial, fullWidth }: TestimonialCardProps) => {
       </div>
 
       {/* Testimonial Text */}
-      <p className="text-center text-muted-foreground leading-relaxed mb-6 text-base">
+      <p className="text-center text-muted-foreground leading-relaxed mb-7 text-base">
         "{renderText()}"
       </p>
 
@@ -167,7 +170,7 @@ const TestimonialCard = ({ testimonial, fullWidth }: TestimonialCardProps) => {
         </div>
         <motion.div
           whileHover={{ scale: 1.1 }}
-          className={`w-12 h-12 rounded-full ${testimonial.avatarColor} flex items-center justify-center text-primary-foreground font-bold text-lg shadow-soft`}
+          className={`w-13 h-13 rounded-full ${testimonial.avatarColor} flex items-center justify-center text-primary-foreground font-bold text-lg shadow-soft`}
         >
           {testimonial.name.charAt(0)}
         </motion.div>

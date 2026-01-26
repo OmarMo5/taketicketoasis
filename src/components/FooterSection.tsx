@@ -47,26 +47,30 @@ const FooterSection = () => {
   };
 
   return (
-    <footer className="bg-foreground text-primary-foreground">
+    <footer className="bg-gradient-footer text-primary-foreground relative overflow-hidden">
+      {/* Decorative gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-secondary/10 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/40 to-transparent" />
+      
       {/* Main Footer */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-50px" }}
-        className="max-w-6xl mx-auto px-4 py-14"
+        className="max-w-6xl mx-auto px-4 py-16 relative z-10"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Logo & Description */}
           <motion.div variants={itemVariants} className="lg:col-span-1">
-            <a href="#" className="inline-block mb-5 group cursor-pointer transition-transform duration-300 hover:scale-105">
+            <a href="#" className="inline-block mb-6 group cursor-pointer transition-transform duration-300 hover:scale-105">
               <img 
                 src={museumLogo} 
                 alt="المعرض والمتحف الدولي للسيرة النبوية" 
                 className="h-14 w-auto object-contain brightness-0 invert"
               />
             </a>
-            <p className="text-primary-foreground/70 text-sm leading-relaxed mb-6">
+            <p className="text-primary-foreground/75 text-sm leading-relaxed mb-6">
               متحف عالمي يحتفي بالتراث الإسلامي ويروي قصة الرسول ﷺ من خلال أحدث التقنيات والمعروضات التفاعلية.
             </p>
             {/* Social Icons */}
@@ -75,9 +79,9 @@ const FooterSection = () => {
                 <motion.a
                   key={social.label}
                   href={social.href}
-                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileHover={{ scale: 1.15, y: -3 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary transition-all duration-300 flex items-center justify-center"
+                  className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-secondary transition-all duration-300 flex items-center justify-center border border-primary-foreground/10 hover:border-secondary"
                   aria-label={social.label}
                 >
                   <social.icon className="w-5 h-5" />
@@ -88,14 +92,17 @@ const FooterSection = () => {
 
           {/* Quick Links */}
           <motion.div variants={itemVariants}>
-            <h3 className="font-bold text-lg mb-5 text-primary-foreground">روابط سريعة</h3>
+            <h3 className="font-bold text-lg mb-6 text-primary-foreground relative inline-block">
+              روابط سريعة
+              <span className="absolute -bottom-1 right-0 w-8 h-0.5 bg-secondary rounded-full" />
+            </h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.label}>
                   <motion.a
                     href={link.href}
-                    whileHover={{ x: -4 }}
-                    className="text-primary-foreground/70 hover:text-primary transition-colors duration-300 text-sm inline-block"
+                    whileHover={{ x: -6 }}
+                    className="text-primary-foreground/70 hover:text-secondary transition-colors duration-300 text-sm inline-block"
                   >
                     {link.label}
                   </motion.a>
@@ -106,14 +113,17 @@ const FooterSection = () => {
 
           {/* Branches */}
           <motion.div variants={itemVariants}>
-            <h3 className="font-bold text-lg mb-5 text-primary-foreground">فروعنا</h3>
+            <h3 className="font-bold text-lg mb-6 text-primary-foreground relative inline-block">
+              فروعنا
+              <span className="absolute -bottom-1 right-0 w-8 h-0.5 bg-secondary rounded-full" />
+            </h3>
             <ul className="space-y-3">
               {branches.map((branch) => (
                 <li key={branch.label}>
                   <motion.a
                     href={branch.href}
-                    whileHover={{ x: -4 }}
-                    className="text-primary-foreground/70 hover:text-primary transition-colors duration-300 text-sm inline-block"
+                    whileHover={{ x: -6 }}
+                    className="text-primary-foreground/70 hover:text-secondary transition-colors duration-300 text-sm inline-block"
                   >
                     {branch.label}
                   </motion.a>
@@ -124,22 +134,31 @@ const FooterSection = () => {
 
           {/* Contact Info */}
           <motion.div variants={itemVariants}>
-            <h3 className="font-bold text-lg mb-5 text-primary-foreground">تواصل معنا</h3>
+            <h3 className="font-bold text-lg mb-6 text-primary-foreground relative inline-block">
+              تواصل معنا
+              <span className="absolute -bottom-1 right-0 w-8 h-0.5 bg-secondary rounded-full" />
+            </h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3 group">
-                <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110" />
-                <span className="text-primary-foreground/70 text-sm group-hover:text-primary-foreground transition-colors duration-300">
+                <div className="w-8 h-8 rounded-lg bg-secondary/20 flex items-center justify-center transition-all duration-300 group-hover:bg-secondary/30">
+                  <MapPin className="w-4 h-4 text-secondary shrink-0" />
+                </div>
+                <span className="text-primary-foreground/70 text-sm group-hover:text-primary-foreground transition-colors duration-300 mt-1">
                   مكة المكرمة، المملكة العربية السعودية
                 </span>
               </li>
               <li className="flex items-center gap-3 group">
-                <Phone className="w-5 h-5 text-primary shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                <div className="w-8 h-8 rounded-lg bg-secondary/20 flex items-center justify-center transition-all duration-300 group-hover:bg-secondary/30">
+                  <Phone className="w-4 h-4 text-secondary shrink-0" />
+                </div>
                 <span className="text-primary-foreground/70 text-sm group-hover:text-primary-foreground transition-colors duration-300" dir="ltr">
                   +966 12 345 6789
                 </span>
               </li>
               <li className="flex items-center gap-3 group">
-                <Mail className="w-5 h-5 text-primary shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                <div className="w-8 h-8 rounded-lg bg-secondary/20 flex items-center justify-center transition-all duration-300 group-hover:bg-secondary/30">
+                  <Mail className="w-4 h-4 text-secondary shrink-0" />
+                </div>
                 <span className="text-primary-foreground/70 text-sm group-hover:text-primary-foreground transition-colors duration-300">
                   info@seerah-museum.com
                 </span>
@@ -150,7 +169,7 @@ const FooterSection = () => {
       </motion.div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-primary-foreground/10">
+      <div className="border-t border-primary-foreground/10 bg-black/10 relative z-10">
         <div className="max-w-6xl mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-primary-foreground/60 text-sm">
@@ -159,15 +178,15 @@ const FooterSection = () => {
             <div className="flex gap-6">
               <motion.a
                 href="#"
-                whileHover={{ y: -1 }}
-                className="text-primary-foreground/60 hover:text-primary text-sm transition-colors duration-300"
+                whileHover={{ y: -2 }}
+                className="text-primary-foreground/60 hover:text-secondary text-sm transition-colors duration-300"
               >
                 سياسة الخصوصية
               </motion.a>
               <motion.a
                 href="#"
-                whileHover={{ y: -1 }}
-                className="text-primary-foreground/60 hover:text-primary text-sm transition-colors duration-300"
+                whileHover={{ y: -2 }}
+                className="text-primary-foreground/60 hover:text-secondary text-sm transition-colors duration-300"
               >
                 الشروط والأحكام
               </motion.a>

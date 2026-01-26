@@ -50,7 +50,7 @@ const PlanVisitSection = () => {
   };
 
   return (
-    <section id="plan-visit" className="py-20 md:py-28 bg-background">
+    <section id="plan-visit" className="py-24 md:py-32 bg-background relative">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div
@@ -58,12 +58,12 @@ const PlanVisitSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-14"
+          className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5">
             خطط زيارتك
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground text-lg max-w-md mx-auto">
             كل ما تحتاج معرفته لتجربة متحف غنية
           </p>
         </motion.div>
@@ -80,15 +80,15 @@ const PlanVisitSection = () => {
             <motion.div
               key={feature.id}
               variants={itemVariants}
-              whileHover={{ y: -6, scale: 1.02 }}
-              className={`${feature.bgColor} rounded-3xl p-8 text-center transition-all duration-400 border border-border/30 shadow-card hover:shadow-elevated`}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className={`${feature.bgColor} rounded-3xl p-10 text-center transition-all duration-400 border border-border/20 shadow-card hover:shadow-elevated`}
             >
               {/* Icon */}
               <motion.div
                 whileHover={{ scale: 1.1, rotate: 5 }}
-                className={`w-16 h-16 ${feature.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-soft`}
+                className={`w-18 h-18 ${feature.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-7 shadow-soft`}
               >
-                <feature.icon className="w-7 h-7 text-primary-foreground" />
+                <feature.icon className="w-8 h-8 text-primary-foreground" />
               </motion.div>
 
               {/* Title */}
