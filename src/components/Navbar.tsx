@@ -5,7 +5,7 @@ import museumLogo from "@/assets/museum-logo.png";
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState("hero");
-  
+
   // Links for display in navbar (visual order)
   const navLinks = [
     { label: "الرئيسية", href: "#hero", id: "hero" },
@@ -13,7 +13,7 @@ const Navbar = () => {
     { label: "التجربة", href: "#tour-highlights", id: "tour-highlights" },
     { label: "خطط زيارتك", href: "#plan-visit", id: "plan-visit" },
   ];
-  
+
   // Sections ordered by DOM position for scroll detection
   const sectionOrder = ["hero", "tour-highlights", "plan-visit", "global-locations"];
 
@@ -24,10 +24,10 @@ const Navbar = () => {
         id,
         element: document.getElementById(id)
       }));
-      
+
       const navbarHeight = 64;
       const scrollPosition = window.scrollY + navbarHeight + 100;
-      
+
       // Iterate from last to first in DOM order
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
@@ -43,7 +43,7 @@ const Navbar = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // Initial check
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -55,7 +55,7 @@ const Navbar = () => {
       const navbarHeight = 64;
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
       const offsetPosition = elementPosition - navbarHeight;
-      
+
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
@@ -72,14 +72,14 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a 
-          href="#hero" 
+        <a
+          href="#hero"
           onClick={(e) => handleSmoothScroll(e, "#hero", "hero")}
           className="flex items-center gap-2 group cursor-pointer transition-all duration-300 hover:scale-105"
         >
-          <img 
-            src={museumLogo} 
-            alt="المعرض والمتحف الدولي للسيرة النبوية" 
+          <img
+            src={museumLogo}
+            alt="المعرض والمتحف الدولي للسيرة النبوية"
             className="h-12 w-auto object-contain"
           />
         </a>
@@ -96,11 +96,10 @@ const Navbar = () => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index, duration: 0.3 }}
-                className={`relative text-sm font-semibold cursor-pointer transition-all duration-300 py-1 ${
-                  isActive 
-                    ? "text-primary" 
+                className={`relative text-sm font-semibold cursor-pointer transition-all duration-300 py-1 ${isActive
+                    ? "text-primary"
                     : "text-muted-foreground hover:text-primary"
-                }`}
+                  }`}
               >
                 {link.label}
                 {/* Active indicator */}
@@ -124,9 +123,15 @@ const Navbar = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 0.3 }}
         >
-          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-7 py-2.5 font-semibold shadow-button hover:shadow-glow-primary transition-all duration-300 hover:-translate-y-0.5">
-            احجز تذكرتك
-          </Button>
+          <a
+            href="https://tickets.asc.sa/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-7 py-2.5 font-semibold shadow-button hover:shadow-glow-primary transition-all duration-300 hover:-translate-y-0.5">
+              احجز تذكرتك
+            </Button>
+          </a>
         </motion.div>
       </div>
     </motion.nav>

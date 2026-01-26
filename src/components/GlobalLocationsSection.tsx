@@ -150,20 +150,29 @@ const locationsData: LocationData[] = [
   }
 ];
 
+const bookingLinks: Record<string, string> = {
+  mecca: "https://tickets.asc.sa/?branch_slug=mkh",
+  medina: "https://tickets.asc.sa/?branch_slug=med",
+  rabat: "https://tickets.asc.sa/?branch_slug=ma",
+  dakar: "https://tickets.asc.sa/?branch_slug=sen",
+  nouakchott: "https://tickets.asc.sa/?branch_slug=mrt",
+};
+
+
 const GlobalLocationsSection = () => {
   const [activeLocation, setActiveLocation] = useState(locationsData[0].id);
-  
+
   const currentLocation = locationsData.find(loc => loc.id === activeLocation) || locationsData[0];
 
   const contentVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }
     },
-    exit: { 
-      opacity: 0, 
+    exit: {
+      opacity: 0,
       y: -10,
       transition: { duration: 0.2 }
     }
@@ -174,7 +183,7 @@ const GlobalLocationsSection = () => {
       {/* Decorative background */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/3 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-secondary/3 rounded-full blur-3xl pointer-events-none" />
-      
+
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
         {/* Section Header */}
         <motion.div
@@ -212,11 +221,10 @@ const GlobalLocationsSection = () => {
               transition={{ delay: index * 0.05 }}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className={`px-7 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
-                activeLocation === location.id
+              className={`px-7 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${activeLocation === location.id
                   ? "bg-primary text-primary-foreground shadow-button"
                   : "bg-card text-foreground border border-border hover:border-primary/50 hover:bg-accent/60 shadow-card"
-              }`}
+                }`}
             >
               {location.name}
             </motion.button>
@@ -247,7 +255,7 @@ const GlobalLocationsSection = () => {
                   className="w-full h-64 md:h-72 object-cover"
                 />
               </motion.div>
-              
+
               <div className="mt-5 text-center">
                 <span className="inline-block px-4 py-1.5 text-xs border border-secondary/50 bg-secondary/10 rounded-full text-secondary font-medium mb-3">
                   مفتوح الآن
@@ -276,14 +284,21 @@ const GlobalLocationsSection = () => {
                     <span className="text-lg text-muted-foreground font-medium">{currentLocation.currency}</span>
                   </div>
                 </div>
-                <motion.button
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 px-6 rounded-xl font-semibold flex items-center justify-center gap-3 transition-all duration-300 shadow-button hover:shadow-glow-primary"
+                <a
+                  href={bookingLinks[currentLocation.id]}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <span>احجز زيارة {currentLocation.name}</span>
-                  <ArrowLeft className="w-5 h-5" />
-                </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 px-6 rounded-xl font-semibold flex items-center justify-center gap-3 transition-all duration-300 shadow-button hover:shadow-glow-primary"
+                  >
+                    <span>احجز زيارة {currentLocation.name}</span>
+                    <ArrowLeft className="w-5 h-5" />
+                  </motion.button>
+                </a>
+
               </motion.div>
             </div>
 
