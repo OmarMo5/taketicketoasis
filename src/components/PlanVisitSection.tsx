@@ -60,10 +60,10 @@ const PlanVisitSection = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5">
+          <h2 className="text-4xl md:text-5xl lg:text-[3.25rem] font-bold text-foreground mb-6">
             خطط زيارتك
           </h2>
-          <p className="text-muted-foreground text-lg max-w-md mx-auto">
+          <p className="text-muted-foreground text-lg md:text-xl max-w-lg mx-auto leading-relaxed">
             كل ما تحتاج معرفته لتجربة متحف غنية
           </p>
         </motion.div>
@@ -74,30 +74,33 @@ const PlanVisitSection = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
           {features.map((feature) => (
             <motion.div
               key={feature.id}
               variants={itemVariants}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className={`${feature.bgColor} rounded-3xl p-10 text-center transition-all duration-400 border border-border/20 shadow-card hover:shadow-elevated`}
+              whileHover={{ y: -10 }}
+              className={`${feature.bgColor} rounded-3xl p-10 text-center transition-all duration-400 border border-border/30 shadow-card hover:shadow-elevated relative overflow-hidden group`}
             >
+              {/* Subtle gradient overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-primary/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+              
               {/* Icon */}
               <motion.div
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                className={`w-18 h-18 ${feature.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-7 shadow-soft`}
+                whileHover={{ scale: 1.08 }}
+                className={`w-20 h-20 ${feature.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-soft relative`}
               >
-                <feature.icon className="w-8 h-8 text-primary-foreground" />
+                <feature.icon className="w-9 h-9 text-primary-foreground" strokeWidth={1.75} />
               </motion.div>
 
               {/* Title */}
-              <h3 className="text-xl font-bold text-foreground mb-4">
+              <h3 className="text-2xl font-bold text-foreground mb-5 relative">
                 {feature.title}
               </h3>
 
               {/* Description */}
-              <p className="text-muted-foreground leading-relaxed text-sm">
+              <p className="text-muted-foreground leading-relaxed text-base relative">
                 {feature.description}
               </p>
             </motion.div>

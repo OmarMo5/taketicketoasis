@@ -1,4 +1,4 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Building2, Flower2, Award, Clock } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
 import highlightImage1 from "@/assets/highlight-1.jpg";
 import highlightImage2 from "@/assets/highlight-2.jpg";
@@ -11,25 +11,29 @@ const HighlightsSection = () => {
       id: 1,
       title: "مجسمات مكة والمدينة في زمن الرسول ﷺ",
       image: highlightImage4,
-      iconColor: "bg-secondary",
+      iconColor: "bg-gradient-primary",
+      Icon: Building2,
     },
     {
       id: 2,
       title: "الروضة المحمدية",
       image: highlightImage3,
       iconColor: "bg-secondary",
+      Icon: Flower2,
     },
     {
       id: 3,
       title: "فضائل وخصائص الرسول محمد ﷺ",
       image: highlightImage2,
-      iconColor: "bg-secondary",
+      iconColor: "bg-primary",
+      Icon: Award,
     },
     {
       id: 4,
       title: "خط زمني في حياة الرسول محمد ﷺ",
       image: highlightImage1,
-      iconColor: "bg-primary",
+      iconColor: "bg-secondary",
+      Icon: Clock,
     },
   ];
 
@@ -70,12 +74,12 @@ const HighlightsSection = () => {
         >
           <div className="flex items-center justify-center gap-2 text-primary mb-5">
             <ArrowLeft className="w-4 h-4" />
-            <span className="text-sm font-semibold">جاهز للاستكشاف</span>
+            <span className="text-base font-semibold">جاهز للاستكشاف</span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5">
+          <h2 className="text-4xl md:text-5xl lg:text-[3.25rem] font-bold text-foreground mb-6">
             أبرز معالم جولتك
           </h2>
-          <p className="text-muted-foreground text-lg max-w-md mx-auto">
+          <p className="text-muted-foreground text-lg md:text-xl max-w-lg mx-auto leading-relaxed">
             اكتشف الأقسام الأسطورية في معرضنا
           </p>
         </motion.div>
@@ -106,15 +110,15 @@ const HighlightsSection = () => {
               </div>
               
               {/* Content */}
-              <div className="p-6 flex items-center justify-between gap-3">
-                <h3 className="text-sm font-bold text-foreground leading-relaxed group-hover:text-primary transition-colors duration-300">
+              <div className="p-6 flex items-center justify-between gap-4">
+                <h3 className="text-base font-bold text-foreground leading-relaxed group-hover:text-primary transition-colors duration-300">
                   {item.title}
                 </h3>
                 <motion.div
-                  whileHover={{ scale: 1.15, rotate: 20 }}
-                  className={`w-10 h-10 rounded-full ${item.iconColor} flex items-center justify-center flex-shrink-0 shadow-soft`}
+                  whileHover={{ scale: 1.1, rotate: 8 }}
+                  className={`w-11 h-11 rounded-xl ${item.iconColor} flex items-center justify-center flex-shrink-0 shadow-soft`}
                 >
-                  <span className="text-primary-foreground text-sm">✦</span>
+                  <item.Icon className="w-5 h-5 text-primary-foreground" />
                 </motion.div>
               </div>
             </motion.div>
