@@ -68,9 +68,9 @@ const Navbar = () => {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="sticky top-0 z-50 w-full bg-background/90 backdrop-blur-lg border-b border-border/40 shadow-sm"
+      className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur-xl border-b border-border/30 shadow-soft"
     >
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+      <div className="container mx-auto px-4 h-18 flex items-center justify-between">
         {/* Logo */}
         <a
           href="#hero"
@@ -80,12 +80,12 @@ const Navbar = () => {
           <img
             src={museumLogo}
             alt="المعرض والمتحف الدولي للسيرة النبوية"
-            className="h-12 w-auto object-contain"
+            className="h-12 w-auto object-contain drop-shadow-sm"
           />
         </a>
 
         {/* Nav Links */}
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-2">
           {navLinks.map((link, index) => {
             const isActive = activeSection === link.id;
             return (
@@ -96,22 +96,20 @@ const Navbar = () => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index, duration: 0.3 }}
-                className={`relative text-sm font-semibold cursor-pointer transition-all duration-300 py-1 ${isActive
-                    ? "text-primary"
-                    : "text-muted-foreground hover:text-primary"
+                className={`relative text-sm font-semibold cursor-pointer transition-all duration-300 px-5 py-2.5 rounded-full ${isActive
+                    ? "text-primary bg-primary/10"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                   }`}
               >
                 {link.label}
-                {/* Active indicator */}
-                <motion.span
-                  initial={false}
-                  animate={{
-                    scaleX: isActive ? 1 : 0,
-                    opacity: isActive ? 1 : 0
-                  }}
-                  transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-primary rounded-full origin-center"
-                />
+                {/* Active indicator dot */}
+                {isActive && (
+                  <motion.span
+                    layoutId="activeIndicator"
+                    className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
               </motion.a>
             );
           })}
@@ -128,7 +126,7 @@ const Navbar = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-7 py-2.5 font-semibold shadow-button hover:shadow-glow-primary transition-all duration-300 hover:-translate-y-0.5">
+            <Button className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/95 hover:to-primary text-primary-foreground rounded-full px-7 py-2.5 font-bold shadow-lg hover:shadow-xl hover:shadow-primary/20 transition-all duration-300 hover:-translate-y-0.5">
               احجز تذكرتك
             </Button>
           </a>
