@@ -1,24 +1,30 @@
 import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import museumLogo from "@/assets/museum-logo.png";
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState("hero");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHomePage = location.pathname === "/";
 
   // Links for display in navbar (visual order)
   const navLinks = [
-    { label: "الرئيسية", href: "#hero", id: "hero" },
-    { label: "المواقع", href: "#global-locations", id: "global-locations" },
-    { label: "التجربة", href: "#tour-highlights", id: "tour-highlights" },
-    { label: "خطط زيارتك", href: "#plan-visit", id: "plan-visit" },
+    { label: "الرئيسية", href: "#hero", id: "hero", isSection: true },
+    { label: "أجنحة المتحف", href: "/wings", id: "wings", isSection: false },
+    { label: "المواقع", href: "#global-locations", id: "global-locations", isSection: true },
+    { label: "التجربة", href: "#tour-highlights", id: "tour-highlights", isSection: true },
+    { label: "خطط زيارتك", href: "#plan-visit", id: "plan-visit", isSection: true },
   ];
-
   // Sections ordered by DOM position for scroll detection
   const sectionOrder = ["hero", "tour-highlights", "plan-visit", "global-locations"];
 
-  // Scroll detection for active section
+  // Scroll detection for active section (only on homepage)
   useEffect(() => {
+    if (!isHomePage) return;
+    
     const handleScroll = () => {
       const sections = sectionOrder.map(id => ({
         id,
@@ -45,12 +51,34 @@ const Navbar = () => {
     handleScroll(); // Initial check
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isHomePage]);
 
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string, id: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, link: typeof navLinks[0]) => {
     e.preventDefault();
-    setActiveSection(id);
-    const element = document.getElementById(id);
+    
+    if (!link.isSection) {
+      // Navigate to different page
+      navigate(link.href);
+      return;
+    }
+    
+    if (!isHomePage) {
+      // Navigate to home page first, then scroll
+      navigate("/");
+      setTimeout(() => {
+        const element = document.getElementById(link.id);
+        if (element) {
+          const navbarHeight = 64;
+          const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - navbarHeight;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+      }, 100);
+      return;
+    }
+    
+    setActiveSection(link.id);
+    const element = document.getElementById(link.id);
     if (element) {
       const navbarHeight = 64;
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
@@ -60,6 +88,15 @@ const Navbar = () => {
         top: offsetPosition,
         behavior: 'smooth'
       });
+    }
+  };
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (!isHomePage) {
+      navigate("/");
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -73,8 +110,8 @@ const Navbar = () => {
       <div className="container mx-auto px-4 h-18 flex items-center justify-between">
         {/* Logo */}
         <a
-          href="#hero"
-          onClick={(e) => handleSmoothScroll(e, "#hero", "hero")}
+          href="/"
+          onClick={handleLogoClick}
           className="flex items-center gap-2 group cursor-pointer transition-all duration-300 hover:scale-105"
         >
           <img
@@ -87,12 +124,13 @@ const Navbar = () => {
         {/* Nav Links */}
         <div className="hidden md:flex items-center gap-2">
           {navLinks.map((link, index) => {
-            const isActive = activeSection === link.id;
+            const isActive = (!link.isSection && location.pathname === link.href) || 
+                             (link.isSection && isHomePage && activeSection === link.id);
             return (
               <motion.a
                 key={link.label}
                 href={link.href}
-                onClick={(e) => handleSmoothScroll(e, link.href, link.id)}
+                onClick={(e) => handleNavClick(e, link)}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index, duration: 0.3 }}
