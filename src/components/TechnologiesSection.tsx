@@ -198,12 +198,35 @@ const TechnologiesSection = () => {
     onScroll();
   }, [emblaApi, onScroll]);
 
+  const scrollTo = useCallback(
+    (index: number) => emblaApi && emblaApi.scrollTo(index),
+    [emblaApi]
+  );
+
   return (
-    <section className="py-20 md:py-28 bg-gradient-to-b from-background via-muted/20 to-background relative overflow-hidden">
-      {/* Subtle Decorative Elements */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-20 left-[10%] w-[500px] h-[500px] bg-primary/3 rounded-full blur-[120px]" />
-        <div className="absolute bottom-20 right-[10%] w-[400px] h-[400px] bg-secondary/3 rounded-full blur-[100px]" />
+    <section className="py-20 md:py-28 relative overflow-hidden">
+      {/* Premium Gradient Background */}
+      <div className="absolute inset-0">
+        {/* Base gradient layer */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(179,72%,8%)] via-[hsl(162,50%,6%)] to-[hsl(179,72%,10%)]" />
+        
+        {/* Soft radial glows */}
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[hsl(179,72%,35%,0.08)] rounded-full blur-[150px]" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[hsl(145,65%,42%,0.06)] rounded-full blur-[120px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-[hsl(162,60%,20%,0.04)] rounded-full blur-[100px]" />
+        
+        {/* Subtle pattern overlay */}
+        <div 
+          className="absolute inset-0 opacity-[0.015]"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, hsl(179,72%,50%) 1px, transparent 0)`,
+            backgroundSize: '40px 40px'
+          }}
+        />
+        
+        {/* Top and bottom fade for seamless blending */}
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
@@ -215,13 +238,13 @@ const TechnologiesSection = () => {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <span className="inline-block px-5 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-5 border border-primary/20">
+          <span className="inline-block px-5 py-2 rounded-full bg-primary/15 text-primary text-sm font-medium mb-5 border border-primary/30 backdrop-blur-sm">
             تقنيات مبتكرة
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
             تقنيات المتحف
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
             اكتشف أحدث التقنيات التفاعلية التي تجعل تجربتك في المتحف فريدة ومميزة
           </p>
         </motion.div>
@@ -242,18 +265,20 @@ const TechnologiesSection = () => {
             </div>
           </div>
 
-          {/* Minimal Progress Bar */}
-          <div className="mt-10 flex justify-center">
-            <div className="relative w-48 h-0.5 bg-border/40 rounded-full overflow-hidden">
-              <motion.div 
-                className="absolute top-0 left-0 h-full bg-gradient-to-r from-primary to-secondary rounded-full"
-                style={{ width: `${((selectedIndex + 1) / technologies.length) * 100}%` }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
+          {/* Dot Indicators */}
+          <div className="mt-10 flex justify-center items-center gap-2">
+            {technologies.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => scrollTo(index)}
+                className={`transition-all duration-500 rounded-full ${
+                  index === selectedIndex 
+                    ? 'w-3 h-3 bg-gradient-to-r from-primary to-secondary shadow-[0_0_12px_rgba(25,155,154,0.5)]' 
+                    : 'w-2 h-2 bg-white/20 hover:bg-white/40'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
               />
-            </div>
-            <span className="mr-4 text-xs text-muted-foreground tabular-nums">
-              {String(selectedIndex + 1).padStart(2, '0')} / {technologies.length}
-            </span>
+            ))}
           </div>
         </motion.div>
       </div>
