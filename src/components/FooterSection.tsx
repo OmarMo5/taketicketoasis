@@ -75,13 +75,20 @@ const FooterSection = () => {
             </p>
             {/* Social Icons */}
             <div className="flex gap-3">
-              {socialLinks.map((social) => (
+              {socialLinks.map((social, index) => (
                 <motion.a
                   key={social.label}
                   href={social.href}
-                  whileHover={{ scale: 1.15, y: -3 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.4 }}
+                  whileHover={{ 
+                    scale: 1.1, 
+                    y: -2,
+                    boxShadow: "0 8px 20px -8px hsl(var(--secondary) / 0.4)"
+                  }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-secondary transition-all duration-300 flex items-center justify-center border border-primary-foreground/10 hover:border-secondary"
+                  className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-secondary transition-all duration-400 flex items-center justify-center border border-primary-foreground/10 hover:border-secondary"
                   aria-label={social.label}
                 >
                   <social.icon className="w-5 h-5" />
@@ -97,14 +104,20 @@ const FooterSection = () => {
               <span className="absolute -bottom-1 right-0 w-8 h-0.5 bg-secondary rounded-full" />
             </h3>
             <ul className="space-y-3">
-              {quickLinks.map((link) => (
+              {quickLinks.map((link, index) => (
                 <li key={link.label}>
                   <motion.a
                     href={link.href}
-                    whileHover={{ x: -6 }}
-                    className="text-primary-foreground/70 hover:text-secondary transition-colors duration-300 text-sm inline-block"
+                    initial={{ opacity: 0.7 }}
+                    whileHover={{ 
+                      x: -4,
+                      opacity: 1 
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="text-primary-foreground/70 hover:text-secondary transition-colors duration-400 text-sm inline-block relative group"
                   >
                     {link.label}
+                    <span className="absolute bottom-0 right-0 w-0 h-px bg-secondary transition-all duration-300 group-hover:w-full" />
                   </motion.a>
                 </li>
               ))}
@@ -118,14 +131,20 @@ const FooterSection = () => {
               <span className="absolute -bottom-1 right-0 w-8 h-0.5 bg-secondary rounded-full" />
             </h3>
             <ul className="space-y-3">
-              {branches.map((branch) => (
+              {branches.map((branch, index) => (
                 <li key={branch.label}>
                   <motion.a
                     href={branch.href}
-                    whileHover={{ x: -6 }}
-                    className="text-primary-foreground/70 hover:text-secondary transition-colors duration-300 text-sm inline-block"
+                    initial={{ opacity: 0.7 }}
+                    whileHover={{ 
+                      x: -4,
+                      opacity: 1 
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="text-primary-foreground/70 hover:text-secondary transition-colors duration-400 text-sm inline-block relative group"
                   >
                     {branch.label}
+                    <span className="absolute bottom-0 right-0 w-0 h-px bg-secondary transition-all duration-300 group-hover:w-full" />
                   </motion.a>
                 </li>
               ))}

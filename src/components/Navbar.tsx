@@ -133,21 +133,24 @@ const Navbar = () => {
                 onClick={(e) => handleNavClick(e, link)}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index, duration: 0.3 }}
-                className={`relative text-sm font-semibold cursor-pointer transition-all duration-300 px-5 py-2.5 rounded-full ${isActive
+                transition={{ delay: 0.1 * index, duration: 0.4 }}
+                whileHover={{ y: -1 }}
+                className={`relative text-sm font-semibold cursor-pointer transition-all duration-400 px-5 py-2.5 rounded-full ${isActive
                     ? "text-primary bg-primary/10"
                     : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                   }`}
               >
                 {link.label}
-                {/* Active indicator dot */}
+                {/* Active indicator dot with glow */}
                 {isActive && (
                   <motion.span
                     layoutId="activeIndicator"
-                    className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full"
+                    className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_8px_2px_hsl(var(--primary)/0.4)]"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
+                {/* Hover underline effect */}
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary/30 rounded-full transition-all duration-300 group-hover:w-1/2" />
               </motion.a>
             );
           })}
@@ -164,9 +167,15 @@ const Navbar = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Button className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/95 hover:to-primary text-primary-foreground rounded-full px-7 py-2.5 font-bold shadow-lg hover:shadow-xl hover:shadow-primary/20 transition-all duration-300 hover:-translate-y-0.5">
-              احجز تذكرتك
-            </Button>
+            <motion.div
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Button className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/95 hover:to-primary text-primary-foreground rounded-full px-7 py-2.5 font-bold shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-400">
+                احجز تذكرتك
+              </Button>
+            </motion.div>
           </a>
         </motion.div>
       </div>

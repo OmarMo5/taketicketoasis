@@ -84,24 +84,33 @@ const PlanVisitSection = () => {
             <motion.div
               key={feature.id}
               variants={itemVariants}
-              whileHover={{ y: -12, scale: 1.02 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className={`${feature.bgColor} rounded-3xl p-8 lg:p-10 text-center transition-all duration-400 border border-border/20 shadow-soft hover:shadow-elevated relative overflow-hidden group`}
+              whileHover={{ 
+                y: -10, 
+                scale: 1.02,
+                boxShadow: "0 25px 60px -20px hsl(var(--primary) / 0.12)"
+              }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className={`${feature.bgColor} rounded-3xl p-8 lg:p-10 text-center transition-all duration-500 border border-border/20 shadow-soft hover:shadow-elevated relative overflow-hidden group`}
             >
               {/* Subtle gradient overlay on hover */}
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-primary/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-primary/[0.03]"
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              />
               
               {/* Icon */}
               <motion.div
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                transition={{ duration: 0.3 }}
-                className={`w-20 h-20 lg:w-24 lg:h-24 ${feature.iconBg} rounded-2xl lg:rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg relative`}
+                whileHover={{ scale: 1.08, rotate: 3 }}
+                transition={{ duration: 0.4 }}
+                className={`w-20 h-20 lg:w-24 lg:h-24 ${feature.iconBg} rounded-2xl lg:rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg relative group-hover:shadow-glow-primary transition-shadow duration-500`}
               >
                 <feature.icon className="w-10 h-10 lg:w-12 lg:h-12 text-primary-foreground" strokeWidth={1.5} />
               </motion.div>
 
               {/* Title */}
-              <h3 className="text-2xl lg:text-[1.75rem] font-bold text-foreground mb-5 relative">
+              <h3 className="text-2xl lg:text-[1.75rem] font-bold text-foreground mb-5 relative group-hover:text-primary transition-colors duration-400">
                 {feature.title}
               </h3>
 
