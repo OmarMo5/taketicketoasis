@@ -139,27 +139,34 @@ const TestimonialCard = ({ testimonial, fullWidth }: TestimonialCardProps) => {
 
   return (
     <motion.div
-      whileHover={{ y: -8, scale: 1.01 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
-      className={`relative bg-card rounded-3xl p-8 md:p-10 shadow-soft hover:shadow-elevated transition-all duration-400 group ${
+      whileHover={{ 
+        y: -8, 
+        scale: 1.01,
+        boxShadow: "0 25px 60px -15px hsl(var(--primary) / 0.1)"
+      }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className={`relative bg-card rounded-3xl p-8 md:p-10 shadow-soft hover:shadow-elevated transition-all duration-500 group ${
         testimonial.featured 
           ? "bg-gradient-to-br from-card to-primary/[0.03] shadow-lg ring-1 ring-primary/10" 
           : "border border-border/30"
       } ${fullWidth ? "w-full" : ""}`}
     >
       {/* Quote Icon */}
-      <div className="absolute top-6 right-6 opacity-10 group-hover:opacity-20 transition-opacity duration-300">
+      <motion.div 
+        className="absolute top-6 right-6 opacity-10 group-hover:opacity-25 transition-opacity duration-500"
+        whileHover={{ scale: 1.1, rotate: -5 }}
+      >
         <Quote className="w-10 h-10 text-primary fill-primary" />
-      </div>
+      </motion.div>
 
       {/* Stars */}
       <div className="flex justify-center gap-1.5 mb-8">
         {Array.from({ length: testimonial.rating }).map((_, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: i * 0.1, duration: 0.3 }}
+            initial={{ opacity: 0, scale: 0, rotate: -20 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ delay: i * 0.12, duration: 0.4, ease: "easeOut" }}
           >
             <Star className="w-5 h-5 fill-secondary text-secondary drop-shadow-sm" />
           </motion.div>
@@ -174,22 +181,27 @@ const TestimonialCard = ({ testimonial, fullWidth }: TestimonialCardProps) => {
       {/* Author Info */}
       <div className="flex items-center justify-center gap-4">
         <div className="text-left">
-          <p className="font-bold text-foreground text-lg">{testimonial.name}</p>
+          <p className="font-bold text-foreground text-lg group-hover:text-primary transition-colors duration-400">{testimonial.name}</p>
           <p className="text-sm text-muted-foreground">{testimonial.location}</p>
         </div>
         <motion.div
-          whileHover={{ scale: 1.1 }}
+          whileHover={{ scale: 1.08 }}
+          transition={{ duration: 0.3 }}
           className="relative"
         >
           <img
             src={testimonial.avatarImage}
             alt={testimonial.name}
-            className="w-14 h-14 rounded-full object-cover ring-3 ring-primary/20 shadow-soft"
+            className="w-14 h-14 rounded-full object-cover ring-3 ring-primary/20 shadow-soft group-hover:ring-primary/40 transition-all duration-400"
           />
           {testimonial.featured && (
-            <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-secondary rounded-full flex items-center justify-center shadow-sm">
+            <motion.div 
+              className="absolute -bottom-1 -right-1 w-5 h-5 bg-secondary rounded-full flex items-center justify-center shadow-sm"
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
               <Star className="w-3 h-3 fill-white text-white" />
-            </div>
+            </motion.div>
           )}
         </motion.div>
       </div>

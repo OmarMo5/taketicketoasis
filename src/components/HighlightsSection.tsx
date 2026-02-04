@@ -96,27 +96,34 @@ const HighlightsSection = () => {
             <motion.div
               key={item.id}
               variants={itemVariants}
-              whileHover={{ y: -8 }}
-              className="group bg-card rounded-2xl overflow-hidden shadow-card hover:shadow-elevated transition-all duration-400 border border-border/40"
+              whileHover={{ 
+                y: -8,
+                boxShadow: "0 20px 50px -15px hsl(var(--primary) / 0.15)"
+              }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="group bg-card rounded-2xl overflow-hidden shadow-card hover:shadow-elevated transition-all duration-500 border border-border/40"
             >
               {/* Image */}
               <div className="relative aspect-[4/3] overflow-hidden">
-                <img
+                <motion.img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-cover"
+                  whileHover={{ scale: 1.08 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
               
               {/* Content */}
               <div className="p-6 flex items-center justify-between gap-4">
-                <h3 className="text-base font-bold text-foreground leading-relaxed group-hover:text-primary transition-colors duration-300">
+                <h3 className="text-base font-bold text-foreground leading-relaxed group-hover:text-primary transition-colors duration-400">
                   {item.title}
                 </h3>
                 <motion.div
-                  whileHover={{ scale: 1.1, rotate: 8 }}
-                  className={`w-11 h-11 rounded-xl ${item.iconColor} flex items-center justify-center flex-shrink-0 shadow-soft`}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ duration: 0.3 }}
+                  className={`w-11 h-11 rounded-xl ${item.iconColor} flex items-center justify-center flex-shrink-0 shadow-soft group-hover:shadow-glow-primary transition-shadow duration-400`}
                 >
                   <item.Icon className="w-5 h-5 text-primary-foreground" />
                 </motion.div>
