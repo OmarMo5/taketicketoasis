@@ -204,28 +204,28 @@ const TechnologiesSection = () => {
   );
 
   return (
-    <section className="py-20 md:py-28 relative overflow-hidden">
-      {/* Soft, Elegant Background */}
+    <section id="technologies" className="py-20 md:py-28 relative overflow-hidden">
+      {/* Elegant Dark Background */}
       <div className="absolute inset-0">
-        {/* Light neutral base with very subtle tint */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(179,25%,97%)] via-[hsl(162,20%,96%)] to-[hsl(179,25%,97%)]" />
+        {/* Deep dark base with subtle brand tint */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(180,18%,8%)] via-[hsl(180,15%,7%)] to-[hsl(180,18%,8%)]" />
         
-        {/* Very soft accent glows - barely visible */}
-        <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-[hsl(179,72%,35%,0.03)] rounded-full blur-[200px]" />
-        <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-[hsl(145,65%,42%,0.02)] rounded-full blur-[180px]" />
+        {/* Ambient glow orbs */}
+        <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[180px]" />
+        <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-secondary/4 rounded-full blur-[160px]" />
         
-        {/* Subtle pattern - very low opacity */}
+        {/* Subtle pattern overlay */}
         <div 
-          className="absolute inset-0 opacity-[0.02]"
+          className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, hsl(179,50%,50%) 0.5px, transparent 0)`,
-            backgroundSize: '32px 32px'
+            backgroundSize: '40px 40px'
           }}
         />
         
-        {/* Seamless edge blending */}
-        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-background to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
+        {/* Edge glow lines */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/20 to-transparent" />
       </div>
       
       <div className="container mx-auto px-4 relative z-10">

@@ -122,10 +122,17 @@ const TestimonialsSection = () => {
   );
 
   return (
-    <section className="py-24 md:py-32 px-4 bg-gradient-to-b from-muted/30 to-background relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/20 to-transparent" />
+    <section className="py-24 md:py-32 px-4 relative overflow-hidden">
+      {/* Dark premium background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(180,18%,8%)] via-background to-[hsl(180,18%,8%)]" />
+      
+      {/* Ambient glows */}
+      <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-1/3 left-1/4 w-[350px] h-[350px] bg-secondary/4 rounded-full blur-[120px] pointer-events-none" />
+      
+      {/* Edge lines */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/25 to-transparent" />
 
       <div
         className="max-w-6xl mx-auto"

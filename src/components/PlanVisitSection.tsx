@@ -50,10 +50,17 @@ const PlanVisitSection = () => {
   };
 
   return (
-    <section id="plan-visit" className="py-24 md:py-32 bg-background relative overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary)/0.03)_0%,transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--secondary)/0.03)_0%,transparent_50%)]" />
+    <section id="plan-visit" className="py-24 md:py-32 relative overflow-hidden">
+      {/* Dark premium background with subtle gradients */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(180,18%,7%)] via-background to-[hsl(180,18%,7%)]" />
+      
+      {/* Ambient glow effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,hsl(var(--primary)/0.08)_0%,transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_80%,hsl(var(--secondary)/0.06)_0%,transparent_50%)]" />
+      
+      {/* Edge lines */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/20 to-transparent" />
       
       <div className="container mx-auto px-4 relative">
         {/* Section Header */}

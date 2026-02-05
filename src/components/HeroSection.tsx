@@ -55,19 +55,24 @@ const HeroSection = () => {
 
   return (
     <section id="hero" className="py-20 md:py-28 bg-background relative overflow-hidden">
-      {/* Premium gradient background with subtle drift */}
-      <div className="absolute inset-0 bg-gradient-to-b from-accent/40 via-accent/10 to-transparent pointer-events-none" />
+      {/* Deep premium dark gradient background */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(180,20%,10%)_0%,hsl(180,20%,6%)_50%,hsl(180,18%,4%)_100%)] pointer-events-none" />
+      
+      {/* Ambient glow orbs */}
       <motion.div 
         variants={floatVariants}
         animate="animate"
-        className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" 
+        className="absolute top-10 left-1/4 w-[500px] h-[500px] bg-primary/8 rounded-full blur-[120px] pointer-events-none" 
       />
       <motion.div 
         variants={floatVariants}
         animate="animate"
         style={{ animationDelay: "2s" }}
-        className="absolute top-20 right-1/4 w-80 h-80 bg-secondary/5 rounded-full blur-3xl pointer-events-none animate-subtle-drift" 
+        className="absolute top-32 right-1/4 w-[400px] h-[400px] bg-secondary/6 rounded-full blur-[100px] pointer-events-none animate-subtle-drift" 
       />
+      
+      {/* Subtle top edge glow line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
 
       <motion.div
         className="container mx-auto px-4 text-center relative z-10"
@@ -78,7 +83,7 @@ const HeroSection = () => {
         {/* Featured Badge with Spiritual Breathing Animation */}
         <motion.div
           variants={itemVariants}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-primary/30 bg-accent/70 backdrop-blur-sm mb-10 shadow-soft animate-spiritual-breathe"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-primary/40 bg-primary/10 backdrop-blur-md mb-10 shadow-glow-primary animate-spiritual-breathe"
         >
           <Sparkles className="w-4 h-4 text-primary animate-soft-glow" />
           <span className="text-sm font-semibold animate-calm-shimmer">السيرة قبل أن تعيشها</span>

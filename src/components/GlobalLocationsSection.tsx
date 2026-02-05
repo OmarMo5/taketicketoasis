@@ -179,10 +179,17 @@ const GlobalLocationsSection = () => {
   };
 
   return (
-    <section id="global-locations" className="py-24 md:py-32 bg-background relative" dir="rtl">
-      {/* Decorative background */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/3 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-secondary/3 rounded-full blur-3xl pointer-events-none" />
+    <section id="global-locations" className="py-24 md:py-32 relative overflow-hidden" dir="rtl">
+      {/* Dark premium background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-muted/40 via-background to-muted/40" />
+      
+      {/* Ambient glow decorations */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/6 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none" />
+      
+      {/* Edge lines */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/20 to-transparent" />
 
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
         {/* Section Header */}
