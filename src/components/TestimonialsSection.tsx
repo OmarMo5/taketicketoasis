@@ -1,5 +1,7 @@
-import { Star, Quote } from "lucide-react";
-import { motion, type Variants } from "framer-motion";
+import { useState, useEffect, useCallback } from "react";
+import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface Testimonial {
   id: number;
@@ -41,36 +43,95 @@ const testimonials: Testimonial[] = [
     location: "زار فرع الرباط",
     avatarImage: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
   },
+  {
+    id: 4,
+    rating: 5,
+    text: "زيارة روحانية لا تُنسى! شعرت بالقرب من سيرة النبي ﷺ بطريقة لم أتخيلها من قبل. المكان يفيض بالسكينة والإيمان.",
+    highlightedText: "زيارة روحانية لا تُنسى!",
+    name: "عائشة المنصوري",
+    location: "زارت فرع دبي",
+    avatarImage: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
+  },
+  {
+    id: 5,
+    rating: 5,
+    text: "أفضل تجربة ثقافية مررت بها. التفاصيل الدقيقة في كل جناح تظهر مدى الاهتمام والحب الذي بُني به هذا المتحف.",
+    highlightedText: "أفضل تجربة ثقافية مررت بها.",
+    name: "خالد العتيبي",
+    location: "زار فرع جدة",
+    avatarImage: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face",
+  },
+  {
+    id: 6,
+    rating: 5,
+    text: "أخذت والديّ في جولة وكانا سعيدين جداً. التصميم يراعي جميع الأعمار ويقدم المعلومات بأسلوب سلس ومؤثر.",
+    highlightedText: "التصميم يراعي جميع الأعمار",
+    name: "سارة القحطاني",
+    location: "زارت فرع الرياض",
+    avatarImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face",
+  },
+  {
+    id: 7,
+    rating: 5,
+    text: "تجربة تعليمية رائعة للأطفال والكبار على حد سواء. أنصح كل عائلة بزيارة هذا المتحف.",
+    highlightedText: "تجربة تعليمية رائعة",
+    name: "يوسف الحربي",
+    location: "زار فرع الدمام",
+    avatarImage: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face",
+  },
+  {
+    id: 8,
+    rating: 5,
+    text: "المتحف يجسد السيرة النبوية بشكل مبهر. خرجت وأنا أشعر بالفخر بتاريخنا الإسلامي العريق.",
+    highlightedText: "المتحف يجسد السيرة النبوية بشكل مبهر.",
+    name: "نورة السبيعي",
+    location: "زارت فرع الكويت",
+    avatarImage: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face",
+  },
 ];
 
-const TestimonialsSection = () => {
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
-      },
-    },
-  };
+const TESTIMONIALS_PER_PAGE = 3;
 
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
-    },
-  };
+const TestimonialsSection = () => {
+  const [currentPage, setCurrentPage] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const totalPages = Math.ceil(testimonials.length / TESTIMONIALS_PER_PAGE);
+
+  const nextPage = useCallback(() => {
+    setCurrentPage((prev) => (prev + 1) % totalPages);
+  }, [totalPages]);
+
+  const prevPage = useCallback(() => {
+    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+  }, [totalPages]);
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+
+    const interval = setInterval(() => {
+      nextPage();
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, nextPage]);
+
+  const currentTestimonials = testimonials.slice(
+    currentPage * TESTIMONIALS_PER_PAGE,
+    (currentPage + 1) * TESTIMONIALS_PER_PAGE
+  );
 
   return (
     <section className="py-24 md:py-32 px-4 bg-gradient-to-b from-muted/30 to-background relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/20 to-transparent" />
-      
-      <div className="max-w-6xl mx-auto">
+
+      <div
+        className="max-w-6xl mx-auto"
+        onMouseEnter={() => setIsAutoPlaying(false)}
+        onMouseLeave={() => setIsAutoPlaying(true)}
+      >
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -87,35 +148,67 @@ const TestimonialsSection = () => {
           </p>
         </motion.div>
 
-        {/* Testimonials Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
-          {/* Right column - First testimonial */}
-          <motion.div variants={itemVariants} className="flex flex-col gap-8">
-            <TestimonialCard testimonial={testimonials[0]} />
-          </motion.div>
+        {/* Testimonials Carousel */}
+        <div className="relative">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentPage}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            >
+              {currentTestimonials.map((testimonial, index) => (
+                <motion.div
+                  key={testimonial.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.4 }}
+                >
+                  <TestimonialCard testimonial={testimonial} />
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
 
-          {/* Left column - Featured testimonial */}
-          <motion.div variants={itemVariants} className="flex flex-col gap-8">
-            <TestimonialCard testimonial={testimonials[1]} />
-          </motion.div>
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevPage}
+            className="absolute top-1/2 -right-4 md:-right-12 -translate-y-1/2 w-10 h-10 rounded-full bg-card border border-border/40 shadow-soft flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all duration-300"
+            aria-label="التالي"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+          <button
+            onClick={nextPage}
+            className="absolute top-1/2 -left-4 md:-left-12 -translate-y-1/2 w-10 h-10 rounded-full bg-card border border-border/40 shadow-soft flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all duration-300"
+            aria-label="السابق"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Dot Indicators */}
+        <motion.div className="flex justify-center items-center gap-2 mt-10">
+          {Array.from({ length: totalPages }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentPage(index)}
+              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                index === currentPage
+                  ? "bg-primary w-8 shadow-[0_0_10px_rgba(25,155,154,0.4)]"
+                  : "bg-foreground/15 hover:bg-foreground/25"
+              }`}
+              aria-label={`الصفحة ${index + 1}`}
+            />
+          ))}
         </motion.div>
 
-        {/* Full width testimonial */}
-        <motion.div
-          variants={itemVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="mt-8"
-        >
-          <TestimonialCard testimonial={testimonials[2]} fullWidth />
-        </motion.div>
+        {/* Counter */}
+        <p className="text-center text-sm text-muted-foreground mt-4">
+          {currentPage + 1} من {totalPages} صفحات
+        </p>
       </div>
     </section>
   );
@@ -123,10 +216,9 @@ const TestimonialsSection = () => {
 
 interface TestimonialCardProps {
   testimonial: Testimonial;
-  fullWidth?: boolean;
 }
 
-const TestimonialCard = ({ testimonial, fullWidth }: TestimonialCardProps) => {
+const TestimonialCard = ({ testimonial }: TestimonialCardProps) => {
   const renderText = () => {
     const parts = testimonial.text.split(testimonial.highlightedText);
     return (
@@ -139,71 +231,55 @@ const TestimonialCard = ({ testimonial, fullWidth }: TestimonialCardProps) => {
 
   return (
     <motion.div
-      whileHover={{ 
-        y: -8, 
-        scale: 1.01,
-        boxShadow: "0 25px 60px -15px hsl(var(--primary) / 0.1)"
+      whileHover={{
+        y: -6,
+        boxShadow: "0 20px 50px -15px hsl(var(--primary) / 0.12)",
       }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className={`relative bg-card rounded-3xl p-8 md:p-10 shadow-soft hover:shadow-elevated transition-all duration-500 group ${
-        testimonial.featured 
-          ? "bg-gradient-to-br from-card to-primary/[0.03] shadow-lg ring-1 ring-primary/10" 
-          : "border border-border/30"
-      } ${fullWidth ? "w-full" : ""}`}
+      className={`relative bg-card rounded-2xl p-6 md:p-8 shadow-soft hover:shadow-elevated transition-all duration-500 group h-full flex flex-col ${
+        testimonial.featured
+          ? "bg-gradient-to-br from-card to-primary/[0.03] ring-1 ring-primary/10"
+          : "border border-border/20"
+      }`}
     >
       {/* Quote Icon */}
-      <motion.div 
-        className="absolute top-6 right-6 opacity-10 group-hover:opacity-25 transition-opacity duration-500"
-        whileHover={{ scale: 1.1, rotate: -5 }}
-      >
-        <Quote className="w-10 h-10 text-primary fill-primary" />
-      </motion.div>
+      <div className="absolute top-4 right-4 opacity-[0.08] group-hover:opacity-15 transition-opacity duration-500">
+        <Quote className="w-8 h-8 text-primary fill-primary" />
+      </div>
 
       {/* Stars */}
-      <div className="flex justify-center gap-1.5 mb-8">
+      <div className="flex justify-center gap-1 mb-5">
         {Array.from({ length: testimonial.rating }).map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, scale: 0, rotate: -20 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ delay: i * 0.12, duration: 0.4, ease: "easeOut" }}
-          >
-            <Star className="w-5 h-5 fill-secondary text-secondary drop-shadow-sm" />
-          </motion.div>
+          <Star key={i} className="w-4 h-4 fill-secondary text-secondary" />
         ))}
       </div>
 
       {/* Testimonial Text */}
-      <p className="text-center text-muted-foreground leading-relaxed mb-8 text-base md:text-lg">
+      <p className="text-center text-muted-foreground leading-relaxed mb-6 text-sm md:text-base flex-1">
         "{renderText()}"
       </p>
 
       {/* Author Info */}
-      <div className="flex items-center justify-center gap-4">
-        <div className="text-left">
-          <p className="font-bold text-foreground text-lg group-hover:text-primary transition-colors duration-400">{testimonial.name}</p>
+      <div className="flex items-center justify-center gap-3 pt-4 border-t border-border/20">
+        <div className="text-left flex-1">
+          <p className="font-semibold text-foreground text-sm group-hover:text-primary transition-colors duration-400">
+            {testimonial.name}
+          </p>
           <p className="text-sm text-muted-foreground">{testimonial.location}</p>
         </div>
-        <motion.div
-          whileHover={{ scale: 1.08 }}
-          transition={{ duration: 0.3 }}
-          className="relative"
-        >
-          <img
-            src={testimonial.avatarImage}
-            alt={testimonial.name}
-            className="w-14 h-14 rounded-full object-cover ring-3 ring-primary/20 shadow-soft group-hover:ring-primary/40 transition-all duration-400"
-          />
+        <div className="relative">
+          <Avatar className="w-12 h-12 ring-2 ring-primary/20 group-hover:ring-primary/40 transition-all duration-400">
+            <AvatarImage src={testimonial.avatarImage} alt={testimonial.name} />
+            <AvatarFallback className="bg-primary/10 text-primary font-semibold">
+              {testimonial.name.charAt(0)}
+            </AvatarFallback>
+          </Avatar>
           {testimonial.featured && (
-            <motion.div 
-              className="absolute -bottom-1 -right-1 w-5 h-5 bg-secondary rounded-full flex items-center justify-center shadow-sm"
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            >
+            <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-secondary rounded-full flex items-center justify-center shadow-sm">
               <Star className="w-3 h-3 fill-white text-white" />
-            </motion.div>
+            </div>
           )}
-        </motion.div>
+        </div>
       </div>
     </motion.div>
   );

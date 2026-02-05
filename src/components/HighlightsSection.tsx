@@ -1,139 +1,288 @@
-import { ArrowLeft, Building2, Flower2, Award, Clock } from "lucide-react";
-import { motion, type Variants } from "framer-motion";
-import highlightImage1 from "@/assets/highlight-1.jpg";
-import highlightImage2 from "@/assets/highlight-2.jpg";
-import highlightImage3 from "@/assets/highlight-3.jpg";
-import highlightImage4 from "@/assets/highlight-4.jpg";
+import { useState } from "react";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import WingCard from "@/components/WingCard";
+import {
+  Sparkles,
+  Armchair,
+  Route,
+  Heart,
+  Baby,
+  Stethoscope,
+  Crown,
+  Film,
+  Clapperboard,
+  History,
+  Home,
+  Eye,
+  Users,
+  Plus,
+  ChevronDown,
+} from "lucide-react";
 
-const HighlightsSection = () => {
-  const highlights = [
-    {
-      id: 1,
-      title: "مجسمات مكة والمدينة في زمن الرسول ﷺ",
-      image: highlightImage4,
-      iconColor: "bg-gradient-primary",
-      Icon: Building2,
-    },
-    {
-      id: 2,
-      title: "الروضة المحمدية",
-      image: highlightImage3,
-      iconColor: "bg-secondary",
-      Icon: Flower2,
-    },
-    {
-      id: 3,
-      title: "فضائل وخصائص الرسول محمد ﷺ",
-      image: highlightImage2,
-      iconColor: "bg-primary",
-      Icon: Award,
-    },
-    {
-      id: 4,
-      title: "خط زمني في حياة الرسول محمد ﷺ",
-      image: highlightImage1,
-      iconColor: "bg-secondary",
-      Icon: Clock,
-    },
-  ];
+// Import wing images
+import wing01 from "@/assets/wings/wing-01.jpg";
+import wing02 from "@/assets/wings/wing-02.jpg";
+import wing03 from "@/assets/wings/wing-03.jpg";
+import wing04 from "@/assets/wings/wing-04.jpg";
+import wing05 from "@/assets/wings/wing-05.jpg";
+import wing06 from "@/assets/wings/wing-06.jpg";
+import wing07 from "@/assets/wings/wing-07.jpg";
+import wing08 from "@/assets/wings/wing-08.jpg";
+import wing09 from "@/assets/wings/wing-09.jpg";
+import wing10 from "@/assets/wings/wing-10.jpg";
+import wing11 from "@/assets/wings/wing-11.jpg";
+import wing12 from "@/assets/wings/wing-12.jpg";
+import wing13 from "@/assets/wings/wing-13.jpg";
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.1,
-      },
-    },
+const wingsData = [
+  {
+    title: "التحيات لله، عزَّ وجلَّ",
+    description: "تعريف شامل بالله وأسمائه وصفاته ودلائل قدرته، مستخلص من مئة ألف مادة وموضوع.",
+    icon: Sparkles,
+    image: wing01,
+  },
+  {
+    title: "أثاث النبي ﷺ ومقتنياته",
+    description: "تجربة فريدة تعرض كل ما استخدمه النبي ﷺ من أثاث وأوانٍ ومقتنيات مع تعريف بها وما ورد عنها في السنة.",
+    icon: Armchair,
+    image: wing02,
+  },
+  {
+    title: "طريق الهجرة",
+    description: "عرض لمسار هجرة النبي ﷺ إلى المدينة وأهم المواقف التي مر بها.",
+    icon: Route,
+    image: wing03,
+  },
+  {
+    title: "النبي ﷺ والمرأة",
+    description: "عرض شامل يبرز مكانة المرأة في زمن النبي ﷺ ولائحة شرف تضم أكثر من 350 تشريفًا.",
+    icon: Heart,
+    image: wing04,
+  },
+  {
+    title: "النبي ﷺ والطفل",
+    description: "عرض يُظهر أكثر من 250 موقفًا محمودًا للأطفال مع النبي ﷺ.",
+    icon: Baby,
+    image: wing05,
+  },
+  {
+    title: "خيمة الطب النبوي",
+    description: "عرض علمي لما ورد في القرآن والسنة عن الأمراض والعلاج والأطعمة المفيدة.",
+    icon: Stethoscope,
+    image: wing06,
+  },
+  {
+    title: "فضائل النبي ﷺ وشمائله",
+    description: "تفاصيل عن أسماء النبي ﷺ وصفاته ولباسه وطعامه وهيئته.",
+    icon: Crown,
+    image: wing07,
+  },
+  {
+    title: "النبي ﷺ كأنك معه",
+    description: "عرض إبداعي لحياة النبي ﷺ في مكة والمدينة باستخدام تقنيات مميزة.",
+    icon: Film,
+    image: wing08,
+  },
+  {
+    title: "النبي ﷺ كأنك معه (نسخة مختلفة)",
+    description: "نفس الفكرة لكن بتجربة عرض مختلفة بصريًا.",
+    icon: Clapperboard,
+    image: wing09,
+  },
+  {
+    title: "السلام عليك أيها النبي ﷺ",
+    description: "تلخيص زمني لأحداث السيرة النبوية من الميلاد حتى الوفاة.",
+    icon: History,
+    image: wing10,
+  },
+  {
+    title: "الحجرة النبوية الشريفة",
+    description: "وصف دقيق للحجرة الشريفة ومساحتها وأحداثها.",
+    icon: Home,
+    image: wing11,
+  },
+  {
+    title: "النبي ﷺ كأنك تراه",
+    description: "عرض شامل لحياة النبي ﷺ وصفاته ومعالم شخصيته.",
+    icon: Eye,
+    image: wing12,
+  },
+  {
+    title: "الأنبياء كأنك تراهم",
+    description: "عرض مميز للأنبياء، أزمانهم، معجزاتهم، وآدابهم.",
+    icon: Users,
+    image: wing13,
+  },
+  {
+    title: "جناح إضافي",
+    description: "يُترك بتصميم متناسق لعرض جناح مستقبلي.",
+    icon: Plus,
+    image: wing01,
+  },
+];
+
+const CARDS_PER_BATCH = 4;
+
+const MuseumWingsSection = () => {
+  const [visibleCount, setVisibleCount] = useState(CARDS_PER_BATCH);
+  const hasMore = visibleCount < wingsData.length;
+
+  const showMore = () => {
+    setVisibleCount((prev) => Math.min(prev + CARDS_PER_BATCH, wingsData.length));
   };
 
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
-    },
-  };
+  const visibleWings = wingsData.slice(0, visibleCount);
 
   return (
-    <section id="tour-highlights" className="py-24 md:py-32 bg-muted/50 relative overflow-hidden">
+    <section id="museum-wings" className="py-24 md:py-32 bg-muted/30 relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-      
-      <div className="container mx-auto px-4">
+
+      {/* Background Decorations */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div
+          className="absolute top-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
+          animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-20 left-10 w-80 h-80 bg-secondary/5 rounded-full blur-3xl"
+          animate={{ scale: [1.1, 1, 1.1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+
+      <div className="container mx-auto px-4 max-w-7xl relative z-10">
         {/* Section Header */}
         <motion.div
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
         >
-          <div className="flex items-center justify-center gap-2 text-primary mb-5">
-            <ArrowLeft className="w-4 h-4" />
-            <span className="text-base font-semibold">جاهز للاستكشاف</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl lg:text-[3.25rem] font-bold text-foreground mb-6">
-            أبرز معالم جولتك
+          {/* Decorative Element */}
+          <motion.div
+            className="flex items-center justify-center gap-4 mb-6"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <span className="h-px w-16 bg-gradient-to-r from-transparent via-primary to-transparent" />
+            <Sparkles className="w-6 h-6 text-primary" />
+            <span className="h-px w-16 bg-gradient-to-r from-transparent via-primary to-transparent" />
+          </motion.div>
+
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
+            أجنحة المتحف
           </h2>
-          <p className="text-muted-foreground text-lg md:text-xl max-w-lg mx-auto leading-relaxed">
-            اكتشف الأقسام الأسطورية في معرضنا
+
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            رحلة روحية وتاريخية عبر 14 جناحًا، كل منها يروي قصة فريدة من قصص الإيمان والتاريخ الإسلامي
           </p>
+
+          {/* Stats */}
+          <motion.div
+            className="flex items-center justify-center gap-8 mt-10"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <div className="text-center">
+              <span className="block text-3xl md:text-4xl font-bold text-primary">14</span>
+              <span className="text-sm text-muted-foreground">جناح متميز</span>
+            </div>
+            <div className="h-12 w-px bg-border/50" />
+            <div className="text-center">
+              <span className="block text-3xl md:text-4xl font-bold text-secondary">100K+</span>
+              <span className="text-sm text-muted-foreground">مادة علمية</span>
+            </div>
+            <div className="h-12 w-px bg-border/50" />
+            <div className="text-center">
+              <span className="block text-3xl md:text-4xl font-bold text-primary">∞</span>
+              <span className="text-sm text-muted-foreground">تجربة روحية</span>
+            </div>
+          </motion.div>
         </motion.div>
 
-        {/* Cards Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
-          {highlights.map((item) => (
-            <motion.div
-              key={item.id}
-              variants={itemVariants}
-              whileHover={{ 
-                y: -8,
-                boxShadow: "0 20px 50px -15px hsl(var(--primary) / 0.15)"
-              }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              className="group bg-card rounded-2xl overflow-hidden shadow-card hover:shadow-elevated transition-all duration-500 border border-border/40"
-            >
-              {/* Image */}
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <motion.img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover"
-                  whileHover={{ scale: 1.08 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
+        {/* Wings Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <AnimatePresence mode="popLayout">
+            {visibleWings.map((wing, index) => (
+              <motion.div
+                key={wing.title}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{
+                  duration: 0.6,
+                  delay: index >= visibleCount - CARDS_PER_BATCH ? (index % CARDS_PER_BATCH) * 0.1 : 0,
+                  ease: "easeOut",
+                }}
+              >
+                <WingCard
+                  title={wing.title}
+                  description={wing.description}
+                  image={wing.image}
+                  icon={wing.icon}
+                  index={index}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </div>
-              
-              {/* Content */}
-              <div className="p-6 flex items-center justify-between gap-4">
-                <h3 className="text-base font-bold text-foreground leading-relaxed group-hover:text-primary transition-colors duration-400">
-                  {item.title}
-                </h3>
-                <motion.div
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  transition={{ duration: 0.3 }}
-                  className={`w-11 h-11 rounded-xl ${item.iconColor} flex items-center justify-center flex-shrink-0 shadow-soft group-hover:shadow-glow-primary transition-shadow duration-400`}
-                >
-                  <item.Icon className="w-5 h-5 text-primary-foreground" />
-                </motion.div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+
+        {/* More Wings Button */}
+        {hasMore && (
+          <motion.div
+            className="flex justify-center mt-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            <Button
+              onClick={showMore}
+              variant="outline"
+              size="lg"
+              className="group px-8 py-6 text-lg font-medium border-primary/30 hover:border-primary hover:bg-primary/5 transition-all duration-300 rounded-xl gap-3"
+            >
+              <span>المزيد من الأجنحة</span>
+              <motion.div
+                animate={{ y: [0, 3, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <ChevronDown className="w-5 h-5 text-primary" />
+              </motion.div>
+            </Button>
+          </motion.div>
+        )}
+
+        {/* Progress Indicator */}
+        <motion.div
+          className="flex justify-center items-center gap-3 mt-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+        >
+          <span className="text-sm text-muted-foreground">
+            عرض {Math.min(visibleCount, wingsData.length)} من {wingsData.length} جناح
+          </span>
+          <div className="w-32 h-1.5 bg-border/30 rounded-full overflow-hidden">
+            <motion.div
+              className="h-full bg-gradient-to-r from-primary to-secondary rounded-full"
+              initial={{ width: 0 }}
+              animate={{ width: `${(visibleCount / wingsData.length) * 100}%` }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            />
+          </div>
         </motion.div>
       </div>
     </section>
   );
 };
 
-export default HighlightsSection;
+export default MuseumWingsSection;
