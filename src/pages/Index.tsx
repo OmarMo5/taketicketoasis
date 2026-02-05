@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import HighlightsSection from "@/components/HighlightsSection";
+import MuseumWingsSection from "@/components/HighlightsSection";
 import TechnologiesSection from "@/components/TechnologiesSection";
 import PlanVisitSection from "@/components/PlanVisitSection";
 import GlobalLocationsSection from "@/components/GlobalLocationsSection";
@@ -12,7 +12,7 @@ const Index = () => {
     <div className="min-h-screen bg-background font-arabic">
       <Navbar />
       <HeroSection />
-      <HighlightsSection />
+      <MuseumWingsSection />
       <TechnologiesSection />
       <PlanVisitSection />
       <GlobalLocationsSection />

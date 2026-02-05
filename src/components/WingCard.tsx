@@ -21,11 +21,11 @@ const WingCard = ({ title, description, image, icon: Icon, index }: WingCardProp
         <motion.img
           src={image}
           alt={title}
-          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 brightness-100"
         />
         
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-80" />
+        {/* Subtle Bottom Gradient Only - No White Overlay */}
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background/60 to-transparent" />
         
         {/* Decorative Accent Line */}
         <motion.div
@@ -38,7 +38,7 @@ const WingCard = ({ title, description, image, icon: Icon, index }: WingCardProp
         
         {/* Icon Badge */}
         <motion.div
-          className="absolute top-4 left-4 w-11 h-11 rounded-xl bg-background/95 backdrop-blur-sm border border-border/20 flex items-center justify-center shadow-soft"
+          className="absolute top-4 left-4 w-11 h-11 rounded-xl bg-background/80 backdrop-blur-sm border border-border/30 flex items-center justify-center shadow-soft"
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.3 }}
         >
@@ -46,7 +46,7 @@ const WingCard = ({ title, description, image, icon: Icon, index }: WingCardProp
         </motion.div>
 
         {/* Wing Number Badge */}
-        <div className="absolute bottom-4 left-4 px-3 py-1.5 rounded-lg bg-background/90 backdrop-blur-sm border border-border/20 shadow-soft">
+        <div className="absolute bottom-4 left-4 px-3 py-1.5 rounded-lg bg-background/80 backdrop-blur-sm border border-border/30 shadow-soft">
           <span className="text-xs font-bold text-primary">
             {String(index + 1).padStart(2, '0')}
           </span>
