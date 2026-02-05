@@ -12,7 +12,7 @@ interface WingCardProps {
 const WingCard = ({ title, description, image, icon: Icon, index }: WingCardProps) => {
   return (
     <motion.article
-      className="group relative overflow-hidden rounded-2xl bg-card border border-border/20 shadow-soft hover:shadow-elevated transition-all duration-500"
+      className="group relative overflow-hidden rounded-2xl bg-card border border-primary/10 shadow-card hover:shadow-glow-primary transition-all duration-500"
       whileHover={{ y: -6 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >

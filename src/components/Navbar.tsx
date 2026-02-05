@@ -105,7 +105,7 @@ const Navbar = () => {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur-xl border-b border-border/30 shadow-soft"
+      className="sticky top-0 z-50 w-full bg-background/90 backdrop-blur-xl border-b border-primary/10 shadow-[0_4px_30px_-10px_hsl(var(--primary)/0.15)]"
     >
       <div className="container mx-auto px-4 h-18 flex items-center justify-between">
         {/* Logo */}

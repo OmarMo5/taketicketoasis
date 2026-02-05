@@ -135,20 +135,23 @@ const MuseumWingsSection = () => {
   const visibleWings = wingsData.slice(0, visibleCount);
 
   return (
-    <section id="museum-wings" className="py-24 md:py-32 bg-muted/30 relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+    <section id="museum-wings" className="py-24 md:py-32 relative overflow-hidden">
+      {/* Dark Premium Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/50 to-background" />
+      
+      {/* Decorative glow lines */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/25 to-transparent" />
 
-      {/* Background Decorations */}
+      {/* Background ambient glows */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
-          className="absolute top-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
-          animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
+          className="absolute top-20 right-10 w-[500px] h-[500px] bg-primary/6 rounded-full blur-[150px]"
+          animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.6, 0.4] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-20 left-10 w-80 h-80 bg-secondary/5 rounded-full blur-3xl"
+          className="absolute bottom-20 left-10 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[120px]"
           animate={{ scale: [1.1, 1, 1.1], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
