@@ -13,13 +13,13 @@ const Navbar = () => {
   // Links for display in navbar (visual order)
   const navLinks = [
     { label: "الرئيسية", href: "#hero", id: "hero", isSection: true },
-    { label: "أجنحة المتحف", href: "/wings", id: "wings", isSection: false },
+    { label: "أجنحة المتحف", href: "#tour-highlights", id: "tour-highlights", isSection: true },
     { label: "المواقع", href: "#global-locations", id: "global-locations", isSection: true },
-    { label: "التجربة", href: "#tour-highlights", id: "tour-highlights", isSection: true },
+    { label: "التقنيات", href: "#technologies", id: "technologies", isSection: true },
     { label: "خطط زيارتك", href: "#plan-visit", id: "plan-visit", isSection: true },
   ];
   // Sections ordered by DOM position for scroll detection
-  const sectionOrder = ["hero", "tour-highlights", "plan-visit", "global-locations"];
+  const sectionOrder = ["hero", "tour-highlights", "technologies", "plan-visit", "global-locations"];
 
   // Scroll detection for active section (only on homepage)
   useEffect(() => {
