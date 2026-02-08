@@ -16,6 +16,20 @@ import {
   View,
   Cpu
 } from "lucide-react";
+import pict1 from "../../src/assets/tech/Picture1.png"
+import pict2 from "../../src/assets/tech/Picture2.png"
+import pict3 from "../../src/assets/tech/Picture3.png"
+import pict4 from "../../src/assets/tech/Picture4.png"
+import pict5 from "../../src/assets/tech/Picture5.png"
+import pict6 from "../../src/assets/tech/Picture6.png"
+import pict7 from "../../src/assets/tech/Picture7.png"
+import pict8 from "../../src/assets/tech/Picture8.png"
+import pict9 from "../../src/assets/tech/Picture9.png"
+import pict10 from "../../src/assets/tech/Picture10.png"
+import pict11 from "../../src/assets/tech/Picture11.png"
+import pict12 from "../../src/assets/tech/Picture12.png"
+import pict13 from "../../src/assets/tech/Picture1313.png"
+
 
 interface Technology {
   id: number;
@@ -31,84 +45,84 @@ const technologies: Technology[] = [
     title: "Immersive Rooms",
     titleAr: "الغرف الانغماسية",
     icon: Layers,
-    image: "/placeholder.svg"
+    image: pict1
   },
   {
     id: 2,
     title: "3D Atlases",
     titleAr: "الأطالس ثلاثية الأبعاد",
     icon: Globe2,
-    image: "/placeholder.svg"
+    image: pict2
   },
   {
     id: 3,
     title: "Hologram",
     titleAr: "الهولوجرام",
     icon: Scan,
-    image: "/placeholder.svg"
+    image: pict3
   },
   {
     id: 4,
     title: "Artificial Intelligence",
     titleAr: "الذكاء الاصطناعي",
     icon: BrainCircuit,
-    image: "/placeholder.svg"
+    image: pict4
   },
   {
     id: 5,
     title: "Cinema Halls",
     titleAr: "قاعات السينما",
     icon: Clapperboard,
-    image: "/placeholder.svg"
+    image: pict5
   },
   {
-    id: 6,
+    id: 7,
     title: "Interactive Screens",
     titleAr: "الشاشات التفاعلية",
     icon: TouchpadIcon,
-    image: "/placeholder.svg"
+    image: pict6
   },
   {
     id: 7,
     title: "Interactive Murals",
     titleAr: "الجداريات التفاعلية",
     icon: ImagePlus,
-    image: "/placeholder.svg"
+    image: pict7
   },
   {
     id: 8,
     title: "3D Models",
     titleAr: "المجسمات ثلاثية الأبعاد",
     icon: Box,
-    image: "/placeholder.svg"
+    image: pict8
   },
   {
     id: 9,
     title: "Interactive Rooms for Children",
     titleAr: "غرف تفاعلية للأطفال",
     icon: Gamepad2,
-    image: "/placeholder.svg"
+    image: pict9
   },
   {
     id: 10,
     title: "Interactive Artifacts",
     titleAr: "المقتنيات التفاعلية",
     icon: Gem,
-    image: "/placeholder.svg"
+    image: pict10
   },
   {
     id: 11,
     title: "Virtual Reality (VR)",
     titleAr: "الواقع الافتراضي",
     icon: View,
-    image: "/placeholder.svg"
+    image: pict11
   },
   {
     id: 12,
     title: "Interactive Models",
     titleAr: "النماذج التفاعلية",
     icon: Cpu,
-    image: "/placeholder.svg"
+    image: pict12
   }
 ];
 
