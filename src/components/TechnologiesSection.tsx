@@ -154,9 +154,9 @@ const TechnologyCard = ({ tech }: { tech: Technology }) => {
           {/* Bottom Section - Text */}
           <div className="space-y-1">
             {/* Number */}
-            <span className="text-white/15 text-3xl font-bold block leading-none">
+            {/* <span className="text-white/15 text-3xl font-bold block leading-none">
               {String(tech.id).padStart(2, '0')}
-            </span>
+            </span> */}
             
             {/* Titles */}
             <h3 className="text-lg font-semibold text-white leading-tight">

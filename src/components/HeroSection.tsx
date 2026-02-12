@@ -114,7 +114,7 @@ const HeroSection = () => {
           variants={itemVariants}
           className="flex flex-wrap justify-center gap-3 mb-14"
         >
-          {featureTags.map((tag, index) => (
+          {/* {featureTags.map((tag, index) => (
             <motion.div
               key={tag.label}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -135,7 +135,7 @@ const HeroSection = () => {
               </motion.div>
               <span className="text-sm text-foreground font-medium">{tag.label}</span>
             </motion.div>
-          ))}
+          ))} */}
         </motion.div>
 
         {/* Primary CTA */}

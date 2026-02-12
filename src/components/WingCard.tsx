@@ -46,11 +46,11 @@ const WingCard = ({ title, description, image, icon: Icon, index }: WingCardProp
         </motion.div>
 
         {/* Wing Number Badge */}
-        <div className="absolute bottom-4 left-4 px-3 py-1.5 rounded-lg bg-background/80 backdrop-blur-sm border border-border/30 shadow-soft">
+        {/* <div className="absolute bottom-4 left-4 px-3 py-1.5 rounded-lg bg-background/80 backdrop-blur-sm border border-border/30 shadow-soft">
           <span className="text-xs font-bold text-primary">
             {String(index + 1).padStart(2, '0')}
           </span>
-        </div>
+        </div> */}
       </div>
 
       {/* Content */}
