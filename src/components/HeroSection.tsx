@@ -86,7 +86,7 @@ const HeroSection = () => {
           className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-primary/40 bg-primary/10 backdrop-blur-md mb-10 shadow-glow-primary animate-spiritual-breathe"
         >
           <Sparkles className="w-4 h-4 text-primary animate-soft-glow" />
-          <span className="text-sm font-semibold animate-calm-shimmer">السيرة قبل أن تعيشها</span>
+          <span className="text-sm font-semibold animate-calm-shimmer">السيرة كأنك تعيشها</span>
         </motion.div>
 
         {/* Main Heading */}
