@@ -131,7 +131,7 @@ const TechnologyCard = ({ tech }: { tech: Technology }) => {
   
   return (
     <div className="flex-[0_0_85%] min-w-0 sm:flex-[0_0_45%] md:flex-[0_0_30%] lg:flex-[0_0_22%] px-2 md:px-3">
-      <div className="group relative h-[300px] rounded-2xl overflow-hidden bg-card border border-border/40 shadow-sm transition-all duration-700 hover:shadow-[0_16px_48px_-12px_rgba(25,155,154,0.15)] hover:-translate-y-1.5">
+      <div className="group relative h-[300px] rounded-2xl overflow-hidden bg-card border border-border/40 shadow-sm transition-all duration-700 hover:shadow-[0_16px_48px_-12px_rgba(30,120,80,0.15)] hover:-translate-y-1.5">
         {/* Image Container */}
         <div className="absolute inset-0 overflow-hidden">
           <div 
@@ -139,7 +139,7 @@ const TechnologyCard = ({ tech }: { tech: Technology }) => {
             style={{ backgroundImage: `url(${tech.image})` }}
           />
           {/* Refined Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[hsl(179,40%,12%,0.9)] via-[hsl(179,30%,20%,0.5)] to-transparent transition-opacity duration-500" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[hsl(155,40%,10%,0.9)] via-[hsl(160,30%,15%,0.5)] to-transparent transition-opacity duration-500" />
         </div>
         
         {/* Content */}
@@ -222,7 +222,7 @@ const TechnologiesSection = () => {
       {/* Elegant Dark Background */}
       <div className="absolute inset-0">
         {/* Deep dark base with subtle brand tint */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(180,18%,8%)] via-[hsl(180,15%,7%)] to-[hsl(180,18%,8%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(155,20%,6%)] via-[hsl(160,18%,5%)] to-[hsl(155,20%,6%)]" />
         
         {/* Ambient glow orbs */}
         <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[180px]" />
@@ -232,8 +232,7 @@ const TechnologiesSection = () => {
         <div 
           className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, hsl(179,50%,50%) 0.5px, transparent 0)`,
-            backgroundSize: '40px 40px'
+            backgroundImage: `radial-gradient(circle at 1px 1px, hsl(155,50%,40%) 0.5px, transparent 0)`,
           }}
         />
         
@@ -286,7 +285,7 @@ const TechnologiesSection = () => {
                 onClick={() => scrollTo(index)}
                 className={`transition-all duration-500 rounded-full ${
                   index === selectedIndex 
-                    ? 'w-2.5 h-2.5 bg-primary shadow-[0_0_8px_rgba(25,155,154,0.4)]' 
+                    ? 'w-2.5 h-2.5 bg-primary shadow-[0_0_8px_rgba(30,120,80,0.4)]' 
                     : 'w-2 h-2 bg-foreground/15 hover:bg-foreground/30'
                 }`}
                 aria-label={`Go to slide ${index + 1}`}

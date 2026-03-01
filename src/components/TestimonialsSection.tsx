@@ -124,7 +124,7 @@ const TestimonialsSection = () => {
   return (
     <section className="py-24 md:py-32 px-4 relative overflow-hidden">
       {/* Dark premium background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(180,18%,8%)] via-background to-[hsl(180,18%,8%)]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(155,20%,6%)] via-background to-[hsl(155,20%,6%)]" />
       
       {/* Ambient glows */}
       <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[140px] pointer-events-none" />
@@ -204,7 +204,7 @@ const TestimonialsSection = () => {
               onClick={() => setCurrentPage(index)}
               className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
                 index === currentPage
-                  ? "bg-primary w-8 shadow-[0_0_10px_rgba(25,155,154,0.4)]"
+                  ? "bg-primary w-8 shadow-[0_0_10px_rgba(30,120,80,0.4)]"
                   : "bg-foreground/15 hover:bg-foreground/25"
               }`}
               aria-label={`الصفحة ${index + 1}`}
