@@ -218,7 +218,7 @@ const TechnologiesSection = () => {
   );
 
   return (
-    <section id="technologies" className="py-20 md:py-28 relative overflow-hidden">
+    <section id="technologies" className="py-14 md:py-28 relative overflow-hidden">
       {/* Elegant Dark Background */}
       <div className="absolute inset-0">
         {/* Deep dark base with subtle brand tint */}
@@ -248,7 +248,7 @@ const TechnologiesSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="text-center mb-14"
+          className="text-center mb-10 md:mb-14"
         >
           <span className="inline-block px-5 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-5 border border-primary/20">
             تقنيات مبتكرة

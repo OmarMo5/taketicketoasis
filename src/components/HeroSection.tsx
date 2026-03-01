@@ -54,7 +54,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="hero" className="py-20 md:py-28 bg-background relative overflow-hidden">
+    <section id="hero" className="py-12 md:py-28 bg-background relative overflow-hidden">
       {/* Deep premium dark gradient background */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(150,40%,14%)_0%,hsl(155,22%,6%)_40%,hsl(160,15%,4%)_100%)] pointer-events-none" />
       
@@ -83,7 +83,7 @@ const HeroSection = () => {
         {/* Featured Badge with Spiritual Breathing Animation */}
         <motion.div
           variants={itemVariants}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-primary/40 bg-primary/10 backdrop-blur-md mb-10 shadow-glow-primary animate-spiritual-breathe"
+          className="inline-flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-full border border-primary/40 bg-primary/10 backdrop-blur-md mb-6 md:mb-10 shadow-glow-primary animate-spiritual-breathe"
         >
           <Sparkles className="w-4 h-4 text-primary animate-soft-glow" />
           <span className="text-sm font-semibold animate-calm-shimmer">السيرة كأنك تعيشها</span>
@@ -92,7 +92,7 @@ const HeroSection = () => {
         {/* Main Heading */}
         <motion.h1
           variants={itemVariants}
-          className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-8"
+          className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-5 md:mb-8"
         >
           <span className="text-foreground">المتحف الدولي</span>
           <br />
@@ -102,7 +102,7 @@ const HeroSection = () => {
         {/* Description */}
         <motion.p
           variants={itemVariants}
-          className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed"
+          className="text-muted-foreground text-base md:text-xl max-w-2xl mx-auto mb-8 md:mb-12 leading-relaxed"
         >
           اختبر الإرث العميق للنبي محمد ﷺ من خلال التكنولوجيا الأصيلة والقصص الغامرة عبر
           <br className="hidden md:block" />
@@ -112,7 +112,7 @@ const HeroSection = () => {
         {/* Feature Tags */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-wrap justify-center gap-3 mb-14"
+          className="flex flex-wrap justify-center gap-3 mb-8 md:mb-14"
         >
           {/* {featureTags.map((tag, index) => (
             <motion.div
@@ -139,7 +139,7 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Primary CTA */}
-        <motion.div variants={itemVariants} className="mb-16">
+        <motion.div variants={itemVariants} className="mb-10 md:mb-16">
           <motion.div
             whileHover={{ 
               scale: 1.03, 
@@ -153,7 +153,7 @@ const HeroSection = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full px-12 py-8 text-lg font-bold shadow-button-secondary hover:shadow-glow-secondary transition-all duration-400 group">
+              <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full px-8 md:px-12 py-6 md:py-8 text-base md:text-lg font-bold shadow-button-secondary hover:shadow-glow-secondary transition-all duration-400 group">
                 احجز زيارتك
                 <motion.span
                   className="inline-block mr-3"

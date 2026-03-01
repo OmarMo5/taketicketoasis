@@ -179,7 +179,7 @@ const GlobalLocationsSection = () => {
   };
 
   return (
-    <section id="global-locations" className="py-24 md:py-32 relative overflow-hidden" dir="rtl">
+    <section id="global-locations" className="py-14 md:py-32 relative overflow-hidden" dir="rtl">
       {/* Dark premium background */}
       <div className="absolute inset-0 bg-gradient-to-b from-muted/40 via-background to-muted/40" />
       
@@ -198,9 +198,9 @@ const GlobalLocationsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-14"
+          className="text-center mb-10 md:mb-14"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 md:mb-5">
             مواقعنا العالمية
           </h2>
           <p className="text-primary font-semibold mb-3">
@@ -217,7 +217,7 @@ const GlobalLocationsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-3 mb-16"
+          className="flex flex-wrap justify-center gap-2 md:gap-3 mb-10 md:mb-16"
         >
           {locationsData.map((location, index) => (
             <motion.button
@@ -228,7 +228,7 @@ const GlobalLocationsSection = () => {
               transition={{ delay: index * 0.05 }}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className={`px-7 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${activeLocation === location.id
+              className={`px-5 md:px-7 py-2.5 md:py-3 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 ${activeLocation === location.id
                   ? "bg-primary text-primary-foreground shadow-button"
                   : "bg-card text-foreground border border-border hover:border-primary/50 hover:bg-accent/60 shadow-card"
                 }`}
