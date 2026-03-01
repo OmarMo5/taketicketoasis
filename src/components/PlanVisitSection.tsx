@@ -52,7 +52,7 @@ const PlanVisitSection = () => {
   return (
     <section id="plan-visit" className="py-24 md:py-32 relative overflow-hidden">
       {/* Dark premium background with subtle gradients */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(180,18%,7%)] via-background to-[hsl(180,18%,7%)]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(155,20%,6%)] via-background to-[hsl(155,20%,6%)]" />
       
       {/* Ambient glow effects */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,hsl(var(--primary)/0.08)_0%,transparent_50%)]" />

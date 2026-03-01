@@ -56,7 +56,7 @@ const HeroSection = () => {
   return (
     <section id="hero" className="py-20 md:py-28 bg-background relative overflow-hidden">
       {/* Deep premium dark gradient background */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(180,20%,10%)_0%,hsl(180,20%,6%)_50%,hsl(180,18%,4%)_100%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(150,40%,14%)_0%,hsl(155,22%,6%)_40%,hsl(160,15%,4%)_100%)] pointer-events-none" />
       
       {/* Ambient glow orbs */}
       <motion.div 
