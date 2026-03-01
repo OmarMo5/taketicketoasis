@@ -50,7 +50,7 @@ const PlanVisitSection = () => {
   };
 
   return (
-    <section id="plan-visit" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="plan-visit" className="py-14 md:py-32 relative overflow-hidden">
       {/* Dark premium background with subtle gradients */}
       <div className="absolute inset-0 bg-gradient-to-b from-[hsl(155,20%,6%)] via-background to-[hsl(155,20%,6%)]" />
       
@@ -69,9 +69,9 @@ const PlanVisitSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16 md:mb-20"
+          className="text-center mb-10 md:mb-20"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-foreground mb-6 tracking-tight">
+          <h2 className="text-3xl md:text-5xl lg:text-[3.5rem] font-bold text-foreground mb-4 md:mb-6 tracking-tight">
             خطط زيارتك
           </h2>
           <p className="text-muted-foreground text-lg md:text-xl max-w-lg mx-auto leading-relaxed">
@@ -97,7 +97,7 @@ const PlanVisitSection = () => {
                 boxShadow: "0 25px 60px -20px hsl(var(--primary) / 0.12)"
               }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              className={`${feature.bgColor} rounded-3xl p-8 lg:p-10 text-center transition-all duration-500 border border-border/20 shadow-soft hover:shadow-elevated relative overflow-hidden group`}
+              className={`${feature.bgColor} rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-10 text-center transition-all duration-500 border border-border/20 shadow-soft hover:shadow-elevated relative overflow-hidden group`}
             >
               {/* Subtle gradient overlay on hover */}
               <motion.div 
@@ -111,13 +111,13 @@ const PlanVisitSection = () => {
               <motion.div
                 whileHover={{ scale: 1.08, rotate: 3 }}
                 transition={{ duration: 0.4 }}
-                className={`w-20 h-20 lg:w-24 lg:h-24 ${feature.iconBg} rounded-2xl lg:rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg relative group-hover:shadow-glow-primary transition-shadow duration-500`}
+                className={`w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 ${feature.iconBg} rounded-xl md:rounded-2xl lg:rounded-3xl flex items-center justify-center mx-auto mb-5 md:mb-8 shadow-lg relative group-hover:shadow-glow-primary transition-shadow duration-500`}
               >
-                <feature.icon className="w-10 h-10 lg:w-12 lg:h-12 text-primary-foreground" strokeWidth={1.5} />
+                <feature.icon className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-primary-foreground" strokeWidth={1.5} />
               </motion.div>
 
               {/* Title */}
-              <h3 className="text-2xl lg:text-[1.75rem] font-bold text-foreground mb-5 relative group-hover:text-primary transition-colors duration-400">
+              <h3 className="text-xl md:text-2xl lg:text-[1.75rem] font-bold text-foreground mb-3 md:mb-5 relative group-hover:text-primary transition-colors duration-400">
                 {feature.title}
               </h3>
 

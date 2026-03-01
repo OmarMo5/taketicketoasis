@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface Testimonial {
   id: number;
@@ -93,9 +94,11 @@ const testimonials: Testimonial[] = [
 const TESTIMONIALS_PER_PAGE = 3;
 
 const TestimonialsSection = () => {
+  const isMobile = useIsMobile();
+  const perPage = isMobile ? 1 : TESTIMONIALS_PER_PAGE;
   const [currentPage, setCurrentPage] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const totalPages = Math.ceil(testimonials.length / TESTIMONIALS_PER_PAGE);
+  const totalPages = Math.ceil(testimonials.length / perPage);
 
   const nextPage = useCallback(() => {
     setCurrentPage((prev) => (prev + 1) % totalPages);
@@ -117,12 +120,12 @@ const TestimonialsSection = () => {
   }, [isAutoPlaying, nextPage]);
 
   const currentTestimonials = testimonials.slice(
-    currentPage * TESTIMONIALS_PER_PAGE,
-    (currentPage + 1) * TESTIMONIALS_PER_PAGE
+    currentPage * perPage,
+    (currentPage + 1) * perPage
   );
 
   return (
-    <section className="py-24 md:py-32 px-4 relative overflow-hidden">
+    <section className="py-14 md:py-32 px-4 relative overflow-hidden">
       {/* Dark premium background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[hsl(155,20%,6%)] via-background to-[hsl(155,20%,6%)]" />
       
@@ -145,12 +148,12 @@ const TestimonialsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 md:mb-5">
             ماذا يقول زوارنا
           </h2>
-          <p className="text-muted-foreground text-lg md:text-xl max-w-md mx-auto leading-relaxed">
+          <p className="text-muted-foreground text-base md:text-xl max-w-md mx-auto leading-relaxed">
             اكتشف تجارب الزوار من جميع أنحاء العالم
           </p>
         </motion.div>
@@ -164,7 +167,7 @@ const TestimonialsSection = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-6"
+              className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6"
             >
               {currentTestimonials.map((testimonial, index) => (
                 <motion.div
