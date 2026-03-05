@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface WingCardProps {
   title: string;
@@ -10,10 +11,12 @@ interface WingCardProps {
 }
 
 const WingCard = ({ title, description, image, icon: Icon, index }: WingCardProps) => {
+  const isMobile = useIsMobile();
+
   return (
     <motion.article
       className="group relative overflow-hidden rounded-2xl bg-card border border-primary/10 shadow-card hover:shadow-glow-primary transition-all duration-500"
-      whileHover={{ y: -6 }}
+      whileHover={isMobile ? undefined : { y: -6 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
       {/* Image Container */}
