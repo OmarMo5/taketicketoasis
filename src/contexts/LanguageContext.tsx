@@ -22,7 +22,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const setLanguage = useCallback((lang: Language) => {
     setLanguageState(lang);
-    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+    document.documentElement.dir = (lang === "ar" || lang === "ur") ? "rtl" : "ltr";
     document.documentElement.lang = lang;
   }, []);
 
