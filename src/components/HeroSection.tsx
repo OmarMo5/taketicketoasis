@@ -1,24 +1,20 @@
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Sparkles, Monitor, Box, Layers, Clapperboard } from "lucide-react";
+import { ArrowLeft, ArrowRight, Sparkles, Monitor, Box, Layers, Clapperboard } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const HeroSection = () => {
-  const featureTags = [
-    { icon: Sparkles, label: "تجربة غامرة" },
-    { icon: Layers, label: "عروض تفاعلية" },
-    { icon: Monitor, label: "تقنية الهولوغرام" },
-    { icon: Box, label: "نماذج ثلاثية الأبعاد تاريخية" },
-    { icon: Clapperboard, label: "تجربة السينما" },
-  ];
+  const { t, language } = useLanguage();
+  const isRtl = language === "ar";
 
-  const languages = [
-    "الروسية",
-    "التركية",
-    "الإندونيسية",
-    "الأردية",
-    "الفرنسية",
-    "الإنجليزية",
-    "العربية",
+  const languageKeys = [
+    "hero.langRussian",
+    "hero.langTurkish",
+    "hero.langIndonesian",
+    "hero.langUrdu",
+    "hero.langFrench",
+    "hero.langEnglish",
+    "hero.langArabic",
   ];
 
   const containerVariants: Variants = {
@@ -41,7 +37,6 @@ const HeroSection = () => {
     },
   };
 
-  // Gentle floating animation for decorative elements
   const floatVariants: Variants = {
     animate: {
       y: [-8, 8, -8],
@@ -55,10 +50,8 @@ const HeroSection = () => {
 
   return (
     <section id="hero" className="py-12 md:py-28 bg-background relative overflow-hidden">
-      {/* Deep premium dark gradient background */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(150,40%,14%)_0%,hsl(155,22%,6%)_40%,hsl(160,15%,4%)_100%)] pointer-events-none" />
       
-      {/* Ambient glow orbs */}
       <motion.div 
         variants={floatVariants}
         animate="animate"
@@ -71,7 +64,6 @@ const HeroSection = () => {
         className="absolute top-32 right-1/4 w-[400px] h-[400px] bg-secondary/6 rounded-full blur-[100px] pointer-events-none animate-subtle-drift" 
       />
       
-      {/* Subtle top edge glow line */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
 
       <motion.div
@@ -80,65 +72,37 @@ const HeroSection = () => {
         initial="hidden"
         animate="visible"
       >
-        {/* Featured Badge with Spiritual Breathing Animation */}
         <motion.div
           variants={itemVariants}
           className="inline-flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-full border border-primary/40 bg-primary/10 backdrop-blur-md mb-6 md:mb-10 shadow-glow-primary animate-spiritual-breathe"
         >
           <Sparkles className="w-4 h-4 text-primary animate-soft-glow" />
-          <span className="text-sm font-semibold animate-calm-shimmer">السيرة كأنك تعيشها</span>
+          <span className="text-sm font-semibold animate-calm-shimmer">{t("hero.badge")}</span>
         </motion.div>
 
-        {/* Main Heading */}
         <motion.h1
           variants={itemVariants}
           className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-5 md:mb-8"
         >
-          <span className="text-foreground">المتحف الدولي</span>
+          <span className="text-foreground">{t("hero.titleLine1")}</span>
           <br />
-          <span className="text-gradient-primary">للسيرة النبوية</span>
+          <span className="text-gradient-primary">{t("hero.titleLine2")}</span>
         </motion.h1>
 
-        {/* Description */}
         <motion.p
           variants={itemVariants}
           className="text-muted-foreground text-base md:text-xl max-w-2xl mx-auto mb-8 md:mb-12 leading-relaxed"
         >
-          اختبر الإرث العميق للنبي محمد ﷺ من خلال التكنولوجيا الأصيلة والقصص الغامرة عبر
+          {t("hero.description")}
           <br className="hidden md:block" />
-          خمسة مواقع مرموقة حول العالم
+          {t("hero.descriptionLine2")}
         </motion.p>
 
-        {/* Feature Tags */}
         <motion.div
           variants={itemVariants}
           className="flex flex-wrap justify-center gap-3 mb-8 md:mb-14"
-        >
-          {/* {featureTags.map((tag, index) => (
-            <motion.div
-              key={tag.label}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4 + index * 0.06, duration: 0.4 }}
-              whileHover={{ 
-                scale: 1.05, 
-                y: -3,
-                boxShadow: "0 8px 25px -8px hsl(var(--primary) / 0.2)"
-              }}
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-border bg-card hover:border-primary/50 hover:bg-accent/60 transition-all duration-400 cursor-default shadow-card"
-            >
-              <motion.div
-                whileHover={{ rotate: [0, -10, 10, 0] }}
-                transition={{ duration: 0.5 }}
-              >
-                <tag.icon className="w-4 h-4 text-primary" />
-              </motion.div>
-              <span className="text-sm text-foreground font-medium">{tag.label}</span>
-            </motion.div>
-          ))} */}
-        </motion.div>
+        />
 
-        {/* Primary CTA */}
         <motion.div variants={itemVariants} className="mb-10 md:mb-16">
           <motion.div
             whileHover={{ 
@@ -154,31 +118,30 @@ const HeroSection = () => {
               rel="noopener noreferrer"
             >
               <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full px-8 md:px-12 py-6 md:py-8 text-base md:text-lg font-bold shadow-button-secondary hover:shadow-glow-secondary transition-all duration-400 group">
-                احجز زيارتك
+                {t("hero.bookVisit")}
                 <motion.span
-                  className="inline-block mr-3"
-                  animate={{ x: [0, -4, 0] }}
+                  className={`inline-block ${isRtl ? "mr-3" : "ml-3"}`}
+                  animate={{ x: isRtl ? [0, -4, 0] : [0, 4, 0] }}
                   transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <ArrowLeft className="w-5 h-5" />
+                  {isRtl ? <ArrowLeft className="w-5 h-5" /> : <ArrowRight className="w-5 h-5" />}
                 </motion.span>
               </Button>
             </a>
           </motion.div>
         </motion.div>
 
-        {/* Language Selector */}
         <motion.div
           variants={itemVariants}
           className="flex flex-wrap justify-center items-center gap-3"
         >
           <span className="text-sm text-muted-foreground flex items-center gap-2 font-medium">
             <span className="text-primary">🌍</span>
-            متاح باللغات:
+            {t("hero.availableIn")}
           </span>
-        {languages.map((lang, index) => (
+          {languageKeys.map((key, index) => (
             <motion.span
-              key={lang}
+              key={key}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 + index * 0.04 }}
@@ -189,7 +152,7 @@ const HeroSection = () => {
               }}
               className="px-4 py-2 rounded-full border border-border text-sm text-muted-foreground hover:border-primary/50 hover:text-foreground hover:bg-accent/60 transition-all duration-400 cursor-pointer"
             >
-              {lang}
+              {t(key)}
             </motion.span>
           ))}
         </motion.div>

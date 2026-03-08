@@ -3,25 +3,25 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import museumLogo from "@/assets/museum-logo.png";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState("hero");
   const location = useLocation();
   const navigate = useNavigate();
   const isHomePage = location.pathname === "/";
+  const { t, dir } = useLanguage();
 
-  // Links for display in navbar (visual order)
   const navLinks = [
-    { label: "الرئيسية", href: "#hero", id: "hero", isSection: true },
-    { label: "أجنحة المتحف", href: "#museum-wings", id: "museum-wings", isSection: true },
-    { label: "المواقع", href: "#global-locations", id: "global-locations", isSection: true },
-    { label: "التقنيات", href: "#technologies", id: "technologies", isSection: true },
-    { label: "خطط زيارتك", href: "#plan-visit", id: "plan-visit", isSection: true },
+    { label: t("nav.home"), href: "#hero", id: "hero", isSection: true },
+    { label: t("nav.wings"), href: "#museum-wings", id: "museum-wings", isSection: true },
+    { label: t("nav.locations"), href: "#global-locations", id: "global-locations", isSection: true },
+    { label: t("nav.technologies"), href: "#technologies", id: "technologies", isSection: true },
+    { label: t("nav.planVisit"), href: "#plan-visit", id: "plan-visit", isSection: true },
   ];
-  // Sections ordered by DOM position for scroll detection
   const sectionOrder = ["hero", "museum-wings", "technologies", "plan-visit", "global-locations"];
 
-  // Scroll detection for active section (only on homepage)
   useEffect(() => {
     if (!isHomePage) return;
     
@@ -34,7 +34,6 @@ const Navbar = () => {
       const navbarHeight = 64;
       const scrollPosition = window.scrollY + navbarHeight + 100;
 
-      // Iterate from last to first in DOM order
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
         if (section.element) {
@@ -48,7 +47,7 @@ const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial check
+    handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isHomePage]);
@@ -57,13 +56,11 @@ const Navbar = () => {
     e.preventDefault();
     
     if (!link.isSection) {
-      // Navigate to different page
       navigate(link.href);
       return;
     }
     
     if (!isHomePage) {
-      // Navigate to home page first, then scroll
       navigate("/");
       setTimeout(() => {
         const element = document.getElementById(link.id);
@@ -106,6 +103,7 @@ const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="sticky top-0 z-50 w-full bg-background/90 backdrop-blur-xl border-b border-primary/10 shadow-[0_4px_30px_-10px_hsl(var(--primary)/0.15)]"
+      dir={dir}
     >
       <div className="container mx-auto px-4 h-18 flex items-center justify-between">
         {/* Logo */}
@@ -128,7 +126,7 @@ const Navbar = () => {
                              (link.isSection && isHomePage && activeSection === link.id);
             return (
               <motion.a
-                key={link.label}
+                key={link.id}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link)}
                 initial={{ opacity: 0, y: -10 }}
@@ -141,7 +139,6 @@ const Navbar = () => {
                   }`}
               >
                 {link.label}
-                {/* Active indicator dot with glow */}
                 {isActive && (
                   <motion.span
                     layoutId="activeIndicator"
@@ -149,35 +146,37 @@ const Navbar = () => {
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
-                {/* Hover underline effect */}
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary/30 rounded-full transition-all duration-300 group-hover:w-1/2" />
               </motion.a>
             );
           })}
         </div>
 
-        {/* CTA Button */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3, duration: 0.3 }}
-        >
-          <a
-            href="https://tickets.asc.sa/"
-            target="_blank"
-            rel="noopener noreferrer"
+        {/* CTA + Language Switcher */}
+        <div className="flex items-center gap-2 md:gap-3">
+          <LanguageSwitcher />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3, duration: 0.3 }}
           >
-            <motion.div
-              whileHover={{ scale: 1.03, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.3 }}
+            <a
+              href="https://tickets.asc.sa/"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <Button className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/95 hover:to-primary text-primary-foreground rounded-full px-7 py-2.5 font-bold shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-400">
-                احجز تذكرتك
-              </Button>
-            </motion.div>
-          </a>
-        </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Button className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/95 hover:to-primary text-primary-foreground rounded-full px-5 md:px-7 py-2.5 font-bold shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-400 text-xs md:text-sm">
+                  {t("nav.bookTicket")}
+                </Button>
+              </motion.div>
+            </a>
+          </motion.div>
+        </div>
       </div>
     </motion.nav>
   );

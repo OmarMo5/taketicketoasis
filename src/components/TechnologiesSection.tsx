@@ -16,6 +16,7 @@ import {
   View,
   Cpu
 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import pict1 from "../../src/assets/tech/Picture1.png"
 import pict2 from "../../src/assets/tech/Picture2.png"
 import pict3 from "../../src/assets/tech/Picture3.png"
@@ -30,143 +31,58 @@ import pict11 from "../../src/assets/tech/Picture11.png"
 import pict12 from "../../src/assets/tech/Picture12.png"
 import pict13 from "../../src/assets/tech/Picture1313.png"
 
-
 interface Technology {
   id: number;
-  title: string;
-  titleAr: string;
+  titleEnKey: string;
+  titleArKey: string;
   icon: React.ElementType;
   image: string;
 }
 
 const technologies: Technology[] = [
-  {
-    id: 1,
-    title: "Immersive Rooms",
-    titleAr: "الغرف الانغماسية",
-    icon: Layers,
-    image: pict1
-  },
-  {
-    id: 2,
-    title: "3D Atlases",
-    titleAr: "الأطالس ثلاثية الأبعاد",
-    icon: Globe2,
-    image: pict2
-  },
-  {
-    id: 3,
-    title: "Hologram",
-    titleAr: "الهولوجرام",
-    icon: Scan,
-    image: pict3
-  },
-  {
-    id: 4,
-    title: "Artificial Intelligence",
-    titleAr: "الذكاء الاصطناعي",
-    icon: BrainCircuit,
-    image: pict4
-  },
-  {
-    id: 5,
-    title: "Cinema Halls",
-    titleAr: "قاعات السينما",
-    icon: Clapperboard,
-    image: pict5
-  },
-  {
-    id: 7,
-    title: "Interactive Screens",
-    titleAr: "الشاشات التفاعلية",
-    icon: TouchpadIcon,
-    image: pict6
-  },
-  {
-    id: 7,
-    title: "Interactive Murals",
-    titleAr: "الجداريات التفاعلية",
-    icon: ImagePlus,
-    image: pict7
-  },
-  {
-    id: 8,
-    title: "3D Models",
-    titleAr: "المجسمات ثلاثية الأبعاد",
-    icon: Box,
-    image: pict8
-  },
-  {
-    id: 9,
-    title: "Interactive Rooms for Children",
-    titleAr: "غرف تفاعلية للأطفال",
-    icon: Gamepad2,
-    image: pict9
-  },
-  {
-    id: 10,
-    title: "Interactive Artifacts",
-    titleAr: "المقتنيات التفاعلية",
-    icon: Gem,
-    image: pict10
-  },
-  {
-    id: 11,
-    title: "Virtual Reality (VR)",
-    titleAr: "الواقع الافتراضي",
-    icon: View,
-    image: pict11
-  },
-  {
-    id: 12,
-    title: "Interactive Models",
-    titleAr: "النماذج التفاعلية",
-    icon: Cpu,
-    image: pict12
-  }
+  { id: 1, titleEnKey: "Immersive Rooms", titleArKey: "tech.immersiveRooms", icon: Layers, image: pict1 },
+  { id: 2, titleEnKey: "3D Atlases", titleArKey: "tech.atlases3d", icon: Globe2, image: pict2 },
+  { id: 3, titleEnKey: "Hologram", titleArKey: "tech.hologram", icon: Scan, image: pict3 },
+  { id: 4, titleEnKey: "Artificial Intelligence", titleArKey: "tech.ai", icon: BrainCircuit, image: pict4 },
+  { id: 5, titleEnKey: "Cinema Halls", titleArKey: "tech.cinemaHalls", icon: Clapperboard, image: pict5 },
+  { id: 6, titleEnKey: "Interactive Screens", titleArKey: "tech.interactiveScreens", icon: TouchpadIcon, image: pict6 },
+  { id: 7, titleEnKey: "Interactive Murals", titleArKey: "tech.interactiveMurals", icon: ImagePlus, image: pict7 },
+  { id: 8, titleEnKey: "3D Models", titleArKey: "tech.models3d", icon: Box, image: pict8 },
+  { id: 9, titleEnKey: "Interactive Rooms for Children", titleArKey: "tech.childrenRooms", icon: Gamepad2, image: pict9 },
+  { id: 10, titleEnKey: "Interactive Artifacts", titleArKey: "tech.interactiveArtifacts", icon: Gem, image: pict10 },
+  { id: 11, titleEnKey: "Virtual Reality (VR)", titleArKey: "tech.vr", icon: View, image: pict11 },
+  { id: 12, titleEnKey: "Interactive Models", titleArKey: "tech.interactiveModels", icon: Cpu, image: pict12 },
 ];
 
 const TechnologyCard = ({ tech }: { tech: Technology }) => {
   const Icon = tech.icon;
+  const { t, language } = useLanguage();
   
   return (
     <div className="flex-[0_0_85%] min-w-0 sm:flex-[0_0_45%] md:flex-[0_0_30%] lg:flex-[0_0_22%] px-2 md:px-3">
       <div className="group relative h-[300px] rounded-2xl overflow-hidden bg-card border border-border/40 shadow-sm transition-all duration-700 hover:shadow-[0_16px_48px_-12px_rgba(30,120,80,0.15)] hover:-translate-y-1.5">
-        {/* Image Container */}
         <div className="absolute inset-0 overflow-hidden">
           <div 
             className="absolute inset-0 bg-cover bg-center transition-all duration-700 group-hover:scale-[1.02] group-hover:brightness-105"
             style={{ backgroundImage: `url(${tech.image})` }}
           />
-          {/* Refined Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-[hsl(155,40%,10%,0.9)] via-[hsl(160,30%,15%,0.5)] to-transparent transition-opacity duration-500" />
         </div>
         
-        {/* Content */}
         <div className="relative h-full flex flex-col justify-between p-5">
-          {/* Top Section - Icon */}
           <div className="flex justify-end">
             <div className="w-10 h-10 rounded-lg bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center transition-all duration-500 group-hover:bg-primary/25 group-hover:border-primary/50">
               <Icon className="w-4.5 h-4.5 text-white/90 transition-colors duration-500 group-hover:text-white" strokeWidth={1.5} />
             </div>
           </div>
           
-          {/* Bottom Section - Text */}
           <div className="space-y-1">
-            {/* Number */}
-            {/* <span className="text-white/15 text-3xl font-bold block leading-none">
-              {String(tech.id).padStart(2, '0')}
-            </span> */}
-            
-            {/* Titles */}
             <h3 className="text-lg font-semibold text-white leading-tight">
-              {tech.titleAr}
+              {t(tech.titleArKey)}
             </h3>
             <p className="text-xs text-white/65 font-light tracking-wide">
-              {tech.title}
+              {tech.titleEnKey}
             </p>
-            
-            {/* Accent Line */}
             <div className="pt-2.5">
               <div className="h-0.5 w-10 bg-gradient-to-r from-primary to-secondary/80 rounded-full transition-all duration-500 group-hover:w-16" />
             </div>
@@ -178,6 +94,9 @@ const TechnologyCard = ({ tech }: { tech: Technology }) => {
 };
 
 const TechnologiesSection = () => {
+  const { t, language } = useLanguage();
+  const isRtl = language === "ar";
+
   const autoplayPlugin = Autoplay({
     delay: 2500,
     stopOnInteraction: false,
@@ -189,7 +108,7 @@ const TechnologiesSection = () => {
       loop: true,
       align: "start",
       slidesToScroll: 1,
-      direction: "rtl",
+      direction: isRtl ? "rtl" : "ltr",
       dragFree: true,
     },
     [autoplayPlugin]
@@ -219,30 +138,21 @@ const TechnologiesSection = () => {
 
   return (
     <section id="technologies" className="py-14 md:py-28 relative overflow-hidden">
-      {/* Elegant Dark Background */}
       <div className="absolute inset-0">
-        {/* Deep dark base with subtle brand tint */}
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(155,20%,6%)] via-[hsl(160,18%,5%)] to-[hsl(155,20%,6%)]" />
-        
-        {/* Ambient glow orbs */}
         <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[180px]" />
         <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-secondary/4 rounded-full blur-[160px]" />
-        
-        {/* Subtle pattern overlay */}
         <div 
           className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, hsl(155,50%,40%) 0.5px, transparent 0)`,
           }}
         />
-        
-        {/* Edge glow lines */}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/20 to-transparent" />
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -251,17 +161,16 @@ const TechnologiesSection = () => {
           className="text-center mb-10 md:mb-14"
         >
           <span className="inline-block px-5 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-5 border border-primary/20">
-            تقنيات مبتكرة
+            {t("tech.badge")}
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            تقنيات المتحف
+            {t("tech.sectionTitle")}
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            اكتشف أحدث التقنيات التفاعلية التي تجعل تجربتك في المتحف فريدة ومميزة
+            {t("tech.sectionDescription")}
           </p>
         </motion.div>
 
-        {/* Carousel */}
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -277,7 +186,6 @@ const TechnologiesSection = () => {
             </div>
           </div>
 
-          {/* Dot Indicators */}
           <div className="mt-10 flex justify-center items-center gap-2">
             {technologies.map((_, index) => (
               <button
