@@ -189,7 +189,7 @@ const GlobalLocationsSection = () => {
             className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
           >
             {/* Right Side - Location Card */}
-            <div className="order-1 lg:order-2">
+            <div className="order-1 lg:order-1">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
