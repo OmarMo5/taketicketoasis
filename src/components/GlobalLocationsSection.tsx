@@ -189,7 +189,7 @@ const GlobalLocationsSection = () => {
             className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
           >
             {/* Right Side - Location Card */}
-            <div className="order-1 lg:order-2">
+            <div className="order-1 lg:order-1">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -248,7 +248,7 @@ const GlobalLocationsSection = () => {
             </div>
 
             {/* Left Side - Visit Information */}
-            <div className="order-2 lg:order-1 space-y-5">
+            <div className="order-2 lg:order-2 space-y-5">
               <div className="mb-6">
                 <h4 className="text-xl font-bold text-foreground mb-1">{t("locations.visitInfo")}</h4>
                 <p className="text-muted-foreground text-sm">{t("locations.visitInfoDesc")}</p>
