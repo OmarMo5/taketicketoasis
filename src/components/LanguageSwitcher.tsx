@@ -6,6 +6,8 @@ import { useLanguage, type Language } from "@/contexts/LanguageContext";
 const languages: { code: Language; label: string; nativeLabel: string }[] = [
   { code: "ar", label: "Arabic", nativeLabel: "العربية" },
   { code: "en", label: "English", nativeLabel: "English" },
+  { code: "fr", label: "French", nativeLabel: "Français" },
+  { code: "tr", label: "Turkish", nativeLabel: "Türkçe" },
 ];
 
 const LanguageSwitcher = () => {
