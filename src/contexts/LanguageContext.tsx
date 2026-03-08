@@ -38,7 +38,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     [language]
   );
 
-  const dir = language === "ar" ? "rtl" : "ltr";
+  const dir = (language === "ar" || language === "ur") ? "rtl" : "ltr";
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t, dir }}>
