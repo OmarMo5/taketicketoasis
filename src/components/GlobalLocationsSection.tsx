@@ -248,7 +248,7 @@ const GlobalLocationsSection = () => {
             </div>
 
             {/* Left Side - Visit Information */}
-            <div className="order-2 lg:order-1 space-y-5">
+            <div className="order-2 lg:order-2 space-y-5">
               <div className="mb-6">
                 <h4 className="text-xl font-bold text-foreground mb-1">{t("locations.visitInfo")}</h4>
                 <p className="text-muted-foreground text-sm">{t("locations.visitInfoDesc")}</p>
