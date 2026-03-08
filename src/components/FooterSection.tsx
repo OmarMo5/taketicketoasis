@@ -1,22 +1,25 @@
 import { Facebook, Twitter, Instagram, Youtube, MapPin, Phone, Mail } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
 import museumLogo from "@/assets/museum-logo.png";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const FooterSection = () => {
+  const { t } = useLanguage();
+
   const quickLinks = [
-    { label: "الرئيسية", href: "#" },
-    { label: "عن المتحف", href: "#" },
-    { label: "المعارض", href: "#" },
-    { label: "الفعاليات", href: "#" },
-    { label: "تواصل معنا", href: "#" },
+    { labelKey: "footer.home", href: "#" },
+    { labelKey: "footer.aboutMuseum", href: "#" },
+    { labelKey: "footer.exhibitions", href: "#" },
+    { labelKey: "footer.events", href: "#" },
+    { labelKey: "footer.contactUs", href: "#" },
   ];
 
   const branches = [
-    { label: "فرع مكة المكرمة", href: "#" },
-    { label: "فرع المدينة المنورة", href: "#" },
-    { label: "فرع الرباط", href: "#" },
-    { label: "فرع نواكشوط", href: "#" },
-    { label: "فرع داكار", href: "#" },
+    { labelKey: "footer.branchMecca", href: "#" },
+    { labelKey: "footer.branchMedina", href: "#" },
+    { labelKey: "footer.branchRabat", href: "#" },
+    { labelKey: "footer.branchNouakchott", href: "#" },
+    { labelKey: "footer.branchDakar", href: "#" },
   ];
 
   const socialLinks = [
@@ -48,14 +51,10 @@ const FooterSection = () => {
 
   return (
     <footer className="relative overflow-hidden" style={{ background: 'linear-gradient(165deg, hsl(155, 22%, 4%), hsl(160, 20%, 3%), hsl(155, 18%, 2%))' }}>
-      {/* Decorative ambient glows */}
       <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-0 left-1/4 w-[350px] h-[350px] bg-secondary/4 rounded-full blur-[120px] pointer-events-none" />
-      
-      {/* Top edge glow */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       
-      {/* Main Footer */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -64,7 +63,6 @@ const FooterSection = () => {
         className="max-w-6xl mx-auto px-4 py-16 relative z-10"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Logo & Description */}
           <motion.div variants={itemVariants} className="lg:col-span-1">
             <a href="#" className="inline-block mb-6 group cursor-pointer transition-transform duration-300 hover:scale-105">
               <img 
@@ -74,9 +72,8 @@ const FooterSection = () => {
               />
             </a>
             <p className="text-foreground/65 text-sm leading-relaxed mb-6">
-              متحف عالمي يحتفي بالتراث الإسلامي ويروي قصة الرسول ﷺ من خلال أحدث التقنيات والمعروضات التفاعلية.
+              {t("footer.description")}
             </p>
-            {/* Social Icons */}
             <div className="flex gap-3">
               {socialLinks.map((social, index) => (
                 <motion.a
@@ -100,26 +97,22 @@ const FooterSection = () => {
             </div>
           </motion.div>
 
-          {/* Quick Links */}
           <motion.div variants={itemVariants}>
             <h3 className="font-bold text-lg mb-6 text-foreground relative inline-block">
-              روابط سريعة
+              {t("footer.quickLinks")}
               <span className="absolute -bottom-1 right-0 w-8 h-0.5 bg-primary rounded-full" />
             </h3>
             <ul className="space-y-3">
-              {quickLinks.map((link, index) => (
-                <li key={link.label}>
+              {quickLinks.map((link) => (
+                <li key={link.labelKey}>
                   <motion.a
                     href={link.href}
                     initial={{ opacity: 0.7 }}
-                    whileHover={{ 
-                      x: -4,
-                      opacity: 1 
-                    }}
+                    whileHover={{ x: -4, opacity: 1 }}
                     transition={{ duration: 0.3 }}
                     className="text-muted-foreground hover:text-primary transition-colors duration-400 text-sm inline-block relative group"
                   >
-                    {link.label}
+                    {t(link.labelKey)}
                     <span className="absolute bottom-0 right-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
                   </motion.a>
                 </li>
@@ -127,26 +120,22 @@ const FooterSection = () => {
             </ul>
           </motion.div>
 
-          {/* Branches */}
           <motion.div variants={itemVariants}>
             <h3 className="font-bold text-lg mb-6 text-foreground relative inline-block">
-              فروعنا
+              {t("footer.branches")}
               <span className="absolute -bottom-1 right-0 w-8 h-0.5 bg-primary rounded-full" />
             </h3>
             <ul className="space-y-3">
-              {branches.map((branch, index) => (
-                <li key={branch.label}>
+              {branches.map((branch) => (
+                <li key={branch.labelKey}>
                   <motion.a
                     href={branch.href}
                     initial={{ opacity: 0.7 }}
-                    whileHover={{ 
-                      x: -4,
-                      opacity: 1 
-                    }}
+                    whileHover={{ x: -4, opacity: 1 }}
                     transition={{ duration: 0.3 }}
                     className="text-muted-foreground hover:text-primary transition-colors duration-400 text-sm inline-block relative group"
                   >
-                    {branch.label}
+                    {t(branch.labelKey)}
                     <span className="absolute bottom-0 right-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
                   </motion.a>
                 </li>
@@ -154,10 +143,9 @@ const FooterSection = () => {
             </ul>
           </motion.div>
 
-          {/* Contact Info */}
           <motion.div variants={itemVariants}>
             <h3 className="font-bold text-lg mb-6 text-foreground relative inline-block">
-              تواصل معنا
+              {t("footer.contactTitle")}
               <span className="absolute -bottom-1 right-0 w-8 h-0.5 bg-primary rounded-full" />
             </h3>
             <ul className="space-y-4">
@@ -166,7 +154,7 @@ const FooterSection = () => {
                   <MapPin className="w-4 h-4 text-primary shrink-0" />
                 </div>
                 <span className="text-muted-foreground text-sm group-hover:text-foreground transition-colors duration-300 mt-1">
-                  مكة المكرمة، المملكة العربية السعودية
+                  {t("footer.address")}
                 </span>
               </li>
               <li className="flex items-center gap-3 group">
@@ -190,12 +178,11 @@ const FooterSection = () => {
         </div>
       </motion.div>
 
-      {/* Bottom Bar */}
       <div className="border-t border-border/30 bg-black/20 relative z-10">
         <div className="max-w-6xl mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-muted-foreground text-sm">
-              © 2024 متحف السيرة النبوية. جميع الحقوق محفوظة.
+              {t("footer.copyright")}
             </p>
             <div className="flex gap-6">
               <motion.a
@@ -203,14 +190,14 @@ const FooterSection = () => {
                 whileHover={{ y: -2 }}
                 className="text-muted-foreground hover:text-primary text-sm transition-colors duration-300"
               >
-                سياسة الخصوصية
+                {t("footer.privacy")}
               </motion.a>
               <motion.a
                 href="#"
                 whileHover={{ y: -2 }}
                 className="text-muted-foreground hover:text-primary text-sm transition-colors duration-300"
               >
-                الشروط والأحكام
+                {t("footer.terms")}
               </motion.a>
             </div>
           </div>

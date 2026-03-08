@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface WingCardProps {
   title: string;
@@ -12,6 +13,7 @@ interface WingCardProps {
 
 const WingCard = ({ title, description, image, icon: Icon, index }: WingCardProps) => {
   const isMobile = useIsMobile();
+  const { t } = useLanguage();
 
   return (
     <motion.article
@@ -19,18 +21,13 @@ const WingCard = ({ title, description, image, icon: Icon, index }: WingCardProp
       whileHover={isMobile ? undefined : { y: -6 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
-      {/* Image Container */}
       <div className="relative overflow-hidden h-52 md:h-60">
         <motion.img
           src={image}
           alt={title}
           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 brightness-100"
         />
-        
-        {/* Subtle Bottom Gradient Only - No White Overlay */}
         <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background/60 to-transparent" />
-        
-        {/* Decorative Accent Line */}
         <motion.div
           className="absolute top-4 right-4 w-10 h-0.5 bg-gradient-to-r from-primary to-secondary rounded-full opacity-80"
           initial={{ scaleX: 0, originX: 1 }}
@@ -38,8 +35,6 @@ const WingCard = ({ title, description, image, icon: Icon, index }: WingCardProp
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         />
-        
-        {/* Icon Badge */}
         <motion.div
           className="absolute top-4 left-4 w-11 h-11 rounded-xl bg-background/80 backdrop-blur-sm border border-border/30 flex items-center justify-center shadow-soft"
           whileHover={{ scale: 1.05 }}
@@ -47,30 +42,19 @@ const WingCard = ({ title, description, image, icon: Icon, index }: WingCardProp
         >
           <Icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
         </motion.div>
-
-        {/* Wing Number Badge */}
-        {/* <div className="absolute bottom-4 left-4 px-3 py-1.5 rounded-lg bg-background/80 backdrop-blur-sm border border-border/30 shadow-soft">
-          <span className="text-xs font-bold text-primary">
-            {String(index + 1).padStart(2, '0')}
-          </span>
-        </div> */}
       </div>
 
-      {/* Content */}
       <div className="relative p-5 md:p-6">
         <h3 className="text-lg md:text-xl font-bold text-foreground mb-2.5 leading-relaxed group-hover:text-primary transition-colors duration-300 line-clamp-2">
           {title}
         </h3>
-        
         <p className="text-muted-foreground text-sm md:text-base leading-relaxed line-clamp-2">
           {description}
         </p>
-
-        {/* Hover Reveal Arrow */}
         <motion.div
           className="mt-4 flex items-center gap-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         >
-          <span className="text-sm font-medium">استكشف الجناح</span>
+          <span className="text-sm font-medium">{t("wings.exploreWing")}</span>
           <svg
             className="w-4 h-4 rotate-180"
             fill="none"
@@ -82,7 +66,6 @@ const WingCard = ({ title, description, image, icon: Icon, index }: WingCardProp
         </motion.div>
       </div>
 
-      {/* Bottom Accent */}
       <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary via-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
     </motion.article>
   );
