@@ -8,6 +8,9 @@ const languages: { code: Language; label: string; nativeLabel: string }[] = [
   { code: "en", label: "English", nativeLabel: "English" },
   { code: "fr", label: "French", nativeLabel: "Français" },
   { code: "tr", label: "Turkish", nativeLabel: "Türkçe" },
+  { code: "ru", label: "Russian", nativeLabel: "Русский" },
+  { code: "ur", label: "Urdu", nativeLabel: "اردو" },
+  { code: "id", label: "Indonesian", nativeLabel: "Bahasa" },
 ];
 
 const LanguageSwitcher = () => {
