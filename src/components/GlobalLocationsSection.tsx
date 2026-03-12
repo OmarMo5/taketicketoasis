@@ -278,52 +278,55 @@ const GlobalLocationsSection = () => {
               </div>
 
               {/* Collapsible cards on mobile, full on desktop */}
-              <div className="p-4 md:p-6 rounded-xl border-2 border-primary/20 bg-primary/5">
-                <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-primary flex items-center justify-center shadow-button">
-                    <Check className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
+              {/* Visit info cards: 2+1 grid layout */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-5">
+                <div className="p-4 md:p-6 rounded-xl border-2 border-primary/20 bg-primary/5">
+                  <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-primary flex items-center justify-center shadow-button">
+                      <Check className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
+                    </div>
+                    <h5 className="font-bold text-foreground text-base md:text-lg">{t("locations.whatsIncluded")}</h5>
                   </div>
-                  <h5 className="font-bold text-foreground text-base md:text-lg">{t("locations.whatsIncluded")}</h5>
+                  <ul className="space-y-1.5 md:space-y-2.5">
+                    {currentLocation.includesKeys.map((key, index) => (
+                      <li key={index} className="text-xs md:text-sm text-muted-foreground flex items-start gap-2">
+                        <span className="text-primary font-bold">•</span>
+                        <span>{t(key)}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="space-y-1.5 md:space-y-2.5">
-                  {currentLocation.includesKeys.map((key, index) => (
-                    <li key={index} className="text-xs md:text-sm text-muted-foreground flex items-start gap-2">
-                      <span className="text-primary font-bold">•</span>
-                      <span>{t(key)}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
 
-              <div className="p-4 md:p-6 rounded-xl border-2 border-card-blue bg-card-blue">
-                <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-blue flex items-center justify-center shadow-soft">
-                    <Clock className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
+                <div className="p-4 md:p-6 rounded-xl border-2 border-card-blue bg-card-blue">
+                  <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-blue flex items-center justify-center shadow-soft">
+                      <Clock className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
+                    </div>
+                    <h5 className="font-bold text-foreground text-base md:text-lg">{t("locations.durationTiming")}</h5>
                   </div>
-                  <h5 className="font-bold text-foreground text-base md:text-lg">{t("locations.durationTiming")}</h5>
+                  <div className="space-y-1.5 md:space-y-2.5 text-xs md:text-sm text-muted-foreground">
+                    <p><span className="font-medium text-foreground">{t("locations.duration")}</span> {t(currentLocation.durationKey)}</p>
+                    <p><span className="font-medium text-foreground">{t("locations.workingHours")}</span> {t(currentLocation.hoursKey)}</p>
+                    <p className="text-primary font-medium">{t(currentLocation.closedDayKey)}</p>
+                  </div>
                 </div>
-                <div className="space-y-1.5 md:space-y-2.5 text-xs md:text-sm text-muted-foreground">
-                  <p><span className="font-medium text-foreground">{t("locations.duration")}</span> {t(currentLocation.durationKey)}</p>
-                  <p><span className="font-medium text-foreground">{t("locations.workingHours")}</span> {t(currentLocation.hoursKey)}</p>
-                  <p className="text-primary font-medium">{t(currentLocation.closedDayKey)}</p>
-                </div>
-              </div>
 
-              <div className="p-4 md:p-6 rounded-xl border-2 border-card-pink bg-card-pink">
-                <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-pink flex items-center justify-center shadow-soft">
-                    <Shield className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
+                <div className="md:col-span-2 p-4 md:p-6 rounded-xl border-2 border-card-pink bg-card-pink">
+                  <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-pink flex items-center justify-center shadow-soft">
+                      <Shield className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
+                    </div>
+                    <h5 className="font-bold text-foreground text-base md:text-lg">{t("locations.cancellationPolicy")}</h5>
                   </div>
-                  <h5 className="font-bold text-foreground text-base md:text-lg">{t("locations.cancellationPolicy")}</h5>
+                  <ul className="space-y-1.5 md:space-y-2.5">
+                    {currentLocation.cancellationKeys.map((key, index) => (
+                      <li key={index} className="text-xs md:text-sm text-muted-foreground flex items-start gap-2">
+                        <span className="text-primary font-bold">•</span>
+                        <span>{t(key)}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="space-y-1.5 md:space-y-2.5">
-                  {currentLocation.cancellationKeys.map((key, index) => (
-                    <li key={index} className="text-xs md:text-sm text-muted-foreground flex items-start gap-2">
-                      <span className="text-primary font-bold">•</span>
-                      <span>{t(key)}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
             </div>
           </motion.div>
