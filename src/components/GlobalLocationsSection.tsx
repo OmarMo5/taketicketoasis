@@ -127,10 +127,10 @@ const GlobalLocationsSection = () => {
   };
 
   return (
-    <section id="global-locations" className="py-14 md:py-32 relative overflow-hidden" dir={isRtl ? "rtl" : "ltr"}>
+    <section id="global-locations" className="py-10 md:py-32 relative overflow-hidden" dir={isRtl ? "rtl" : "ltr"}>
       <div className="absolute inset-0 bg-gradient-to-b from-muted/40 via-background to-muted/40" />
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/6 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/6 rounded-full blur-[150px] pointer-events-none hidden md:block" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none hidden md:block" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/20 to-transparent" />
 
@@ -140,25 +140,26 @@ const GlobalLocationsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-10 md:mb-14"
+          className="text-center mb-6 md:mb-14"
         >
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 md:mb-5">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground mb-2 md:mb-5">
             {t("locations.sectionTitle")}
           </h2>
-          <p className="text-primary font-semibold mb-3">
+          <p className="text-primary font-semibold mb-2 md:mb-3 text-sm md:text-base">
             {t("locations.sectionSubtitle")}
           </p>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-sm md:text-base">
             {t("locations.sectionQuestion")}
           </p>
         </motion.div>
 
+        {/* Location tabs - horizontal scroll on mobile */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-2 md:gap-3 mb-10 md:mb-16"
+          className="flex md:flex-wrap md:justify-center gap-2 md:gap-3 mb-6 md:mb-16 overflow-x-auto pb-2 md:pb-0 scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0"
         >
           {locationsConfig.map((location, index) => (
             <motion.button
@@ -167,9 +168,8 @@ const GlobalLocationsSection = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.05 }}
-              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className={`px-5 md:px-7 py-2.5 md:py-3 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 ${activeLocation === location.id
+              className={`px-4 md:px-7 py-2 md:py-3 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 whitespace-nowrap flex-shrink-0 ${activeLocation === location.id
                   ? "bg-primary text-primary-foreground shadow-button"
                   : "bg-card text-foreground border border-border hover:border-primary/50 hover:bg-accent/60 shadow-card"
                 }`}
@@ -186,7 +186,7 @@ const GlobalLocationsSection = () => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 items-start"
           >
             {/* Right Side - Location Card */}
             <div className="order-1 lg:order-1">
@@ -199,35 +199,33 @@ const GlobalLocationsSection = () => {
                 <img
                   src={currentLocation.image}
                   alt={t(currentLocation.nameKey)}
-                  className="w-full h-64 md:h-72 object-cover"
+                  className="w-full h-48 md:h-72 object-cover"
                 />
               </motion.div>
 
-              <div className="mt-5 text-center">
-                <span className="inline-block px-4 py-1.5 text-xs border border-secondary/50 bg-secondary/10 rounded-full text-secondary font-medium mb-3">
+              <div className="mt-3 md:mt-5 text-center">
+                <span className="inline-block px-3 md:px-4 py-1 md:py-1.5 text-xs border border-secondary/50 bg-secondary/10 rounded-full text-secondary font-medium mb-2 md:mb-3">
                   {t("locations.openNow")}
                 </span>
-                <h3 className="text-2xl font-bold text-foreground mb-1">
+                <h3 className="text-xl md:text-2xl font-bold text-foreground mb-1">
                   {t(currentLocation.nameKey)}
                 </h3>
-                <p className="text-primary font-medium mb-3">
+                <p className="text-primary font-medium mb-2 md:mb-3 text-sm md:text-base">
                   {t(currentLocation.countryKey)}
                 </p>
-                <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
-                  <MapPin className="w-4 h-4 text-primary" />
+                <div className="flex items-center justify-center gap-2 text-muted-foreground text-xs md:text-sm">
+                  <MapPin className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary" />
                   <span>{t(currentLocation.addressKey)}</span>
                 </div>
               </div>
 
-              <motion.div
-                whileHover={{ y: -4 }}
-                className="mt-6 p-6 border border-border/50 rounded-2xl bg-card shadow-card hover:shadow-elevated transition-all duration-400"
-              >
-                <div className="text-center mb-6">
-                  <p className="text-sm text-muted-foreground mb-2">{t("locations.ticketsFrom")}</p>
-                  <div className="flex items-baseline justify-center gap-2">
-                    <span className="text-5xl font-bold text-foreground">{currentLocation.price}</span>
-                    <span className="text-lg text-muted-foreground font-medium">{currentLocation.currency}</span>
+              {/* Pricing & Book - compact on mobile */}
+              <div className="mt-4 md:mt-6 p-4 md:p-6 border border-border/50 rounded-2xl bg-card shadow-card">
+                <div className="flex items-center justify-between md:block md:text-center mb-3 md:mb-6">
+                  <p className="text-xs md:text-sm text-muted-foreground">{t("locations.ticketsFrom")}</p>
+                  <div className="flex items-baseline gap-1 md:gap-2 md:justify-center">
+                    <span className="text-3xl md:text-5xl font-bold text-foreground">{currentLocation.price}</span>
+                    <span className="text-sm md:text-lg text-muted-foreground font-medium">{currentLocation.currency}</span>
                   </div>
                 </div>
                 <a
@@ -236,80 +234,71 @@ const GlobalLocationsSection = () => {
                   rel="noopener noreferrer"
                 >
                   <motion.button
-                    whileHover={{ scale: 1.02, y: -2 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 px-6 rounded-xl font-semibold flex items-center justify-center gap-3 transition-all duration-300 shadow-button hover:shadow-glow-primary"
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 md:py-4 px-4 md:px-6 rounded-xl font-semibold flex items-center justify-center gap-2 md:gap-3 transition-all duration-300 shadow-button text-sm md:text-base"
                   >
                     <span>{t("locations.bookVisit")} {t(currentLocation.nameKey)}</span>
-                    {isRtl ? <ArrowLeft className="w-5 h-5" /> : <ArrowRight className="w-5 h-5" />}
+                    {isRtl ? <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" /> : <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />}
                   </motion.button>
                 </a>
-              </motion.div>
+              </div>
             </div>
 
             {/* Left Side - Visit Information */}
-            <div className="order-2 lg:order-2 space-y-5">
-              <div className="mb-6">
-                <h4 className="text-xl font-bold text-foreground mb-1">{t("locations.visitInfo")}</h4>
-                <p className="text-muted-foreground text-sm">{t("locations.visitInfoDesc")}</p>
+            <div className="order-2 lg:order-2 space-y-3 md:space-y-5">
+              <div className="mb-3 md:mb-6">
+                <h4 className="text-lg md:text-xl font-bold text-foreground mb-1">{t("locations.visitInfo")}</h4>
+                <p className="text-muted-foreground text-xs md:text-sm">{t("locations.visitInfoDesc")}</p>
               </div>
 
-              <motion.div
-                whileHover={{ y: -3 }}
-                className="p-6 rounded-xl border-2 border-primary/20 bg-primary/5 transition-all duration-300 hover:border-primary/40 hover:shadow-soft"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-button">
-                    <Check className="w-5 h-5 text-primary-foreground" />
+              {/* Collapsible cards on mobile, full on desktop */}
+              <div className="p-4 md:p-6 rounded-xl border-2 border-primary/20 bg-primary/5">
+                <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-primary flex items-center justify-center shadow-button">
+                    <Check className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
                   </div>
-                  <h5 className="font-bold text-foreground text-lg">{t("locations.whatsIncluded")}</h5>
+                  <h5 className="font-bold text-foreground text-base md:text-lg">{t("locations.whatsIncluded")}</h5>
                 </div>
-                <ul className="space-y-2.5">
+                <ul className="space-y-1.5 md:space-y-2.5">
                   {currentLocation.includesKeys.map((key, index) => (
-                    <li key={index} className="text-sm text-muted-foreground flex items-start gap-2">
+                    <li key={index} className="text-xs md:text-sm text-muted-foreground flex items-start gap-2">
                       <span className="text-primary font-bold">•</span>
                       <span>{t(key)}</span>
                     </li>
                   ))}
                 </ul>
-              </motion.div>
+              </div>
 
-              <motion.div
-                whileHover={{ y: -3 }}
-                className="p-6 rounded-xl border-2 border-card-blue bg-card-blue transition-all duration-300 hover:shadow-soft"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-blue flex items-center justify-center shadow-soft">
-                    <Clock className="w-5 h-5 text-primary-foreground" />
+              <div className="p-4 md:p-6 rounded-xl border-2 border-card-blue bg-card-blue">
+                <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-blue flex items-center justify-center shadow-soft">
+                    <Clock className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
                   </div>
-                  <h5 className="font-bold text-foreground text-lg">{t("locations.durationTiming")}</h5>
+                  <h5 className="font-bold text-foreground text-base md:text-lg">{t("locations.durationTiming")}</h5>
                 </div>
-                <div className="space-y-2.5 text-sm text-muted-foreground">
+                <div className="space-y-1.5 md:space-y-2.5 text-xs md:text-sm text-muted-foreground">
                   <p><span className="font-medium text-foreground">{t("locations.duration")}</span> {t(currentLocation.durationKey)}</p>
                   <p><span className="font-medium text-foreground">{t("locations.workingHours")}</span> {t(currentLocation.hoursKey)}</p>
                   <p className="text-primary font-medium">{t(currentLocation.closedDayKey)}</p>
                 </div>
-              </motion.div>
+              </div>
 
-              <motion.div
-                whileHover={{ y: -3 }}
-                className="p-6 rounded-xl border-2 border-card-pink bg-card-pink transition-all duration-300 hover:shadow-soft"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-pink flex items-center justify-center shadow-soft">
-                    <Shield className="w-5 h-5 text-primary-foreground" />
+              <div className="p-4 md:p-6 rounded-xl border-2 border-card-pink bg-card-pink">
+                <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-pink flex items-center justify-center shadow-soft">
+                    <Shield className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
                   </div>
-                  <h5 className="font-bold text-foreground text-lg">{t("locations.cancellationPolicy")}</h5>
+                  <h5 className="font-bold text-foreground text-base md:text-lg">{t("locations.cancellationPolicy")}</h5>
                 </div>
-                <ul className="space-y-2.5">
+                <ul className="space-y-1.5 md:space-y-2.5">
                   {currentLocation.cancellationKeys.map((key, index) => (
-                    <li key={index} className="text-sm text-muted-foreground flex items-start gap-2">
+                    <li key={index} className="text-xs md:text-sm text-muted-foreground flex items-start gap-2">
                       <span className="text-primary font-bold">•</span>
                       <span>{t(key)}</span>
                     </li>
                   ))}
                 </ul>
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         </AnimatePresence>
