@@ -53,8 +53,7 @@ const translations: Record<Language, Record<string, any>> = {
       home: "الرئيسية",
       wings: "أجنحة المتحف",
       locations: "المواقع",
-      technologies: "التقنيات",
-      planVisit: "خطط زيارتك",
+      testimonials: "آراء العملاء",
       bookTicket: "احجز تذكرتك",
     },
     hero: {
@@ -255,8 +254,7 @@ const translations: Record<Language, Record<string, any>> = {
       home: "Home",
       wings: "Museum Wings",
       locations: "Locations",
-      technologies: "Technologies",
-      planVisit: "Plan Your Visit",
+      testimonials: "Reviews",
       bookTicket: "Book Ticket",
     },
     hero: {
@@ -457,8 +455,7 @@ const translations: Record<Language, Record<string, any>> = {
       home: "Accueil",
       wings: "Ailes du Musée",
       locations: "Emplacements",
-      technologies: "Technologies",
-      planVisit: "Planifiez Votre Visite",
+      testimonials: "Avis",
       bookTicket: "Réserver un Billet",
     },
     hero: {
@@ -659,8 +656,7 @@ const translations: Record<Language, Record<string, any>> = {
       home: "Ana Sayfa",
       wings: "Müze Kanatları",
       locations: "Konumlar",
-      technologies: "Teknolojiler",
-      planVisit: "Ziyaretinizi Planlayın",
+      testimonials: "Yorumlar",
       bookTicket: "Bilet Al",
     },
     hero: {
@@ -861,8 +857,7 @@ const translations: Record<Language, Record<string, any>> = {
       home: "Главная",
       wings: "Крылья музея",
       locations: "Локации",
-      technologies: "Технологии",
-      planVisit: "Спланируйте визит",
+      testimonials: "Отзывы",
       bookTicket: "Купить билет",
     },
     hero: {
@@ -1063,8 +1058,7 @@ const translations: Record<Language, Record<string, any>> = {
       home: "ہوم",
       wings: "میوزیم ونگز",
       locations: "مقامات",
-      technologies: "ٹیکنالوجیز",
-      planVisit: "اپنے دورے کی منصوبہ بندی کریں",
+      testimonials: "جائزے",
       bookTicket: "ٹکٹ بک کریں",
     },
     hero: {
@@ -1265,8 +1259,7 @@ const translations: Record<Language, Record<string, any>> = {
       home: "Beranda",
       wings: "Sayap Museum",
       locations: "Lokasi",
-      technologies: "Teknologi",
-      planVisit: "Rencanakan Kunjungan",
+      testimonials: "Ulasan",
       bookTicket: "Pesan Tiket",
     },
     hero: {

@@ -190,37 +190,63 @@ const GlobalLocationsSection = () => {
           >
             {/* Right Side - Location Card */}
             <div className="order-1 lg:order-1">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4 }}
-                className="rounded-2xl overflow-hidden shadow-soft border border-border/50"
-              >
-                <img
-                  src={currentLocation.image}
-                  alt={t(currentLocation.nameKey)}
-                  className="w-full h-48 md:h-72 object-cover"
-                />
-              </motion.div>
-
-              <div className="mt-3 md:mt-5 text-center">
-                <span className="inline-block px-3 md:px-4 py-1 md:py-1.5 text-xs border border-secondary/50 bg-secondary/10 rounded-full text-secondary font-medium mb-2 md:mb-3">
-                  {t("locations.openNow")}
-                </span>
-                <h3 className="text-xl md:text-2xl font-bold text-foreground mb-1">
-                  {t(currentLocation.nameKey)}
-                </h3>
-                <p className="text-primary font-medium mb-2 md:mb-3 text-sm md:text-base">
-                  {t(currentLocation.countryKey)}
-                </p>
-                <div className="flex items-center justify-center gap-2 text-muted-foreground text-xs md:text-sm">
-                  <MapPin className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary" />
-                  <span>{t(currentLocation.addressKey)}</span>
+              {/* Mobile: compact horizontal layout */}
+              <div className="flex gap-3 md:hidden">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4 }}
+                  className="w-2/5 flex-shrink-0 rounded-xl overflow-hidden shadow-soft border border-border/50"
+                >
+                  <img
+                    src={currentLocation.image}
+                    alt={t(currentLocation.nameKey)}
+                    className="w-full h-36 object-cover"
+                  />
+                </motion.div>
+                <div className="flex-1 flex flex-col justify-center min-w-0">
+                  <span className="inline-block self-start px-2 py-0.5 text-[10px] border border-secondary/50 bg-secondary/10 rounded-full text-secondary font-medium mb-1">
+                    {t("locations.openNow")}
+                  </span>
+                  <h3 className="text-base font-bold text-foreground leading-tight">{t(currentLocation.nameKey)}</h3>
+                  <p className="text-primary font-medium text-xs mb-1">{t(currentLocation.countryKey)}</p>
+                  <div className="flex items-center gap-1 text-muted-foreground text-[10px]">
+                    <MapPin className="w-3 h-3 text-primary flex-shrink-0" />
+                    <span className="truncate">{t(currentLocation.addressKey)}</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Pricing & Book - compact on mobile */}
-              <div className="mt-4 md:mt-6 p-4 md:p-6 border border-border/50 rounded-2xl bg-card shadow-card">
+              {/* Desktop: original vertical layout */}
+              <div className="hidden md:block">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4 }}
+                  className="rounded-2xl overflow-hidden shadow-soft border border-border/50"
+                >
+                  <img
+                    src={currentLocation.image}
+                    alt={t(currentLocation.nameKey)}
+                    className="w-full h-72 object-cover"
+                  />
+                </motion.div>
+
+                <div className="mt-5 text-center">
+                  <span className="inline-block px-4 py-1.5 text-xs border border-secondary/50 bg-secondary/10 rounded-full text-secondary font-medium mb-3">
+                    {t("locations.openNow")}
+                  </span>
+                  <h3 className="text-2xl font-bold text-foreground mb-1">{t(currentLocation.nameKey)}</h3>
+                  <p className="text-primary font-medium mb-3 text-base">{t(currentLocation.countryKey)}</p>
+                  <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
+                    <MapPin className="w-4 h-4 text-primary" />
+                    <span>{t(currentLocation.addressKey)}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Pricing & Book */}
+              <div className="mt-3 md:mt-6 p-4 md:p-6 border border-border/50 rounded-2xl bg-card shadow-card">
                 <div className="flex items-center justify-between md:block md:text-center mb-3 md:mb-6">
                   <p className="text-xs md:text-sm text-muted-foreground">{t("locations.ticketsFrom")}</p>
                   <div className="flex items-baseline gap-1 md:gap-2 md:justify-center">
@@ -252,52 +278,55 @@ const GlobalLocationsSection = () => {
               </div>
 
               {/* Collapsible cards on mobile, full on desktop */}
-              <div className="p-4 md:p-6 rounded-xl border-2 border-primary/20 bg-primary/5">
-                <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-primary flex items-center justify-center shadow-button">
-                    <Check className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
+              {/* Visit info cards: 2+1 grid layout */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-5">
+                <div className="p-4 md:p-6 rounded-xl border-2 border-primary/20 bg-primary/5">
+                  <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-primary flex items-center justify-center shadow-button">
+                      <Check className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
+                    </div>
+                    <h5 className="font-bold text-foreground text-base md:text-lg">{t("locations.whatsIncluded")}</h5>
                   </div>
-                  <h5 className="font-bold text-foreground text-base md:text-lg">{t("locations.whatsIncluded")}</h5>
+                  <ul className="space-y-1.5 md:space-y-2.5">
+                    {currentLocation.includesKeys.map((key, index) => (
+                      <li key={index} className="text-xs md:text-sm text-muted-foreground flex items-start gap-2">
+                        <span className="text-primary font-bold">•</span>
+                        <span>{t(key)}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="space-y-1.5 md:space-y-2.5">
-                  {currentLocation.includesKeys.map((key, index) => (
-                    <li key={index} className="text-xs md:text-sm text-muted-foreground flex items-start gap-2">
-                      <span className="text-primary font-bold">•</span>
-                      <span>{t(key)}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
 
-              <div className="p-4 md:p-6 rounded-xl border-2 border-card-blue bg-card-blue">
-                <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-blue flex items-center justify-center shadow-soft">
-                    <Clock className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
+                <div className="p-4 md:p-6 rounded-xl border-2 border-card-blue bg-card-blue">
+                  <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-blue flex items-center justify-center shadow-soft">
+                      <Clock className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
+                    </div>
+                    <h5 className="font-bold text-foreground text-base md:text-lg">{t("locations.durationTiming")}</h5>
                   </div>
-                  <h5 className="font-bold text-foreground text-base md:text-lg">{t("locations.durationTiming")}</h5>
+                  <div className="space-y-1.5 md:space-y-2.5 text-xs md:text-sm text-muted-foreground">
+                    <p><span className="font-medium text-foreground">{t("locations.duration")}</span> {t(currentLocation.durationKey)}</p>
+                    <p><span className="font-medium text-foreground">{t("locations.workingHours")}</span> {t(currentLocation.hoursKey)}</p>
+                    <p className="text-primary font-medium">{t(currentLocation.closedDayKey)}</p>
+                  </div>
                 </div>
-                <div className="space-y-1.5 md:space-y-2.5 text-xs md:text-sm text-muted-foreground">
-                  <p><span className="font-medium text-foreground">{t("locations.duration")}</span> {t(currentLocation.durationKey)}</p>
-                  <p><span className="font-medium text-foreground">{t("locations.workingHours")}</span> {t(currentLocation.hoursKey)}</p>
-                  <p className="text-primary font-medium">{t(currentLocation.closedDayKey)}</p>
-                </div>
-              </div>
 
-              <div className="p-4 md:p-6 rounded-xl border-2 border-card-pink bg-card-pink">
-                <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-pink flex items-center justify-center shadow-soft">
-                    <Shield className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
+                <div className="md:col-span-2 p-4 md:p-6 rounded-xl border-2 border-card-pink bg-card-pink">
+                  <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-pink flex items-center justify-center shadow-soft">
+                      <Shield className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
+                    </div>
+                    <h5 className="font-bold text-foreground text-base md:text-lg">{t("locations.cancellationPolicy")}</h5>
                   </div>
-                  <h5 className="font-bold text-foreground text-base md:text-lg">{t("locations.cancellationPolicy")}</h5>
+                  <ul className="space-y-1.5 md:space-y-2.5">
+                    {currentLocation.cancellationKeys.map((key, index) => (
+                      <li key={index} className="text-xs md:text-sm text-muted-foreground flex items-start gap-2">
+                        <span className="text-primary font-bold">•</span>
+                        <span>{t(key)}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="space-y-1.5 md:space-y-2.5">
-                  {currentLocation.cancellationKeys.map((key, index) => (
-                    <li key={index} className="text-xs md:text-sm text-muted-foreground flex items-start gap-2">
-                      <span className="text-primary font-bold">•</span>
-                      <span>{t(key)}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
             </div>
           </motion.div>
