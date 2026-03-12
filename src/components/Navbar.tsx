@@ -17,10 +17,9 @@ const Navbar = () => {
     { label: t("nav.home"), href: "#hero", id: "hero", isSection: true },
     { label: t("nav.wings"), href: "#museum-wings", id: "museum-wings", isSection: true },
     { label: t("nav.locations"), href: "#global-locations", id: "global-locations", isSection: true },
-    { label: t("nav.technologies"), href: "#technologies", id: "technologies", isSection: true },
-    { label: t("nav.planVisit"), href: "#plan-visit", id: "plan-visit", isSection: true },
+    { label: t("nav.testimonials"), href: "#testimonials", id: "testimonials", isSection: true },
   ];
-  const sectionOrder = ["hero", "museum-wings", "technologies", "plan-visit", "global-locations"];
+  const sectionOrder = ["hero", "museum-wings", "global-locations", "testimonials"];
 
   useEffect(() => {
     if (!isHomePage) return;

@@ -1259,8 +1259,7 @@ const translations: Record<Language, Record<string, any>> = {
       home: "Beranda",
       wings: "Sayap Museum",
       locations: "Lokasi",
-      technologies: "Teknologi",
-      planVisit: "Rencanakan Kunjungan",
+      testimonials: "Ulasan",
       bookTicket: "Pesan Tiket",
     },
     hero: {
