@@ -254,8 +254,7 @@ const translations: Record<Language, Record<string, any>> = {
       home: "Home",
       wings: "Museum Wings",
       locations: "Locations",
-      technologies: "Technologies",
-      planVisit: "Plan Your Visit",
+      testimonials: "Reviews",
       bookTicket: "Book Ticket",
     },
     hero: {
