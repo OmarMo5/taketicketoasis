@@ -1058,8 +1058,7 @@ const translations: Record<Language, Record<string, any>> = {
       home: "ہوم",
       wings: "میوزیم ونگز",
       locations: "مقامات",
-      technologies: "ٹیکنالوجیز",
-      planVisit: "اپنے دورے کی منصوبہ بندی کریں",
+      testimonials: "جائزے",
       bookTicket: "ٹکٹ بک کریں",
     },
     hero: {
