@@ -53,8 +53,7 @@ const translations: Record<Language, Record<string, any>> = {
       home: "الرئيسية",
       wings: "أجنحة المتحف",
       locations: "المواقع",
-      technologies: "التقنيات",
-      planVisit: "خطط زيارتك",
+      testimonials: "آراء العملاء",
       bookTicket: "احجز تذكرتك",
     },
     hero: {
