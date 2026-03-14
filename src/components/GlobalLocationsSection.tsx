@@ -279,7 +279,7 @@ const GlobalLocationsSection = () => {
 
               {/* Collapsible cards on mobile, full on desktop */}
               {/* Visit info cards: 2+1 grid layout */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-5">
+              <div className="grid grid-cols-2 gap-3 md:gap-5">
                 <div className="p-4 md:p-6 rounded-xl border-2 border-primary/20 bg-primary/5">
                   <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
                     <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-primary flex items-center justify-center shadow-button">
@@ -311,7 +311,7 @@ const GlobalLocationsSection = () => {
                   </div>
                 </div>
 
-                <div className="md:col-span-2 p-4 md:p-6 rounded-xl border-2 border-card-pink bg-card-pink">
+                <div className="col-span-2 p-4 md:p-6 rounded-xl border-2 border-card-pink bg-card-pink">
                   <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
                     <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-pink flex items-center justify-center shadow-soft">
                       <Shield className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
