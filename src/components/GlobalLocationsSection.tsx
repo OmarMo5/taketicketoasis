@@ -190,29 +190,49 @@ const GlobalLocationsSection = () => {
           >
             {/* Right Side - Location Card */}
             <div className="order-1 lg:order-1">
-              {/* Mobile: compact horizontal layout */}
+              {/* Mobile: compact horizontal layout with price & booking */}
               <div className="flex gap-3 md:hidden">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4 }}
-                  className="w-2/5 flex-shrink-0 rounded-xl overflow-hidden shadow-soft border border-border/50"
+                  className="w-1/3 flex-shrink-0 rounded-xl overflow-hidden shadow-soft border border-border/50"
                 >
                   <img
                     src={currentLocation.image}
                     alt={t(currentLocation.nameKey)}
-                    className="w-full h-36 object-cover"
+                    className="w-full h-44 object-cover"
                   />
                 </motion.div>
                 <div className="flex-1 flex flex-col justify-center min-w-0">
                   <span className="inline-block self-start px-2 py-0.5 text-[10px] border border-secondary/50 bg-secondary/10 rounded-full text-secondary font-medium mb-1">
                     {t("locations.openNow")}
                   </span>
-                  <h3 className="text-base font-bold text-foreground leading-tight">{t(currentLocation.nameKey)}</h3>
+                  <h3 className="text-sm font-bold text-foreground leading-tight">{t(currentLocation.nameKey)}</h3>
                   <p className="text-primary font-medium text-xs mb-1">{t(currentLocation.countryKey)}</p>
-                  <div className="flex items-center gap-1 text-muted-foreground text-[10px]">
+                  <div className="flex items-center gap-1 text-muted-foreground text-[10px] mb-2">
                     <MapPin className="w-3 h-3 text-primary flex-shrink-0" />
-                    <span className="truncate">{t(currentLocation.addressKey)}</span>
+                    <span className="line-clamp-2">{t(currentLocation.addressKey)}</span>
+                  </div>
+                  <div className="border-t border-border/50 pt-2">
+                    <p className="text-[10px] text-muted-foreground">{t("locations.ticketsFrom")}</p>
+                    <div className="flex items-baseline gap-1 mb-2">
+                      <span className="text-xl font-bold text-foreground">{currentLocation.price}</span>
+                      <span className="text-xs text-muted-foreground font-medium">{currentLocation.currency}</span>
+                    </div>
+                    <a
+                      href={bookingLinks[currentLocation.id]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <motion.button
+                        whileTap={{ scale: 0.98 }}
+                        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-2 px-3 rounded-lg font-semibold flex items-center justify-center gap-1.5 transition-all duration-300 shadow-button text-xs"
+                      >
+                        <span>{t("locations.bookVisit")}</span>
+                        {isRtl ? <ArrowLeft className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}
+                      </motion.button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -245,13 +265,13 @@ const GlobalLocationsSection = () => {
                 </div>
               </div>
 
-              {/* Pricing & Book */}
-              <div className="mt-3 md:mt-6 p-4 md:p-6 border border-border/50 rounded-2xl bg-card shadow-card">
-                <div className="flex items-center justify-between md:block md:text-center mb-3 md:mb-6">
-                  <p className="text-xs md:text-sm text-muted-foreground">{t("locations.ticketsFrom")}</p>
-                  <div className="flex items-baseline gap-1 md:gap-2 md:justify-center">
-                    <span className="text-3xl md:text-5xl font-bold text-foreground">{currentLocation.price}</span>
-                    <span className="text-sm md:text-lg text-muted-foreground font-medium">{currentLocation.currency}</span>
+              {/* Pricing & Book - Desktop only */}
+              <div className="hidden md:block mt-6 p-6 border border-border/50 rounded-2xl bg-card shadow-card">
+                <div className="block text-center mb-6">
+                  <p className="text-sm text-muted-foreground">{t("locations.ticketsFrom")}</p>
+                  <div className="flex items-baseline gap-2 justify-center">
+                    <span className="text-5xl font-bold text-foreground">{currentLocation.price}</span>
+                    <span className="text-lg text-muted-foreground font-medium">{currentLocation.currency}</span>
                   </div>
                 </div>
                 <a
@@ -261,10 +281,10 @@ const GlobalLocationsSection = () => {
                 >
                   <motion.button
                     whileTap={{ scale: 0.98 }}
-                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 md:py-4 px-4 md:px-6 rounded-xl font-semibold flex items-center justify-center gap-2 md:gap-3 transition-all duration-300 shadow-button text-sm md:text-base"
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 px-6 rounded-xl font-semibold flex items-center justify-center gap-3 transition-all duration-300 shadow-button text-base"
                   >
                     <span>{t("locations.bookVisit")} {t(currentLocation.nameKey)}</span>
-                    {isRtl ? <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" /> : <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />}
+                    {isRtl ? <ArrowLeft className="w-5 h-5" /> : <ArrowRight className="w-5 h-5" />}
                   </motion.button>
                 </a>
               </div>
