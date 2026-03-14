@@ -311,7 +311,7 @@ const GlobalLocationsSection = () => {
                   </div>
                 </div>
 
-                <div className="md:col-span-2 p-4 md:p-6 rounded-xl border-2 border-card-pink bg-card-pink">
+                <div className="col-span-2 p-4 md:p-6 rounded-xl border-2 border-card-pink bg-card-pink">
                   <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
                     <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-pink flex items-center justify-center shadow-soft">
                       <Shield className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
