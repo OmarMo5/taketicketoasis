@@ -191,12 +191,12 @@ const GlobalLocationsSection = () => {
             {/* Right Side - Location Card */}
             <div className="order-1 lg:order-1">
               {/* Mobile: compact horizontal layout with price & booking */}
-              <div className="flex gap-3 md:hidden">
+              <div className="flex gap-2 md:hidden">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4 }}
-                  className="w-1/3 flex-shrink-0 rounded-xl overflow-hidden shadow-soft border border-border/50"
+                  className="w-1/2 flex-shrink-0 rounded-xl overflow-hidden shadow-soft border border-border/50"
                 >
                   <img
                     src={currentLocation.image}
@@ -216,7 +216,7 @@ const GlobalLocationsSection = () => {
                   </div>
                   <div className="border-t border-border/50 pt-2">
                     <p className="text-[10px] text-muted-foreground">{t("locations.ticketsFrom")}</p>
-                    <div className="flex items-baseline gap-1 mb-2">
+                    <div className="flex items-baseline gap-1 mb-1.5">
                       <span className="text-xl font-bold text-foreground">{currentLocation.price}</span>
                       <span className="text-xs text-muted-foreground font-medium">{currentLocation.currency}</span>
                     </div>
@@ -227,10 +227,10 @@ const GlobalLocationsSection = () => {
                     >
                       <motion.button
                         whileTap={{ scale: 0.98 }}
-                        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-2 px-3 rounded-lg font-semibold flex items-center justify-center gap-1.5 transition-all duration-300 shadow-button text-xs"
+                        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-1 px-2 rounded-lg font-semibold flex items-center justify-center gap-1 transition-all duration-300 shadow-button text-[10px]"
                       >
                         <span>{t("locations.bookVisit")}</span>
-                        {isRtl ? <ArrowLeft className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}
+                        {isRtl ? <ArrowLeft className="w-3 h-3" /> : <ArrowRight className="w-3 h-3" />}
                       </motion.button>
                     </a>
                   </div>
@@ -297,10 +297,9 @@ const GlobalLocationsSection = () => {
                 <p className="text-muted-foreground text-xs md:text-sm">{t("locations.visitInfoDesc")}</p>
               </div>
 
-              {/* Collapsible cards on mobile, full on desktop */}
-              {/* Visit info cards: 2+1 grid layout */}
-              <div className="grid grid-cols-2 gap-3 md:gap-5">
-                <div className="p-4 md:p-6 rounded-xl border-2 border-primary/20 bg-primary/5">
+              {/* Cards: 2 then 1 on mobile, stacked vertically on desktop */}
+              <div className="grid grid-cols-2 md:flex md:flex-col gap-3 md:gap-5">
+                <div className="p-4 md:p-6 rounded-xl border-2 border-primary/20 bg-primary/5 col-span-1">
                   <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
                     <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-primary flex items-center justify-center shadow-button">
                       <Check className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
@@ -317,7 +316,7 @@ const GlobalLocationsSection = () => {
                   </ul>
                 </div>
 
-                <div className="p-4 md:p-6 rounded-xl border-2 border-card-blue bg-card-blue">
+                <div className="p-4 md:p-6 rounded-xl border-2 border-card-blue bg-card-blue col-span-1">
                   <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
                     <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-blue flex items-center justify-center shadow-soft">
                       <Clock className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
@@ -331,7 +330,7 @@ const GlobalLocationsSection = () => {
                   </div>
                 </div>
 
-                <div className="col-span-2 p-4 md:p-6 rounded-xl border-2 border-card-pink bg-card-pink">
+                <div className="p-4 md:p-6 rounded-xl border-2 border-card-pink bg-card-pink col-span-2 md:col-span-1">
                   <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4">
                     <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-pink flex items-center justify-center shadow-soft">
                       <Shield className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
