@@ -146,7 +146,7 @@ const MuseumWingsSection = () => {
             </div>
             <div className="h-10 md:h-12 w-px bg-border/50" />
             <div className="text-center">
-              <span className="block text-2xl md:text-4xl font-bold text-secondary">100K+</span>
+              <span className="block text-2xl md:text-4xl font-bold text-secondary">+1,000,000</span>
               <span className="text-xs md:text-sm text-muted-foreground">{t("wings.statMaterials")}</span>
             </div>
             <div className="h-10 md:h-12 w-px bg-border/50" />
