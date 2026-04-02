@@ -64,7 +64,7 @@ const TestimonialsSection = () => {
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/25 to-transparent" />
 
       <div
-        className="max-w-6xl mx-auto"
+        className="max-w-6xl mx-auto relative z-10"
         onMouseEnter={() => setIsAutoPlaying(false)}
         onMouseLeave={() => setIsAutoPlaying(true)}
       >
