@@ -1,207 +1,46 @@
-import { Facebook, Twitter, Instagram, Youtube, MapPin, Phone, Mail } from "lucide-react";
-import { motion, type Variants } from "framer-motion";
-import museumLogo from "@/assets/museum-logo.png";
+import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const FooterSection = () => {
   const { t } = useLanguage();
 
-  const quickLinks = [
-    { labelKey: "footer.home", href: "#" },
-    { labelKey: "footer.aboutMuseum", href: "#" },
-    { labelKey: "footer.exhibitions", href: "#" },
-    { labelKey: "footer.events", href: "#" },
-    { labelKey: "footer.contactUs", href: "#" },
-  ];
-
-  const branches = [
-    { labelKey: "footer.branchMecca", href: "#" },
-    { labelKey: "footer.branchMedina", href: "#" },
-    { labelKey: "footer.branchRabat", href: "#" },
-    { labelKey: "footer.branchNouakchott", href: "#" },
-    { labelKey: "footer.branchDakar", href: "#" },
-  ];
-
-  const socialLinks = [
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Instagram, href: "#", label: "Instagram" },
-    { icon: Youtube, href: "#", label: "Youtube" },
-  ];
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] },
-    },
-  };
-
   return (
     <footer className="relative overflow-hidden" style={{ background: 'linear-gradient(165deg, hsl(155, 22%, 4%), hsl(160, 20%, 3%), hsl(155, 18%, 2%))' }}>
-      <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-[350px] h-[350px] bg-secondary/4 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-      
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
-        className="max-w-6xl mx-auto px-4 py-16 relative z-10"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          <motion.div variants={itemVariants} className="lg:col-span-1">
-            <a href="#" className="inline-block mb-6 group cursor-pointer transition-transform duration-300 hover:scale-105">
-              <img 
-                src={museumLogo} 
-                alt="المعرض والمتحف الدولي للسيرة النبوية" 
-                className="h-14 w-auto object-contain brightness-0 invert opacity-90"
-              />
-            </a>
-            <p className="text-foreground/65 text-sm leading-relaxed mb-6">
-              {t("footer.description")}
-            </p>
-            <div className="flex gap-3">
-              {socialLinks.map((social, index) => (
-                <motion.a
-                  key={social.label}
-                  href={social.href}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1, duration: 0.4 }}
-                  whileHover={{ 
-                    scale: 1.1, 
-                    y: -2,
-                    boxShadow: "0 8px 20px -8px hsl(var(--secondary) / 0.4)"
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-secondary transition-all duration-400 flex items-center justify-center border border-primary-foreground/10 hover:border-secondary"
-                  aria-label={social.label}
-                >
-                  <social.icon className="w-5 h-5" />
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
 
-          <motion.div variants={itemVariants}>
-            <h3 className="font-bold text-lg mb-6 text-foreground relative inline-block">
-              {t("footer.quickLinks")}
-              <span className="absolute -bottom-1 right-0 w-8 h-0.5 bg-primary rounded-full" />
-            </h3>
-            <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link.labelKey}>
-                  <motion.a
-                    href={link.href}
-                    initial={{ opacity: 0.7 }}
-                    whileHover={{ x: -4, opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                    className="text-muted-foreground hover:text-primary transition-colors duration-400 text-sm inline-block relative group"
-                  >
-                    {t(link.labelKey)}
-                    <span className="absolute bottom-0 right-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
-                  </motion.a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+      <div className="max-w-6xl mx-auto px-4 py-8 relative z-10">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-10">
+          <motion.a
+            href="#"
+            whileHover={{ y: -2 }}
+            className="text-foreground/80 hover:text-primary text-sm font-medium transition-colors duration-300"
+          >
+            {t("footer.home")}
+          </motion.a>
 
-          <motion.div variants={itemVariants}>
-            <h3 className="font-bold text-lg mb-6 text-foreground relative inline-block">
-              {t("footer.branches")}
-              <span className="absolute -bottom-1 right-0 w-8 h-0.5 bg-primary rounded-full" />
-            </h3>
-            <ul className="space-y-3">
-              {branches.map((branch) => (
-                <li key={branch.labelKey}>
-                  <motion.a
-                    href={branch.href}
-                    initial={{ opacity: 0.7 }}
-                    whileHover={{ x: -4, opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                    className="text-muted-foreground hover:text-primary transition-colors duration-400 text-sm inline-block relative group"
-                  >
-                    {t(branch.labelKey)}
-                    <span className="absolute bottom-0 right-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
-                  </motion.a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+          <motion.a
+            href="mailto:info@seerah-museum.com"
+            whileHover={{ y: -2 }}
+            className="text-foreground/80 hover:text-primary text-sm transition-colors duration-300"
+          >
+            info@seerah-museum.com
+          </motion.a>
 
-          <motion.div variants={itemVariants}>
-            <h3 className="font-bold text-lg mb-6 text-foreground relative inline-block">
-              {t("footer.contactTitle")}
-              <span className="absolute -bottom-1 right-0 w-8 h-0.5 bg-primary rounded-full" />
-            </h3>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3 group">
-                <div className="w-8 h-8 rounded-lg bg-primary/15 flex items-center justify-center transition-all duration-300 group-hover:bg-primary/25">
-                  <MapPin className="w-4 h-4 text-primary shrink-0" />
-                </div>
-                <span className="text-muted-foreground text-sm group-hover:text-foreground transition-colors duration-300 mt-1">
-                  {t("footer.address")}
-                </span>
-              </li>
-              <li className="flex items-center gap-3 group">
-                <div className="w-8 h-8 rounded-lg bg-primary/15 flex items-center justify-center transition-all duration-300 group-hover:bg-primary/25">
-                  <Phone className="w-4 h-4 text-primary shrink-0" />
-                </div>
-                <span className="text-muted-foreground text-sm group-hover:text-foreground transition-colors duration-300" dir="ltr">
-                  +966 12 345 6789
-                </span>
-              </li>
-              <li className="flex items-center gap-3 group">
-                <div className="w-8 h-8 rounded-lg bg-primary/15 flex items-center justify-center transition-all duration-300 group-hover:bg-primary/25">
-                  <Mail className="w-4 h-4 text-primary shrink-0" />
-                </div>
-                <span className="text-muted-foreground text-sm group-hover:text-foreground transition-colors duration-300">
-                  info@seerah-museum.com
-                </span>
-              </li>
-            </ul>
-          </motion.div>
+          <motion.a
+            href="https://wa.me/966123456789"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ y: -2 }}
+            className="text-foreground/80 hover:text-primary text-sm transition-colors duration-300"
+            dir="ltr"
+          >
+            +966 12 345 6789
+          </motion.a>
         </div>
-      </motion.div>
 
-      <div className="border-t border-border/30 bg-black/20 relative z-10">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-muted-foreground text-sm">
-              {t("footer.copyright")}
-            </p>
-            <div className="flex gap-6">
-              <motion.a
-                href="#"
-                whileHover={{ y: -2 }}
-                className="text-muted-foreground hover:text-primary text-sm transition-colors duration-300"
-              >
-                {t("footer.privacy")}
-              </motion.a>
-              <motion.a
-                href="#"
-                whileHover={{ y: -2 }}
-                className="text-muted-foreground hover:text-primary text-sm transition-colors duration-300"
-              >
-                {t("footer.terms")}
-              </motion.a>
-            </div>
-          </div>
-        </div>
+        <p className="text-center text-muted-foreground text-xs mt-6">
+          {t("footer.copyright")}
+        </p>
       </div>
     </footer>
   );
