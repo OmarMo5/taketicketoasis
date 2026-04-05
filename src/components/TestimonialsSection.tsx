@@ -24,6 +24,10 @@ const testimonialsConfig: TestimonialConfig[] = [
   { id: 6, textKey: "testimonials.t6text", highlightKey: "testimonials.t6highlight", nameKey: "testimonials.t6name", locationKey: "testimonials.t6location", avatarImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face" },
   { id: 7, textKey: "testimonials.t7text", highlightKey: "testimonials.t7highlight", nameKey: "testimonials.t7name", locationKey: "testimonials.t7location", avatarImage: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face" },
   { id: 8, textKey: "testimonials.t8text", highlightKey: "testimonials.t8highlight", nameKey: "testimonials.t8name", locationKey: "testimonials.t8location", avatarImage: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face" },
+  { id: 8, textKey: "testimonials.t9text", highlightKey: "testimonials.t9highlight", nameKey: "testimonials.t9name", locationKey: "testimonials.t9location", avatarImage: "https://images.unsplash.com/photo-1544005313-94ddf0296df2?w=100&h=100&fit=crop&crop=face" },
+  { id: 8, textKey: "testimonials.t10text", highlightKey: "testimonials.t10highlight", nameKey: "testimonials.t10name", locationKey: "testimonials.t10location", avatarImage: "https://images.unsplash.com/photo-1544005313-94ddf02106df2?w=100&h=100&fit=crop&crop=face" },
+  { id: 8, textKey: "testimonials.t11text", highlightKey: "testimonials.t11highlight", nameKey: "testimonials.t11name", locationKey: "testimonials.t11location", avatarImage: "https://images.unsplash.com/photo-1544005313-94ddf02116df2?w=100&h=100&fit=crop&crop=face" },
+  { id: 8, textKey: "testimonials.t12text", highlightKey: "testimonials.t12highlight", nameKey: "testimonials.t12name", locationKey: "testimonials.t12location", avatarImage: "https://images.unsplash.com/photo-1544005313-94ddf02126df2?w=100&h=100&fit=crop&crop=face" },
 ];
 
 const TESTIMONIALS_PER_PAGE = 3;
