@@ -32,12 +32,12 @@ const locationsConfig: LocationConfig[] = [
     image: locationMecca,
     addressKey: "locations.addressMecca",
     price: "70",
-    currency: "ر.س",
-    includesKeys: ["locations.guidedTour", "locations.allSections60", "locations.interactiveDisplays3d", "locations.cinemaExperience", "locations.freeGuide"],
+    currency: "locations.currencySAR",
+    includesKeys: ["locations.guidedTour", "locations.allSections60", "locations.interactiveDisplays3d", "locations.cinemaExperience"],
     durationKey: "locations.duration23",
     hoursKey: "locations.hoursSatThu",
     closedDayKey: "locations.closedFri",
-    cancellationKeys: ["locations.cancel24", "locations.noRefund24", "locations.reschedule"],
+    cancellationKeys: ["locations.cancel24", "locations.noRefund24"],
   },
   {
     id: "medina",
@@ -46,12 +46,12 @@ const locationsConfig: LocationConfig[] = [
     image: locationMedina,
     addressKey: "locations.addressMedina",
     price: "40",
-    currency: "ر.س",
-    includesKeys: ["locations.guidedTour", "locations.allSections60", "locations.interactiveDisplays3d", "locations.cinemaExperience", "locations.freeGuide"],
+    currency: "locations.currencySAR",
+    includesKeys: ["locations.guidedTour", "locations.allSections60", "locations.interactiveDisplays3d", "locations.cinemaExperience"],
     durationKey: "locations.duration23",
     hoursKey: "locations.hoursSatThu",
     closedDayKey: "locations.closedFri",
-    cancellationKeys: ["locations.cancel24", "locations.noRefund24", "locations.reschedule"],
+    cancellationKeys: ["locations.cancel24", "locations.noRefund24"],
   },
   {
     id: "rabat",
@@ -59,13 +59,13 @@ const locationsConfig: LocationConfig[] = [
     countryKey: "locations.countryMorocco",
     image: locationRabat,
     addressKey: "locations.addressRabat",
-    price: "100",
-    currency: "د.م",
-    includesKeys: ["locations.guidedTour", "locations.allSections", "locations.interactiveDisplays", "locations.cinemaExperience", "locations.freeGuide"],
+    price: "locations.priceFree",
+    currency: "",
+    includesKeys: ["locations.guidedTour", "locations.allSections", "locations.interactiveDisplays", "locations.cinemaExperience"],
     durationKey: "locations.duration23",
     hoursKey: "locations.hoursMonSat",
     closedDayKey: "locations.closedSun",
-    cancellationKeys: ["locations.cancel48", "locations.noRefund48", "locations.reschedule"],
+    cancellationKeys: ["locations.cancel48", "locations.noRefund48"],
   },
   {
     id: "nouakchott",
@@ -74,12 +74,12 @@ const locationsConfig: LocationConfig[] = [
     image: locationNouakchott,
     addressKey: "locations.addressNouakchott",
     price: "1000",
-    currency: "أوقية",
+    currency: "locations.currencyMRU",
     includesKeys: ["locations.guidedTour", "locations.allSections", "locations.interactiveDisplays", "locations.cinemaExperience"],
     durationKey: "locations.duration23",
     hoursKey: "locations.hoursSatThu2",
     closedDayKey: "locations.closedFri",
-    cancellationKeys: ["locations.cancel48", "locations.noRefund48", "locations.reschedule"],
+    cancellationKeys: ["locations.cancel48", "locations.noRefund48"],
   },
   {
     id: "dakar",
@@ -88,12 +88,12 @@ const locationsConfig: LocationConfig[] = [
     image: locationDakar,
     addressKey: "locations.addressDakar",
     price: "5000",
-    currency: "فرنك",
+    currency: "locations.currencyXOF",
     includesKeys: ["locations.guidedTour", "locations.allSections", "locations.interactiveDisplays", "locations.cinemaExperience"],
     durationKey: "locations.duration23",
     hoursKey: "locations.hoursMonSat2",
     closedDayKey: "locations.closedSun",
-    cancellationKeys: ["locations.cancel48", "locations.noRefund48", "locations.reschedule"],
+    cancellationKeys: ["locations.cancel48", "locations.noRefund48"],
   },
 ];
 
@@ -170,8 +170,8 @@ const GlobalLocationsSection = () => {
               transition={{ delay: index * 0.05 }}
               whileTap={{ scale: 0.98 }}
               className={`px-4 md:px-7 py-2 md:py-3 rounded-full text-xs md:text-sm font-semibold transition-all duration-300 whitespace-nowrap flex-shrink-0 ${activeLocation === location.id
-                  ? "bg-primary text-primary-foreground shadow-button"
-                  : "bg-card text-foreground border border-border hover:border-primary/50 hover:bg-accent/60 shadow-card"
+                ? "bg-primary text-primary-foreground shadow-button"
+                : "bg-card text-foreground border border-border hover:border-primary/50 hover:bg-accent/60 shadow-card"
                 }`}
             >
               {t(location.nameKey)}
@@ -215,10 +215,12 @@ const GlobalLocationsSection = () => {
                     <span className="line-clamp-2">{t(currentLocation.addressKey)}</span>
                   </div>
                   <div className="border-t border-border/50 pt-2">
-                    <p className="text-[10px] text-muted-foreground">{t("locations.ticketsFrom")}</p>
+                    <p className="text-[10px] text-muted-foreground">
+                      {currentLocation.id === "rabat" ? t("locations.ticketsFromFree") : t("locations.ticketsFrom")}
+                    </p>
                     <div className="flex items-baseline gap-1 mb-1.5">
-                      <span className="text-xl font-bold text-foreground">{currentLocation.price}</span>
-                      <span className="text-xs text-muted-foreground font-medium">{currentLocation.currency}</span>
+                      <span className="text-xl font-bold text-foreground">{t(currentLocation.price)}</span>
+                      <span className="text-xs text-muted-foreground font-medium">{t(currentLocation.currency)}</span>
                     </div>
                     <a
                       href={bookingLinks[currentLocation.id]}
@@ -268,10 +270,12 @@ const GlobalLocationsSection = () => {
               {/* Pricing & Book - Desktop only */}
               <div className="hidden md:block mt-6 p-6 border border-border/50 rounded-2xl bg-card shadow-card">
                 <div className="block text-center mb-6">
-                  <p className="text-sm text-muted-foreground">{t("locations.ticketsFrom")}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {currentLocation.id === "rabat" ? t("locations.ticketsFromFree") : t("locations.ticketsFrom")}
+                  </p>
                   <div className="flex items-baseline gap-2 justify-center">
-                    <span className="text-5xl font-bold text-foreground">{currentLocation.price}</span>
-                    <span className="text-lg text-muted-foreground font-medium">{currentLocation.currency}</span>
+                    <span className="text-5xl font-bold text-foreground">{t(currentLocation.price)}</span>
+                    <span className="text-lg text-muted-foreground font-medium">{t(currentLocation.currency)}</span>
                   </div>
                 </div>
                 <a
